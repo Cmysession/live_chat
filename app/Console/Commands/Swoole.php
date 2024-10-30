@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\ChatModel;
 use Illuminate\Console\Command;
 use swoole_websocket_server;
 
@@ -56,16 +57,72 @@ class Swoole extends Command
     {
         // 这里是监听的服务端口号
         $this->ws = new swoole_websocket_server(env('SWOOLE_HOST', "0.0.0.0"), env('SWOOLE_PORT', 9502));
+        $this->model = new ChatModel();
         //监听WebSocket连接打开事件
         $this->ws->on('open', function ($ws, $request) {
-            var_dump($request);
         });
         //监听WebSocket消息事件
         $this->ws->on('message', function ($ws, $frame) {
-            $this->info("client is SendMessage4545\n" . $frame);
+            $data = $this->model->toArray($frame->fd, $frame->data);
+            if ($data) {
+                switch ($data['code']) {
+                    case $this->model::PING:
+                        //  PING
+                        $data['code'] = $this->model::JOIN;
+                        $data['message'] = 'PING';
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                        break;
+                    case $this->model::JOIN:
+                        //  进入聊天室
+                        $data['code'] = $this->model::JOIN;
+                        $data['message'] = '进入直播间!';
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                        break;
+                    case $this->model::SEND_MESSAGE:
+                        //  发送消息
+                        echo "SEND_MESSAGE";
+                        $data['code'] = $this->model::SEND_MESSAGE;
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                        break;
+                    case $this->model::SEND_BARRAGE:
+                        //  发送弹幕
+                        echo "SEND_BARRAGE";
+                        $data['code'] = $this->model::SEND_BARRAGE;
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                        break;
+                    default:
+                        //  参数出错
+                        $data['code'] = $this->model::PARAMETER_ERROR;
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                }
+
+            }
+
         });
         //监听WebSocket主动推送消息事件
         $this->ws->on('request', function ($request, $response) {
+            $this->info("----监听WebSocket主动推送消息事件----");
+            dump($request->post);
             $scene = $request->post['scene'];
             foreach ($this->ws->connections as $fd) {
                 if ($this->ws->isEstablished($fd)) {
@@ -75,6 +132,7 @@ class Swoole extends Command
         });
         //监听WebSocket连接关闭事件
         $this->ws->on('close', function ($ws, $fd) {
+//            $data = $this->model->toArray($fd, $frame->data);
             $this->info("client is close\n");
         });
         $this->ws->start();

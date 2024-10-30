@@ -26,7 +26,7 @@
 
         #video-box {
             width: 100%;
-            background-color: antiquewhite;
+            /*background-color: antiquewhite;*/
             padding: 20px;
             background-color: #000000;
         }
@@ -52,7 +52,7 @@
         }
 
         #msg-box-1 {
-            background-color: aqua;
+            /*background-color: aqua;*/
             border-radius: 10px;
             /* padding: 10px; */
             margin-left: 5px;
@@ -73,9 +73,6 @@
             height: 700px;
         }
 
-        .h1,
-        .h2,
-        .h3,
         h1,
         h2,
         h3 {
@@ -150,10 +147,6 @@
             background-color: #ffffff;
         }
 
-        .form-group {
-            margin-bottom: 5px;
-        }
-
         .col-md-4,
         .col-md-8 {
             padding-right: 0;
@@ -200,7 +193,7 @@
             font-weight: bold;
             position: absolute;
             white-space: nowrap;
-            display: 'inline-block';
+            /*display: 'inline-block';*/
         }
 
         #loding,
@@ -316,427 +309,450 @@
 </head>
 
 <body>
-    <div id="WebSocket"></div>
-    <div>
-        <div id="video-box">
-            <div class="row">
-                <div class="col-md-8 col" id="vd-box">
-                    <div id="vd-box-1">
-                        <h1 style="background-color: #ffffff;padding: 10px;" id="video-title">&emsp;</h1>
-                        <div id="video-box-b">
-                            <div id="mui-player"></div>
-                            <div id="ready">
-                                <img id="loding" src="as/images/loding.gif" alt="loding">
-                                <img id="play" src="as/images/play.png" alt="play">
-                            </div>
-                        </div>
-                        <div id="barrage">
-                            <div class="row">
-                                <div class="col-md-2" style="text-align: center;padding: 0;">
-                                    <button id="colse-barrage" type="submit" class="btn btn-primary">
-                                        关 闭 弹 幕
-                                    </button>
-                                </div>
-                                <div class="col-md-8">
-                                    <textarea id="barrage-txt" style="resize:none;" type="text" placeholder="请输入弹幕信息"
-                                        class="form-control" rows="1"></textarea>
-                                </div>
-                                <div class="col-md-2" style="text-align: center;padding: 0;">
-                                    <button id="send-barrage" type="submit" class="btn btn-primary">
-                                        发 送 弹 幕
-                                    </button>
-                                </div>
-
-                            </div>
+<div>
+    <div id="video-box">
+        <div class="row">
+            <div class="col-md-8 col" id="vd-box">
+                <div id="vd-box-1">
+                    <h1 style="background-color: #ffffff;padding: 10px;" id="video-title">&emsp;</h1>
+                    <div id="video-box-b">
+                        <div id="mui-player"></div>
+                        <div id="ready">
+                            <img id="loding" src="as/images/loding.gif" alt="loding">
+                            <img id="play" src="as/images/play.png" alt="play">
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 col" id="msg-box">
-                    <div id="msg-box-1">
-                        <div>
-                            <h2> 聊天室 <small>100人在线</small></h2>
-                        </div>
-                        <div id="user-msg">
-                            <div id="chart-to-btm">↓ 消 息 ↓</div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c co"><span>张三 ：</span><span>吃饭没有</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
-                            <div class="c me"><span>张三 ：</span><span>我的发言</span></div>
-                            <div class="c to"><span>张三 ：</span><span>hello</span></div>
+                    <div id="barrage">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align: center;padding: 0;">
+                                <button id="colse-barrage" type="submit" class="btn btn-primary">
+                                    关 闭 弹 幕
+                                </button>
+                            </div>
+                            <div class="col-md-8">
+                                    <textarea id="barrage-txt" style="resize:none;" type="text"
+                                              placeholder="请输入弹幕信息"
+                                              class="form-control" rows="1"></textarea>
+                            </div>
+                            <div class="col-md-2" style="text-align: center;padding: 0;">
+                                <button id="send-barrage" type="submit" class="btn btn-primary">
+                                    发 送 弹 幕
+                                </button>
+                            </div>
 
                         </div>
-                        <div class="c tb"
-                            style="background-color: #f0f0f0;width: 100%;text-align: center;border-top: 1px solid #e3e3e3;">
-                            <span>【 张三 】进入了直播间</span>
-                        </div>
-                        <!-- <hr> -->
-                        <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
-                            <textarea id="input-message" class="form-control"
-                                style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
-                            <button type="button" disabled="true" id="send-btn"
-                                class="send-btn btn btn-primary btn-lg btn-block"> 发 送
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="tv-box" style="text-align: center;background-color: #000000;" class="row"></div>
-        <!-- Small modal -->
-        <div class="modal fade" id="wit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    ...
+            <div class="col-md-4 col" id="msg-box">
+                <div id="msg-box-1">
+                    <div>
+                        <h2> 聊天室 <small>100人在线</small></h2>
+                    </div>
+                    <div id="user-msg">
+                        <div id="chart-to-btm">↓ 消 息 ↓</div>
+                    </div>
+                    <div class="c tb"
+                         style="background-color: #f0f0f0;width: 100%;text-align: center;border-top: 1px solid #e3e3e3;">
+                        <span>【 张三 】进入了直播间</span>
+                    </div>
+                    <!-- <hr> -->
+                    <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
+                            <textarea id="input-message" class="form-control"
+                                      style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
+                        <button type="button" disabled="true" id="send-btn"
+                                class="send-btn btn btn-primary btn-lg btn-block"> 发 送
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    <div id="tv-box" style="text-align: center;background-color: #000000;" class="row"></div>
+    <!-- Small modal -->
+    <div class="modal fade" id="wit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                ...
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="as/bootstrap-3/js/jquery.min.js"></script>
-    <script src="as/bootstrap-3/js/bootstrap.min.js"></script>
-    <script>
-        // 获取参数
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) { return pair[1]; }
+<script src="as/bootstrap-3/js/jquery.min.js"></script>
+<script src="as/bootstrap-3/js/bootstrap.min.js"></script>
+<script>
+    // 获取参数
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
             }
-            return (false);
         }
-        let video_lists = {
-            first: {
-                'title': '主要播放',
+        return (false);
+    }
+
+    let video_lists = {
+        first: {
+            'title': '主要播放',
+            'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+            'video': 'https://live.ole777777777.com/ty.m3u8',
+        },
+        "list": [
+            {
+                'title': '测试 - 1',
                 'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                'video': 'https://live.ole777777777.com/ty.m3u8',
+                'video': 'https://wse.hatinhtv.net/live/httv1/chunklist_w271915096.m3u8',
             },
-            "list": [
-                {
-                    'title': '测试 - 1',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'https://wse.hatinhtv.net/live/httv1/chunklist_w271915096.m3u8',
-                },
-                {
-                    'title': '测试 - 2',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'https://live.canthotv.vn/live/tv_web/playlist.m3u8',
-                },
-                {
-                    'title': '测试 - 3',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'https://tv.ktv.org.vn/hls/ktv1.m3u8',
-                },
-                {
-                    'title': '测试 - 4',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'https://tv.kgtv.vn/live/kgtv/kgtv.m3u8',
-                },
-                {
-                    'title': '测试 - 5',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'http://tv.kgtv.vn/live/kgtv1/kgtv1.m3u8',
-                },
-                {
-                    'title': '测试 - 5',
-                    'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
-                    'video': 'https://live.truyenhinhnghean.vn/hls/na1/index.m3u8',
-                },
-            ]
+            {
+                'title': '测试 - 2',
+                'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+                'video': 'https://live.canthotv.vn/live/tv_web/playlist.m3u8',
+            },
+            {
+                'title': '测试 - 3',
+                'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+                'video': 'https://tv.ktv.org.vn/hls/ktv1.m3u8',
+            },
+            {
+                'title': '测试 - 4',
+                'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+                'video': 'https://tv.kgtv.vn/live/kgtv/kgtv.m3u8',
+            },
+            {
+                'title': '测试 - 5',
+                'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+                'video': 'http://tv.kgtv.vn/live/kgtv1/kgtv1.m3u8',
+            },
+            {
+                'title': '测试 - 5',
+                'video_img': 'https://i.ytimg.com/vi/_Lw3dLg_l2M/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAR-Q-fBmLIZ-D8oNnTwufk10i0-w',
+                'video': 'https://live.truyenhinhnghean.vn/hls/na1/index.m3u8',
+            },
+        ]
 
-        };
-        let t = getQueryVariable("t") ?? null;
-        let v = getQueryVariable("v") ?? null;
-        let muiMuiPlayerSrc = video_lists.first.video;
-        let muiMuiPlayerPoster = video_lists.first.video_img;
-        if (video_lists.list[v] && t && v && (video_lists.list[v].title === decodeURI(t))) {
-            muiMuiPlayerSrc = video_lists.list[v].video;
-            muiMuiPlayerPoster = video_lists.list[v].video_img;
-            $('#video-title').text(decodeURI(t));
-        } else {
-            $('#video-title').text(video_lists.first.title);
+    };
+    let t = getQueryVariable("t") ?? null;
+    let v = getQueryVariable("v") ?? null;
+    let muiMuiPlayerSrc = video_lists.first.video;
+    let muiMuiPlayerPoster = video_lists.first.video_img;
+    if (video_lists.list[v] && t && v && (video_lists.list[v].title === decodeURI(t))) {
+        muiMuiPlayerSrc = video_lists.list[v].video;
+        muiMuiPlayerPoster = video_lists.list[v].video_img;
+        $('#video-title').text(decodeURI(t));
+    } else {
+        $('#video-title').text(video_lists.first.title);
+    }
+
+    let muiMuiPlayer = {
+        container: document.getElementById("mui-player"),
+        src: muiMuiPlayerSrc,
+        poster: muiMuiPlayerPoster,
+        themeColor: '#06000000',
+        live: true,
+        height: 585,
+        autoFit: false,
+        lang: "en",
+        parse: {
+            type: 'hls',
+            loader: Hls,
+            config: {
+                debug: false,
+            },
         }
+    }
 
-        let muiMuiPlayer = {
-            container: document.getElementById("mui-player"),
-            src: muiMuiPlayerSrc,
-            poster: muiMuiPlayerPoster,
-            themeColor: '#06000000',
-            live: true,
-            height: 585,
-            autoFit: false,
-            lang: "en",
-            parse: {
-                type: 'hls',
-                loader: Hls,
-                config: {
-                    debug: false,
-                },
-            }
-        }
-
-        let tv_box = '';
-        for (let i = 0; i < video_lists.list.length; i++) {
-            tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(video_lists.list[i].title) + '&v=' + i + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + video_lists.list[i].title + '</a></div>';
-        }
-        $('#tv-box').append(tv_box);
-        if (
-            navigator.userAgent.match(/Mobi/i) ||
-            navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/iPhone/i)
-        ) {
-            // 当前设备是移动设备
-            muiMuiPlayer.autoFit = true;
-            delete muiMuiPlayer.height;
-            $('#colse-barrage').click(function () {
-                let colse_barrage = $('#mplayer-header').css('display');
-                if (colse_barrage === 'none') {
-                    $('#barrage-txt').css('display', 'block');
-                    $('#send-barrage').css('display', 'block');
-                } else {
-                    $('#barrage-txt').css('display', 'none');
-                    $('#send-barrage').css('display', 'none');
-                }
-            });
-
-        }
-        // 示例 hls 配置
-        var mp = new MuiPlayer(muiMuiPlayer);
-
-        // 判断是否开始准备完成
-        let is_play = true;
-        mp.on('duration-change', function (event) {
-            if (is_play) {
-                $('#loding').css('display', 'none');
-                $('#play').css('display', 'block');
-                is_play = false;
-            }
-        });
-        mp.on('error', function (event) {
-            mp.showToast('视频播放错误联系管理员');
-        });
-        // 点击播放
-        $(function () {
-            $('#play').click(function () {
-                $('#loding').css('display', 'none');
-                $('#play').css('display', 'none');
-                $('#play-switch').click();
-            });
-            $('#play-switch').click(function () {
-                let btn_play = $('#play-switch ._play').css('display');
-                if (btn_play === 'none') {
-                    $('#play').css('display', 'block');
-                } else {
-                    $('#play').css('display', 'none');
-                }
-            });
-        });
-
-
-    </script>
-    <script>
-        var me = '小米';
-        var is_send = false;
-        var is_scrollTop = true;
-        // 点击发送消息
-        $('#send-btn').click(function () {
-            sunmitMessage();
-        });
-        // 回车发送消息
-        $("#input-message").keydown(function (e) {
-            var e = e || event;
-            if (e.keyCode == 13) {
-                e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-                let input_message = $('#input-message').val();
-                if (parseInt(input_message.length) <= 0) {
-                    return false;
-                }
-                sunmitMessage();
-            }
-        });
-        // 内容改变时
-        $("#input-message").on('input propertychange', function () {
-            let input_message = $('#input-message').val();
-            if (parseInt(input_message.length)) {
-                $('#send-btn').attr('disabled', false);
-            } else {
-                $('#send-btn').attr('disabled', true);
-            }
-
-        });
-        // 判断是否到底部了
-        $('#user-msg').scroll(function () {
-            var scrollTop = $('#user-msg').scrollTop();
-            var direction = scrollTop > 0 ? 'up' : 'down';
-            scrollHeight = window.document.getElementById('user-msg').scrollHeight + 9;
-            let chartH = window.document.getElementById('user-msg').clientHeight + $('#user-msg').scrollTop();
-            let wc = scrollHeight - chartH;
-            if (wc <= 10) {
-                is_scrollTop = true;
-                $('#chart-to-btm').css('display', 'none');
-            } else {
-                is_scrollTop = false;
-                $('#chart-to-btm').css('display', 'block');
-            }
-        });
-        // 点击到底部
-        $('#chart-to-btm').click(function () {
-            const dow = window.document.getElementById('user-msg');
-            dow.scrollTop = dow.scrollHeight;
-            $('#chart-to-btm').css('display', 'none');
-        });
-        // 发送消息
-        function sunmitMessage() {
-            if (is_send) {
-                return false;
-            }
-            let input_message = $('#input-message').val();
-            if (parseInt(input_message.length) <= 0) {
-                almsg('请输入信息!');
-                return false;
-            }
-            is_send = true;
-            // 模拟发送消息
-            $('#send-btn').attr('disabled', true);
-            // setTimeout(function () {
-            let html = '<div class="c me"><span>' + me + ' ：</span><span>' + input_message + '</span></div>';
-            $('#user-msg').append(html);
-            const dow = window.document.getElementById('user-msg');
-            if (is_scrollTop) {
-                dow.scrollTop = dow.scrollHeight;
-            }
-            input_message = $('#input-message').val('');
-            is_send = false;
-            // }, 1000);
-        }
-        // 错误提示
-        function almsg(message) {
-            $('#myModalWit .modal-body').text(message);
-            $('#myModalWit').modal('show');
-        }
-        // 发送弹幕
-        $('#send-barrage').click(function () {
-            sendBarrage();
-        });
-        // 回车发送弹幕
-        $("#barrage-txt").keydown(function (e) {
-            var e = e || event;
-            if (e.keyCode == 13) {
-                e.preventDefault ? e.preventDefault() : (e.returnValue = false);
-                let barrage_message = $('#barrage-txt').val();
-                sendBarrage();
-            }
-        });
-        //发送弹幕
-        function sendBarrage() {
-            let commit = $('#barrage-txt').val();
-            if (parseInt(commit.length) <= 0) {
-                return false;
-            }
-            $screen = $(document.getElementById("mplayer-header"));
-            var content = $('<div class="commit-txt">' + commit + '</div>');
-            var top = Math.random() * $screen.height();
-            content.css({
-                top: top + "px",
-                right: 0,
-                color: getRandomColor(),
-                "font-weight": "bold",
-                "letter-spacing": "2px",
-                "text-shadow": "rgb(0, 0, 0) 0px 0px 3px",
-            });
-            $('.mplayer-header').append(content);
-            content.animate({
-                right: $screen.width() + 0 - content.width()
-            }, 10000, function () {
-                $(this).remove();
-            });
-            $('#barrage-txt').val('');
-        }
-        // 关闭弹幕
+    let tv_box = '';
+    for (let i = 0; i < video_lists.list.length; i++) {
+        tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(video_lists.list[i].title) + '&v=' + i + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + video_lists.list[i].title + '</a></div>';
+    }
+    $('#tv-box').append(tv_box);
+    if (
+        navigator.userAgent.match(/Mobi/i) ||
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/iPhone/i)
+    ) {
+        // 当前设备是移动设备
+        muiMuiPlayer.autoFit = true;
+        delete muiMuiPlayer.height;
         $('#colse-barrage').click(function () {
             let colse_barrage = $('#mplayer-header').css('display');
             if (colse_barrage === 'none') {
-                $('#mplayer-header').css('display', 'flex');
-                $('#colse-barrage').text('关 闭 弹 幕');
-                $('#colse-barrage').css('background-color', '#cf3333');
+                $('#barrage-txt').css('display', 'block');
+                $('#send-barrage').css('display', 'block');
             } else {
-                $('#mplayer-header').css('display', 'none');
-                $('#colse-barrage').text('开 启 弹 幕');
-                $('#colse-barrage').css('background-color', '#54911d');
+                $('#barrage-txt').css('display', 'none');
+                $('#send-barrage').css('display', 'none');
             }
         });
-        // 弹幕颜色
-        function getRandomColor() {
-            let arr = [];
-            for (var i = 0; i < 3; i++) {
-                arr.push(Math.floor(Math.random() * 128 + 128));
+
+    }
+    // 示例 hls 配置
+    var mp = new MuiPlayer(muiMuiPlayer);
+
+    // 判断是否开始准备完成
+    let is_play = true;
+    mp.on('duration-change', function (event) {
+        if (is_play) {
+            $('#loding').css('display', 'none');
+            $('#play').css('display', 'block');
+            is_play = false;
+        }
+    });
+    mp.on('error', function (event) {
+        mp.showToast('视频播放错误联系管理员');
+    });
+    // 点击播放
+    $(function () {
+        $('#play').click(function () {
+            $('#loding').css('display', 'none');
+            $('#play').css('display', 'none');
+            $('#play-switch').click();
+        });
+        $('#play-switch').click(function () {
+            let btn_play = $('#play-switch ._play').css('display');
+            if (btn_play === 'none') {
+                $('#play').css('display', 'block');
+            } else {
+                $('#play').css('display', 'none');
             }
-            let [r, g, b] = arr;
-            var color = `#${r.toString(16).length > 1 ? r.toString(16) : '0' + r.toString(16)}${g.toString(16).length > 1 ? g.toString(16) : '0' + g.toString(16)}${b.toString(16).length > 1 ? b.toString(16) : '0' + b.toString(16)}`;
-            return color;
+        });
+    });
+
+
+</script>
+<script>
+    var me = '';
+    var is_send = false;
+    var is_scrollTop = true;
+    // 生成唯一标识
+    const uniqueId = Math.random().toString(36).substr(2, 9);
+    let user = {
+        'user_id': uniqueId,
+        'username': '游客(' + uniqueId + ')',
+    };
+    me = user.username;
+    let userInfo = localStorage.getItem("userinfo");
+    let userInfoJson = null;
+
+    if (userInfo && userInfo.length && userInfo !== '') {
+        try {
+            user = userInfoJson = JSON.parse(userInfo);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    localStorage.setItem("userInfo", JSON.stringify(user));
+    var ws = new WebSocket("ws://live.com:9502");
+    ws.onopen = function (event) {
+        user.message = '';
+        user.code = 100;
+        ws.send(JSON.stringify(user));
+    };
+
+    ws.onmessage = function (event) {
+        let data = JSON.parse(event.data);
+        const dow = window.document.getElementById('user-msg');
+        switch (data.code) {
+            case 100:
+                $('#user-msg').append('<div class="c to"><span>' + data.username + ' ：</span><span>' + data.message + '</span></div>');
+                if (is_scrollTop) {
+                    dow.scrollTop = dow.scrollHeight;
+                }
+                break;
+            case 101:
+                let elClass = "c co";
+                if (data.user_id === uniqueId){
+                    elClass = "c me";
+                }
+                let html = '<div class="' + elClass + '"><span>' + data.username + ' ：</span><span>' + data.message + '</span></div>';
+                $('#user-msg').append(html);
+                if (is_scrollTop) {
+                    dow.scrollTop = dow.scrollHeight;
+                }
+                break;
+            case 102:
+                $screen = $(document.getElementById("mplayer-header"));
+                var content = $('<div class="commit-txt">' + data.message + '</div>');
+                var top = Math.random() * $screen.height();
+                content.css({
+                    top: top + "px",
+                    right: 0,
+                    color: getRandomColor(),
+                    "font-weight": "bold",
+                    "letter-spacing": "2px",
+                    "text-shadow": "rgb(0, 0, 0) 0px 0px 3px",
+                });
+                $('.mplayer-header').append(content);
+                content.animate({
+                    right: $screen.width() + 0 - content.width()
+                }, 10000, function () {
+                    $(this).remove();
+                });
+                break;
+        }
+    }
+
+    ws.onclose = function (event) {
+        console.log("连接已关闭");
+    };
+
+
+    // 点击发送消息
+    $('#send-btn').click(function () {
+        sunmitMessage();
+    });
+    // 回车发送消息
+    $("#input-message").keydown(function (e) {
+        var e = e || event;
+        if (e.keyCode == 13) {
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            let input_message = $('#input-message').val();
+            if (parseInt(input_message.length) <= 0) {
+                return false;
+            }
+            sunmitMessage();
+        }
+    });
+    // 内容改变时
+    $("#input-message").on('input propertychange', function () {
+        let input_message = $('#input-message').val();
+        if (parseInt(input_message.length)) {
+            $('#send-btn').attr('disabled', false);
+        } else {
+            $('#send-btn').attr('disabled', true);
         }
 
-    </script>
-    <script>
-        var ws = new WebSocket("ws://live.com:9502");
-        ws.onopen = function (event) {
-            console.log("客户端已连接上!");
-            ws.send("hello server,this is client!");
-        };
-
-        ws.onmessage = function (event) {
-            var parent = document.getElementById('WebSocket');
-            var div = document.createElement("div");
-            div.innerHTML = event.data
-            parent.appendChild(div);
-            console.log("服务器传过来的数据是：" + event.data);
+    });
+    // 判断是否到底部了
+    $('#user-msg').scroll(function () {
+        scrollHeight = window.document.getElementById('user-msg').scrollHeight + 9;
+        let chartH = window.document.getElementById('user-msg').clientHeight + $('#user-msg').scrollTop();
+        let wc = scrollHeight - chartH;
+        if (wc <= 10) {
+            is_scrollTop = true;
+            $('#chart-to-btm').css('display', 'none');
+        } else {
+            is_scrollTop = false;
+            $('#chart-to-btm').css('display', 'block');
         }
+    });
+    // 点击到底部
+    $('#chart-to-btm').click(function () {
+        const dow = window.document.getElementById('user-msg');
+        dow.scrollTop = dow.scrollHeight;
+        $('#chart-to-btm').css('display', 'none');
+    });
 
-        ws.onclose = function (event) {
-            console.log("连接已关闭");
+    // 发送消息
+    function sunmitMessage() {
+        if (is_send) {
+            return false;
+        }
+        let input_message = $('#input-message').val();
+        if (parseInt(input_message.length) <= 0) {
+            almsg('请输入信息!');
+            return false;
+        }
+        is_send = true;
+        // 模拟发送消息
+        $('#send-btn').attr('disabled', true);
+        // setTimeout(function () {
+        let data = {
+            code: 101,
+            username: me,
+            user_id: uniqueId,
+            message: input_message,
+
         };
+        ws.send(JSON.stringify(data));
+        $('#input-message').val('');
+        is_send = false;
+        // }, 1000);
+    }
 
-    </script>
+    // 错误提示
+    function almsg(message) {
+        $('#myModalWit .modal-body').text(message);
+        $('#myModalWit').modal('show');
+    }
+
+    // 发送弹幕
+    $('#send-barrage').click(function () {
+        sendBarrage();
+    });
+    // 回车发送弹幕
+    $("#barrage-txt").keydown(function (e) {
+        var e = e || event;
+        if (e.keyCode == 13) {
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            sendBarrage();
+        }
+    });
+
+    //发送弹幕
+    function sendBarrage() {
+        let commit = $('#barrage-txt').val();
+        if (parseInt(commit.length) <= 0) {
+            return false;
+        }
+        let data = {
+            code: 102,
+            username: me,
+            user_id: uniqueId,
+            message: commit,
+
+        };
+        ws.send(JSON.stringify(data));
+
+        // $screen = $(document.getElementById("mplayer-header"));
+        // var content = $('<div class="commit-txt">' + commit + '</div>');
+        // var top = Math.random() * $screen.height();
+        // content.css({
+        //     top: top + "px",
+        //     right: 0,
+        //     color: getRandomColor(),
+        //     "font-weight": "bold",
+        //     "letter-spacing": "2px",
+        //     "text-shadow": "rgb(0, 0, 0) 0px 0px 3px",
+        // });
+        // $('.mplayer-header').append(content);
+        // content.animate({
+        //     right: $screen.width() + 0 - content.width()
+        // }, 10000, function () {
+        //     $(this).remove();
+        // });
+        $('#barrage-txt').val('');
+    }
+
+    // 关闭弹幕
+    $('#colse-barrage').click(function () {
+        let colse_barrage = $('#mplayer-header').css('display');
+        if (colse_barrage === 'none') {
+            $('#mplayer-header').css('display', 'flex');
+            $('#colse-barrage').text('关 闭 弹 幕');
+            $('#colse-barrage').css('background-color', '#cf3333');
+        } else {
+            $('#mplayer-header').css('display', 'none');
+            $('#colse-barrage').text('开 启 弹 幕');
+            $('#colse-barrage').css('background-color', '#54911d');
+        }
+    });
+
+    // 弹幕颜色
+    function getRandomColor() {
+        let arr = [];
+        for (var i = 0; i < 3; i++) {
+            arr.push(Math.floor(Math.random() * 128 + 128));
+        }
+        let [r, g, b] = arr;
+        var color = `#${r.toString(16).length > 1 ? r.toString(16) : '0' + r.toString(16)}${g.toString(16).length > 1 ? g.toString(16) : '0' + g.toString(16)}${b.toString(16).length > 1 ? b.toString(16) : '0' + b.toString(16)}`;
+        return color;
+    }
+
+</script>
 </body>
-
 </html>
