@@ -347,14 +347,14 @@
             <div class="col-md-4 col" id="msg-box">
                 <div id="msg-box-1">
                     <div>
-                        <h2> 聊天室 <small>100人在线</small></h2>
+                        <h2> 聊天室 <small><a>修改昵称</a></small></h2>
                     </div>
                     <div id="user-msg">
                         <div id="chart-to-btm">↓ 消 息 ↓</div>
                     </div>
                     <div class="c tb"
                          style="background-color: #f0f0f0;width: 100%;text-align: center;border-top: 1px solid #e3e3e3;">
-                        <span>【 张三 】进入了直播间</span>
+                        <span>***</span>
                     </div>
                     <!-- <hr> -->
                     <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
@@ -532,20 +532,28 @@
     const uniqueId = Math.random().toString(36).substr(2, 9);
     let user = {
         'user_id': uniqueId,
-        'username': '游客(' + uniqueId + ')',
+        'username':null,
     };
-    me = user.username;
     let userInfo = localStorage.getItem("userinfo");
+    console.log(userInfo);
     let userInfoJson = null;
 
     if (userInfo && userInfo.length && userInfo !== '') {
         try {
-            user = userInfoJson = JSON.parse(userInfo);
+            userInfoJson = JSON.parse(userInfo);
+            if (!userInfoJson.username){
+                userInfoJson.username = '游客(' + uniqueId + ')';
+            }
+            user = userInfoJson;
         } catch (e) {
             console.log(e);
         }
+    }else{
+        user.username = '游客(' + uniqueId + ')';
     }
-    localStorage.setItem("userInfo", JSON.stringify(user));
+    me = user.username;
+    console.log(user);
+    localStorage.setItem("userinfo", JSON.stringify(user));
     var ws = new WebSocket("ws://live.com:9502");
     ws.onopen = function (event) {
         user.message = '';
@@ -558,14 +566,11 @@
         const dow = window.document.getElementById('user-msg');
         switch (data.code) {
             case 100:
-                $('#user-msg').append('<div class="c to"><span>' + data.username + ' ：</span><span>' + data.message + '</span></div>');
-                if (is_scrollTop) {
-                    dow.scrollTop = dow.scrollHeight;
-                }
+                $('.c.tb span').text("【 " + data.username + " 】" + data.message);
                 break;
             case 101:
                 let elClass = "c co";
-                if (data.user_id === uniqueId){
+                if (data.user_id === user.user_id) {
                     elClass = "c me";
                 }
                 let html = '<div class="' + elClass + '"><span>' + data.username + ' ：</span><span>' + data.message + '</span></div>';
@@ -646,7 +651,6 @@
         dow.scrollTop = dow.scrollHeight;
         $('#chart-to-btm').css('display', 'none');
     });
-
     // 发送消息
     function sunmitMessage() {
         if (is_send) {
@@ -660,20 +664,16 @@
         is_send = true;
         // 模拟发送消息
         $('#send-btn').attr('disabled', true);
-        // setTimeout(function () {
         let data = {
             code: 101,
             username: me,
-            user_id: uniqueId,
+            'user_id': user.user_id,
             message: input_message,
-
         };
         ws.send(JSON.stringify(data));
         $('#input-message').val('');
         is_send = false;
-        // }, 1000);
     }
-
     // 错误提示
     function almsg(message) {
         $('#myModalWit .modal-body').text(message);
@@ -692,7 +692,6 @@
             sendBarrage();
         }
     });
-
     //发送弹幕
     function sendBarrage() {
         let commit = $('#barrage-txt').val();
@@ -702,29 +701,11 @@
         let data = {
             code: 102,
             username: me,
-            user_id: uniqueId,
+            'user_id': user.user_id,
             message: commit,
 
         };
         ws.send(JSON.stringify(data));
-
-        // $screen = $(document.getElementById("mplayer-header"));
-        // var content = $('<div class="commit-txt">' + commit + '</div>');
-        // var top = Math.random() * $screen.height();
-        // content.css({
-        //     top: top + "px",
-        //     right: 0,
-        //     color: getRandomColor(),
-        //     "font-weight": "bold",
-        //     "letter-spacing": "2px",
-        //     "text-shadow": "rgb(0, 0, 0) 0px 0px 3px",
-        // });
-        // $('.mplayer-header').append(content);
-        // content.animate({
-        //     right: $screen.width() + 0 - content.width()
-        // }, 10000, function () {
-        //     $(this).remove();
-        // });
         $('#barrage-txt').val('');
     }
 

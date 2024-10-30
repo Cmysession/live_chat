@@ -88,7 +88,6 @@ class Swoole extends Command
                         break;
                     case $this->model::SEND_MESSAGE:
                         //  发送消息
-                        echo "SEND_MESSAGE";
                         $data['code'] = $this->model::SEND_MESSAGE;
                         foreach ($this->ws->connections as $fd) {
                             if ($this->ws->isEstablished($fd)) {
@@ -98,7 +97,6 @@ class Swoole extends Command
                         break;
                     case $this->model::SEND_BARRAGE:
                         //  发送弹幕
-                        echo "SEND_BARRAGE";
                         $data['code'] = $this->model::SEND_BARRAGE;
                         foreach ($this->ws->connections as $fd) {
                             if ($this->ws->isEstablished($fd)) {
@@ -115,9 +113,7 @@ class Swoole extends Command
                             }
                         }
                 }
-
             }
-
         });
         //监听WebSocket主动推送消息事件
         $this->ws->on('request', function ($request, $response) {
