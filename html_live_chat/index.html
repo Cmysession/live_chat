@@ -535,7 +535,6 @@
         'username':null,
     };
     let userInfo = localStorage.getItem("userinfo");
-    console.log(userInfo);
     let userInfoJson = null;
 
     if (userInfo && userInfo.length && userInfo !== '') {
@@ -552,7 +551,6 @@
         user.username = '游客(' + uniqueId + ')';
     }
     me = user.username;
-    console.log(user);
     localStorage.setItem("userinfo", JSON.stringify(user));
     var ws = new WebSocket("ws://live.com:9502");
     ws.onopen = function (event) {
