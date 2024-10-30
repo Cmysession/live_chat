@@ -538,6 +538,7 @@
     });
     mp.on('error', function (event) {
         mp.showToast('视频播放错误联系管理员');
+        $('#mplayer-error .errop-tip').text('请刷新!或联系管理员!');
     });
     // 点击播放
     $(function () {
@@ -598,7 +599,7 @@
                 $('.c.tb span').text("【 " + data.username + " 】" + data.message);
                 break;
             case 300:
-                $(".c.tb span").text(data.message);
+                $(".c.tb span").text(data.message + '!');
                 break;
             case 101:
                 let elClass = "c co";
@@ -634,7 +635,7 @@
     }
 
     ws.onclose = function (event) {
-        almsg('进入聊天室失败!请刷新或更换浏览器');
+        almsg('进入聊天室失败!请刷新或更换浏览器!');
     };
 
 
@@ -777,16 +778,29 @@
     });
 
     // 点击确定修改昵称
-    $("#form-sub").click(function (){
+    $("#form-sub").click(function () {
         let form_username = $('#form-username').val();
-        if (!form_username || form_username.length<=0 ||form_username===''){
+        if (!form_username || form_username.length <= 0 || form_username === '') {
             return;
         }
+        editUserName();
+    });
+    // 回车修改昵称
+    $("#form-username").keydown(function (e) {
+        var e = e || event;
+        if (e.keyCode == 13) {
+            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            editUserName();
+        }
+    });
+
+    function editUserName(){
+        let form_username = $('#form-username').val();
         let data = {
             code: 300,
             username: form_username,
             'user_id': user.user_id,
-            message: user.username+'修改为:'+form_username,
+            message: user.username + '改名为:' + form_username,
         };
         let userInfo = localStorage.getItem("userinfo");
         let userInfoJsonGetItem = JSON.parse(userInfo);
@@ -795,7 +809,7 @@
         localStorage.setItem("userinfo", JSON.stringify(userInfoJsonGetItem));
         ws.send(JSON.stringify(data));
         $('#userNameForm').modal('hide');
-    });
+    }
 </script>
 </body>
 </html>
