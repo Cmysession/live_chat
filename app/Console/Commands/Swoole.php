@@ -95,6 +95,15 @@ class Swoole extends Command
                             }
                         }
                         break;
+                    case $this->model::EDIT_USERNAME:
+                        //  修改昵称
+                        $data['code'] = $this->model::EDIT_USERNAME;
+                        foreach ($this->ws->connections as $fd) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
+                        break;
                     case $this->model::SEND_BARRAGE:
                         //  发送弹幕
                         $data['code'] = $this->model::SEND_BARRAGE;
@@ -107,6 +116,10 @@ class Swoole extends Command
                     default:
                         //  参数出错
                         $data['code'] = $this->model::PARAMETER_ERROR;
+                        $data['message'] = 'error';
+                        $data['fd'] = 'error';
+                        $data['user_id'] = 'error';
+                        $data['username'] = 'error';
                         foreach ($this->ws->connections as $fd) {
                             if ($this->ws->isEstablished($fd)) {
                                 $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));

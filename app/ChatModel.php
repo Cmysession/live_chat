@@ -33,6 +33,10 @@ class ChatModel
      */
     const PING = 200;
 
+    /**
+     * 修改昵称
+     */
+    const EDIT_USERNAME = 300;
     public function toArray(int $fd, string $dataStr)
     {
         if (!$dataStr || !$fd) {
