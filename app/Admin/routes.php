@@ -12,4 +12,5 @@ Route::group([
 ], function (Router $router) {
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('live-room','LiveRoomController');
+    $router->resource('ban-user','BanUserController');
 });

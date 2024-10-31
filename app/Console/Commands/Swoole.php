@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\ChatModel;
+use App\Models\ChatModel;
+use App\Models\TemporaryUserModel;
 use Illuminate\Console\Command;
 use swoole_websocket_server;
 
@@ -68,63 +69,32 @@ class Swoole extends Command
                 switch ($data['code']) {
                     case $this->model::PING:
                         //  PING
-                        $data['code'] = $this->model::JOIN;
-                        $data['message'] = 'PING';
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->ping($data);
                         break;
                     case $this->model::JOIN:
-                        //  进入聊天室
-                        $data['code'] = $this->model::JOIN;
-                        $data['message'] = '进入直播间!';
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->joinRoom($data);
                         break;
                     case $this->model::SEND_MESSAGE:
                         //  发送消息
-                        $data['code'] = $this->model::SEND_MESSAGE;
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->sendMessage($data);
                         break;
                     case $this->model::EDIT_USERNAME:
                         //  修改昵称
-                        $data['code'] = $this->model::EDIT_USERNAME;
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->editUsername($data);
                         break;
                     case $this->model::SEND_BARRAGE:
                         //  发送弹幕
-                        $data['code'] = $this->model::SEND_BARRAGE;
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->seedBarrage($data);
                         break;
                     default:
                         //  参数出错
-                        $data['code'] = $this->model::PARAMETER_ERROR;
-                        $data['message'] = 'error';
-                        $data['fd'] = 'error';
-                        $data['user_id'] = 'error';
-                        $data['username'] = 'error';
-                        foreach ($this->ws->connections as $fd) {
-                            if ($this->ws->isEstablished($fd)) {
-                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
-                            }
-                        }
+                        $data = $this->model->parameterError();
+                }
+                var_dump($data);
+                foreach ($this->ws->connections as $fd) {
+                    if ($this->ws->isEstablished($fd)) {
+                        $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                    }
                 }
             }
         });

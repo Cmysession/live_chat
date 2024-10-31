@@ -5,9 +5,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 
-class LiveRoomModel extends Model
+class TemporaryUserModel extends Model
 {
-    public $table = 'live_room';
+    public $table = 'temporary_user';
     public static function boot()
     {
         parent::boot();

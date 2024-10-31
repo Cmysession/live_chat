@@ -416,6 +416,7 @@
 <script src="as/bootstrap-3/js/jquery.min.js"></script>
 <script src="as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
+
     // 获取参数
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -426,8 +427,12 @@
                 return pair[1];
             }
         }
-        return false;
+        return (false);
     }
+    $.get('http://live.com/api/live-room',function (data){
+
+    })
+
 
     let video_lists = {
         first: {
@@ -556,7 +561,7 @@
             }
         });
     });
-
+    //
     var me = '';
     var is_send = false;
     var is_scrollTop = true;
@@ -637,7 +642,6 @@
     ws.onclose = function (event) {
         almsg('进入聊天室失败!请刷新或更换浏览器!');
     };
-
 
     // 点击发送消息
     $("#send-btn").click(function () {
