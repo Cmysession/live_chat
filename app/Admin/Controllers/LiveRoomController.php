@@ -24,9 +24,15 @@ class LiveRoomController extends AdminController
     protected function grid(): Grid
     {
         $grid = new Grid(new LiveRoomModel());
-        $grid->column('id', 'ID');
+        $grid->column('id', 'ID')
+            ->sortable();
+        $grid->column('uuid', 'UUID')
+            ->sortable();
         $grid->column('title', '直播间标题');
         $grid->column('live_url', '直播源');
+        $grid->column('sort', '排序')
+            ->editable()
+            ->sortable();
         $grid->column('status', '直播状态')
             ->switch($this->live_status);
         $grid->actions(function ($actions) {
@@ -34,6 +40,8 @@ class LiveRoomController extends AdminController
             $actions->disableView();
         });
         $grid->column('remarks', '备注');
+
+        $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
         // 查询
         $grid->filter(function ($filter) {
@@ -50,22 +58,46 @@ class LiveRoomController extends AdminController
             ]);
 
         });
-
+        // 禁用导出
+        $grid->disableExport();
         return $grid;
     }
 
     protected function form(): Form
     {
-        $form = new Form(new LiveRoomModel());
+        $liveRoomModel = new LiveRoomModel();
+        $form = new Form($liveRoomModel);
         $form->display('id', 'ID');
         $form->text('title', '直播间标题')
-            ->rules('required');
+            ->creationRules("required|min:3|max:10|unique:" . $liveRoomModel->table, [
+                'required' => '直播间标题不能为空!',
+                'min' => '直播间标题不能小于3个字符!',
+                'max' => '直播间标题不能大于10个字符!',
+                'unique' => '直播间标题已存在!',
+            ])
+            ->updateRules("required|min:3|max:10|unique:live_room,title,{{id}}", [
+                'required' => '直播间标题不能为空!',
+                'min' => '直播间标题不能小于3个字符!',
+                'max' => '直播间标题不能大于10个字符!',
+                'unique' => '直播间标题已存在!',
+            ]);
         $form->text('live_url', '直播源')
+            ->creationRules("required|unique:" . $liveRoomModel->table, [
+                'required' => '直播源不能为空!',
+                'unique' => '直播源已存在!',
+            ])
+            ->creationRules("required||unique:" . $liveRoomModel->table . ",live_url,{{id}}", [
+                'required' => '直播源不能为空!',
+                'unique' => '直播源已存在!',
+            ]);
+        $form->number('sort', '排序')
+            ->default(1000)
             ->rules('required');
         $form->switch('status', '直播状态')
             ->states($this->live_status)->default(1)
             ->rules('required');
         $form->textarea('remarks', '备注');
+        $form->confirm('确定更新吗？', 'edit');
         return $form;
     }
 }
