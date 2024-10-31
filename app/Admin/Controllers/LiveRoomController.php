@@ -24,10 +24,7 @@ class LiveRoomController extends AdminController
     protected function grid(): Grid
     {
         $grid = new Grid(new LiveRoomModel());
-        $grid->column('id', 'ID')
-            ->sortable();
-        $grid->column('uuid', 'UUID')
-            ->sortable();
+        $grid->column('uuid', 'UUID');
         $grid->column('title', '直播间标题');
         $grid->column('live_url', '直播源');
         $grid->column('sort', '排序')
@@ -51,6 +48,7 @@ class LiveRoomController extends AdminController
 
             // 在这里添加字段过滤器
             $filter->like('title', '直播间标题');
+            $filter->like('UUID', 'UUID');
             $filter->equal('status', '直播状态')->radio([
                 '' => '所有',
                 $this->live_status['on']['value'] => $this->live_status['on']['text'],
@@ -82,12 +80,14 @@ class LiveRoomController extends AdminController
                 'unique' => '直播间标题已存在!',
             ]);
         $form->text('live_url', '直播源')
-            ->creationRules("required|unique:" . $liveRoomModel->table, [
+            ->creationRules("required|url|unique:" . $liveRoomModel->table, [
                 'required' => '直播源不能为空!',
+                'url' => '直播源地址有误!',
                 'unique' => '直播源已存在!',
             ])
-            ->creationRules("required||unique:" . $liveRoomModel->table . ",live_url,{{id}}", [
+            ->creationRules("required|url|unique:" . $liveRoomModel->table . ",live_url,{{id}}", [
                 'required' => '直播源不能为空!',
+                'url' => '直播源地址有误!',
                 'unique' => '直播源已存在!',
             ]);
         $form->number('sort', '排序')
