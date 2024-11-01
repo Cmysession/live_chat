@@ -26,7 +26,6 @@ class BanUserController extends AdminController
         $grid = new  Grid(new TemporaryUserModel());
         $grid->column('uuid', 'UUID');
         $grid->column('username', '用户名');
-        $grid->column('cache_key', '缓存KEY');
         $grid->column('live_room_id', '所在聊天室');
         $grid->column('fd', '对话ID');
         $grid->column('status', '对话状态')
@@ -35,6 +34,7 @@ class BanUserController extends AdminController
         $grid->column('remarks', '备注');
         $grid->column('updated_at', '上线时间');
         $grid->column('created_at', '注册时间');
+        $grid->model()->orderBy('updated_at', 'desc');
         // 查询
         $grid->filter(function ($filter) {
 
@@ -44,7 +44,6 @@ class BanUserController extends AdminController
             // 在这里添加字段过滤器
             $filter->like('UUID', 'UUID');
             $filter->like('fd', '对话ID');
-            $filter->like('cache_key', '缓存KEY');
             $filter->like('username', '用户名');
             $filter->like('live_room_id', '所在聊天室');
             $filter->equal('status', '对话状态')->radio([

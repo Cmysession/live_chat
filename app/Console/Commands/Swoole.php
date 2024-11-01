@@ -65,13 +65,25 @@ class Swoole extends Command
         //监听WebSocket消息事件
         $this->ws->on('message', function ($ws, $frame) {
             $data = $this->model->toArray($frame->fd, $frame->data);
+            $this->info('收到的消息');
+            var_dump($data);
+            if (empty($data['code']) || empty($data['message']) || empty($data['live_room_id']) || empty($data['user_id'])) {
+                $data['code'] = $this->model::INTERNAL_ERROR;
+                $data['message'] = 'on error';
+                $this->ws->push($frame->fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+            }
             if ($data) {
                 switch ($data['code']) {
                     case $this->model::PING:
-                        //  PING
+                        // PING
                         $data = $this->model->ping($data);
                         break;
+                    case $this->model::KEY_USERNAME:
+                        // 匹配key和用户名
+                        $data = $this->model->keyAndUsername($data);
+                        break;
                     case $this->model::JOIN:
+                        // 加入聊天室
                         $data = $this->model->joinRoom($data);
                         break;
                     case $this->model::SEND_MESSAGE:
@@ -88,12 +100,28 @@ class Swoole extends Command
                         break;
                     default:
                         //  参数出错
-                        $data = $this->model->parameterError();
+                        $data = $this->model->parameterError($data);
                 }
+                $this->info('发送消息');
                 var_dump($data);
-                foreach ($this->ws->connections as $fd) {
-                    if ($this->ws->isEstablished($fd)) {
-                        $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                $user_fd = $data['fd'];
+                unset($data['fd']);
+                // 发送消息
+                if ($data['code'] === $this->model::KEY_USERNAME) {
+                    $this->ws->push($user_fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                }else {
+                    $fds = TemporaryUserModel::where([
+                        'live_room_id' => $data['live_room_id']
+                    ])->pluck('uuid', 'fd')
+                        ->toArray();
+                    $fdsKeys = array_keys($fds);
+                    foreach ($this->ws->connections as $fd) {
+                        if (in_array($fd, $fdsKeys)) {
+                            if ($this->ws->isEstablished($fd)) {
+                                $this->info('发送消息给:'.$fd);
+                                $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                            }
+                        }
                     }
                 }
             }

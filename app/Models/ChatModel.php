@@ -10,6 +10,11 @@ class ChatModel
      * 进入聊天室
      */
     const JOIN = 100;
+
+    /**
+     * 分配KEY和名称
+     */
+    const KEY_USERNAME = 111;
     /**
      * 发送消息
      */
@@ -51,9 +56,9 @@ class ChatModel
             return false;
         }
         try {
-            $dataArr = json_decode($dataStr, true);
-            $dataArr['fd'] = $fd;
-            return $dataArr;
+            $dataStr = json_decode($dataStr, true);
+            $dataStr['fd'] = $fd;
+            return $dataStr;
         } catch (\Exception $e) {
             return false;
         }
@@ -81,6 +86,45 @@ class ChatModel
     }
 
     /**
+     * 分配key和用户名
+     * @param $data
+     * @return mixed
+     */
+    public function keyAndUsername($data)
+    {
+        $data['code'] = self::KEY_USERNAME;
+        if (!empty($data['user_id'])) {
+            $first = TemporaryUserModel::where('uuid', $data['user_id'])
+                ->first(['uuid', 'live_room_id', 'fd', 'username', 'status', 'updated_at']);
+            if (!$first) {
+                // 不存在
+                var_dump('不存在');
+                $data['user_id'] = $this->cacheKey();
+                $data['username'] = "游客(" . $data['user_id'] . ")";
+                TemporaryUserModel::create([
+                    'uuid' => $data['user_id'],
+                    'username' => $data['username'],
+                    'fd' => $data['fd'],
+                    'live_room_id' => $data['live_room_id'],
+                    'status' => 1,
+                    'sort' => 1000,
+                ]);
+            }else{
+                // 存在
+                var_dump('存在');
+                TemporaryUserModel::where('uuid', $data['user_id'])
+                    ->update([
+                        'live_room_id' => $data['live_room_id'],
+                        'fd' => $data['fd'],
+                    ]);
+                $data['username'] = $first->username;
+            }
+        }
+        $data['message'] = '欢迎【 '.$data['username'].'】进入直播间!';
+        return $data;
+    }
+
+    /**
      * 进入聊天室
      * @param $data
      * @return mixed
@@ -90,16 +134,6 @@ class ChatModel
         //  进入聊天室
         $data['code'] = self::JOIN;
         $data['message'] = '进入直播间!';
-        if (!empty($data['user_id'])) {
-            $exists = TemporaryUserModel::where('uuid', $data['user_id'])->exists();
-            if (!$exists) {
-                $data['user_id'] = $this->cacheKey();
-                $data['username'] = "游客(" . $this->cacheKey() . ")";
-            }
-        } else {
-            $data['user_id'] = $this->cacheKey();
-            $data['username'] = "游客(" . $this->cacheKey() . ")";
-        }
         return $data;
     }
 

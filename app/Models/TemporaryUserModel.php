@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
@@ -8,11 +9,5 @@ use Illuminate\Support\Str;
 class TemporaryUserModel extends Model
 {
     public $table = 'temporary_user';
-    public static function boot()
-    {
-        parent::boot();
-        static::saving(function ($model) {
-            $model->uuid = Str::random(9);
-        });
-    }
+    protected $fillable = ['uuid', 'live_room_id', 'fd', 'username', 'status', 'remarks', 'sort', 'updated_at'];
 }
