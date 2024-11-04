@@ -109,16 +109,15 @@ class Swoole extends Command
                 // 发送消息
                 if ($data['code'] === $this->model::KEY_USERNAME) {
                     // 首次分配名字
-                    $this->info('首次发给自己:'.$user_fd);
+                    $this->info('首次发给自己:' . $user_fd);
                     $this->ws->push($user_fd, json_encode($data, JSON_UNESCAPED_UNICODE));
                     $data = $this->model->joinRoom($data);
                 } else if ($data['code'] === $this->model::EDIT_USERNAME) {
-                    $this->info('修改发给自己:'.$user_fd);
+                    $this->info('修改发给自己:' . $user_fd);
                     $ToMeData = $data;
                     $ToMeData['code'] = $this->model::KEY_USERNAME;
                     $this->ws->push($user_fd, json_encode($ToMeData, JSON_UNESCAPED_UNICODE));
                 }
-
                 $this->info('发送给发所有人');
                 var_dump($data);
                 $fds = TemporaryUserModel::where([
@@ -140,18 +139,13 @@ class Swoole extends Command
         $this->ws->on('request', function ($request, $response) {
             $this->info("----监听WebSocket主动推送消息事件----");
             dump($request->post);
-            $scene = $request->post['scene'];
-            foreach ($this->ws->connections as $fd) {
-                if ($this->ws->isEstablished($fd)) {
-                    $this->ws->push($fd, $scene);
-                }
-            }
         });
+
         //监听WebSocket连接关闭事件
         $this->ws->on('close', function ($ws, $fd) {
-//            $data = $this->model->toArray($fd, $frame->data);
-            $this->info("client is close\n");
+            TemporaryUserModel::where('fd', $fd)->update(['on_line' => 2]);
         });
+
         $this->ws->start();
     }
 }

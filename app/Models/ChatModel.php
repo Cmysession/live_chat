@@ -108,19 +108,21 @@ class ChatModel
                     'live_room_id' => $data['live_room_id'],
                     'status' => 1,
                     'sort' => 1000,
+                    'on_line' => 1,
                 ]);
-            }else{
+            } else {
                 // 存在
                 var_dump('存在');
                 TemporaryUserModel::where('uuid', $data['user_id'])
                     ->update([
                         'live_room_id' => $data['live_room_id'],
-                        'fd' => $data['fd']
+                        'on_line' => 1,
+                        'fd' => $data['fd'],
                     ]);
                 $data['username'] = $first->username;
             }
         }
-        $data['message'] = '欢迎【 '.$data['username'].'】进入直播间!';
+        $data['message'] = '欢迎【 ' . $data['username'] . '】进入直播间!';
         return $data;
     }
 
@@ -133,7 +135,7 @@ class ChatModel
     {
         //  进入聊天室
         $data['code'] = self::JOIN;
-        $data['message'] = "~🎉 欢 迎 🎊~".$data['username'];
+        $data['message'] = "~🎉 欢 迎 🎊~" . $data['username'];
         return $data;
     }
 
@@ -157,13 +159,13 @@ class ChatModel
     {
         $data['code'] = self::EDIT_USERNAME;
         $temporaryUserModel = TemporaryUserModel::where([
-            'uuid'=>$data['user_id'],
-            'fd'=>$data['fd'],
-            'live_room_id'=>$data['live_room_id'],
+            'uuid' => $data['user_id'],
+            'fd' => $data['fd'],
+            'live_room_id' => $data['live_room_id'],
         ])->update([
             'username' => $data['username'],
         ]);
-        if (!$temporaryUserModel){
+        if (!$temporaryUserModel) {
             $data['code'] = self::INTERNAL_ERROR;
         }
         return $data;

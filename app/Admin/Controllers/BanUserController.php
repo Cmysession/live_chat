@@ -30,8 +30,15 @@ class BanUserController extends AdminController
         $grid->column('fd', '对话ID');
         $grid->column('status', '对话状态')
             ->switch($this->ban_status);
+        $grid->column('on_line', '在线状态')->display(function ($on_line) {
+            if ($on_line == 1) {
+                return "<span style='color: #179e1c;font-weight: bold'>在线</span>";
+            }
+            return "<span style='color: darkred;font-weight: bold'>离线</span>";
+        });
         $grid->column('sort', '排序');
         $grid->column('remarks', '备注');
+        $grid->column('ip', 'IP');
         $grid->column('updated_at', '上线时间');
         $grid->column('created_at', '注册时间');
         $grid->model()->orderBy('updated_at', 'desc');
