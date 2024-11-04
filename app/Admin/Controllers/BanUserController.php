@@ -26,7 +26,7 @@ class BanUserController extends AdminController
         $grid = new  Grid(new TemporaryUserModel());
         $grid->column('uuid', 'UUID');
         $grid->column('username', '用户名');
-        $grid->column('live_room_id', '所在聊天室');
+        $grid->column('room.title', '所在聊天室');
         $grid->column('fd', '对话ID');
         $grid->column('status', '对话状态')
             ->switch($this->ban_status);

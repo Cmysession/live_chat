@@ -39,7 +39,6 @@ class LiveRoomController extends AdminController
             $actions->disableView();
         });
         $grid->column('remarks', '备注');
-
         $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
         // 查询

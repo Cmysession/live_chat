@@ -115,7 +115,7 @@ class ChatModel
                 TemporaryUserModel::where('uuid', $data['user_id'])
                     ->update([
                         'live_room_id' => $data['live_room_id'],
-                        'fd' => $data['fd'],
+                        'fd' => $data['fd']
                     ]);
                 $data['username'] = $first->username;
             }
@@ -133,7 +133,7 @@ class ChatModel
     {
         //  进入聊天室
         $data['code'] = self::JOIN;
-        $data['message'] = '进入直播间!';
+        $data['message'] = "~🎉 欢 迎 🎊~".$data['username'];
         return $data;
     }
 
@@ -156,6 +156,16 @@ class ChatModel
     public function editUsername($data)
     {
         $data['code'] = self::EDIT_USERNAME;
+        $temporaryUserModel = TemporaryUserModel::where([
+            'uuid'=>$data['user_id'],
+            'fd'=>$data['fd'],
+            'live_room_id'=>$data['live_room_id'],
+        ])->update([
+            'username' => $data['username'],
+        ]);
+        if (!$temporaryUserModel){
+            $data['code'] = self::INTERNAL_ERROR;
+        }
         return $data;
     }
 
