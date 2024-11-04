@@ -26,6 +26,8 @@ class LiveRoomController extends AdminController
         $grid = new Grid(new LiveRoomModel());
         $grid->column('uuid', 'UUID');
         $grid->column('title', '直播间标题');
+        $grid->column('cover','封面')
+            ->image();
         $grid->column('live_url', '直播源');
         $grid->column('sort', '排序')
             ->editable()
@@ -79,6 +81,9 @@ class LiveRoomController extends AdminController
                 'max' => '直播间标题不能大于10个字符!',
                 'unique' => '直播间标题已存在!',
             ]);
+        $form->image('cover','封面')
+            ->move('cover/'.date('Y-m'), uniqid().'.jpg')
+            ->rules('required');
         $form->text('live_url', '直播源')
             ->creationRules("required|url|unique:" . $liveRoomModel->table, [
                 'required' => '直播源不能为空!',

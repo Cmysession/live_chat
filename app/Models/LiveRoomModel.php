@@ -2,7 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class LiveRoomModel extends Model
@@ -13,6 +13,7 @@ class LiveRoomModel extends Model
         parent::boot();
         static::saving(function ($model) {
             $model->uuid = Str::random(9);
+            Cache::forget('room');
         });
     }
 }
