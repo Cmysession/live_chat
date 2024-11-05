@@ -17,8 +17,8 @@ class BanUserController extends AdminController
 
     public $title = '禁言管理';
     private $ban_status = [
-        'on' => ['value' => 1, 'text' => '发言', 'color' => 'success'],
-        'off' => ['value' => 2, 'text' => '禁言', 'color' => 'danger'],
+        'on' => ['value' => 1, 'text' => '正常状态', 'color' => 'success'],
+        'off' => ['value' => 2, 'text' => '异常状态', 'color' => 'danger'],
     ];
 
     protected function grid(): Grid
