@@ -65,8 +65,6 @@ class Swoole extends Command
         //监听WebSocket消息事件
         $this->ws->on('message', function ($ws, $frame) {
             $data = $this->model->toArray($frame->fd, $frame->data);
-            $this->info('收到的消息');
-            var_dump($data);
             if (empty($data['code']) || empty($data['message']) || empty($data['live_room_id']) || empty($data['user_id'])) {
                 $data['code'] = $this->model::INTERNAL_ERROR;
                 $data['message'] = 'on error';
@@ -87,14 +85,32 @@ class Swoole extends Command
                         $data = $this->model->joinRoom($data);
                         break;
                     case $this->model::SEND_MESSAGE:
+                        // 禁言用户
+                        if ($this->model->banUsers($data)){
+                            $data['code'] = $this->model::BAN_USER;
+                            $data['message'] = '你被限制了哦';
+                            return $this->ws->push($frame->fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                        }
                         //  发送消息
                         $data = $this->model->sendMessage($data);
                         break;
                     case $this->model::EDIT_USERNAME:
+                        // 禁言用户
+                        if ($this->model->banUsers($data)){
+                            $data['code'] = $this->model::BAN_USER;
+                            $data['message'] = '你被限制了哦';
+                            return $this->ws->push($frame->fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                        }
                         //  修改昵称
                         $data = $this->model->editUsername($data);
                         break;
                     case $this->model::SEND_BARRAGE:
+                        // 禁言用户
+                        if ($this->model->banUsers($data)){
+                            $data['code'] = $this->model::BAN_USER;
+                            $data['message'] = '你被限制了哦';
+                            return $this->ws->push($frame->fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                        }
                         //  发送弹幕
                         $data = $this->model->seedBarrage($data);
                         break;

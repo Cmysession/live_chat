@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class ChatModel
@@ -45,6 +46,11 @@ class ChatModel
      */
     const EDIT_USERNAME = 300;
 
+
+    /**
+     * 禁言
+     */
+    const BAN_USER = 401;
     /**
      * @param int $fd
      * @param string $dataStr
@@ -64,6 +70,23 @@ class ChatModel
         }
     }
 
+
+    /**
+     * 是否被禁言
+     * @param $data
+     * @return bool
+     */
+    public function banUsers($data)
+    {
+       $banUsers = Cache::remember('ban_users', 600, function () {
+            return TemporaryUserModel::where('status', 2)->pluck('fd','uuid')->toArray();
+        });
+       var_dump(array_keys($banUsers));
+       if (in_array($data['user_id'], array_keys($banUsers))) {
+           return true;
+       }
+        return false;
+    }
     /**
      * @return string
      */
