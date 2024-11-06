@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>聊天室测试</title>
-    <link rel="stylesheet" href="as/bootstrap-3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="as/muiplayer/mui-player.min.css">
-    <script type="text/javascript" src="as/muiplayer/mui-player.min.js"></script>
-    <script type="text/javascript" src="as/muiplayer/hls.min.js"></script>
-    <script type="text/javascript" src="as/muiplayer/flv.min.js"></script>
+    <link rel="stylesheet" href="http://video.supers.live/as/bootstrap-3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://video.supers.live/as/muiplayer/mui-player.min.css">
+    <script type="text/javascript" src="http://video.supers.live/as/bootstrap-3/js/reconnecting-websocket.js"></script>
+    <script type="text/javascript" src="http://video.supers.live/as/muiplayer/mui-player.min.js"></script>
+    <script type="text/javascript" src="http://video.supers.live/as/muiplayer/hls.min.js"></script>
+    <script type="text/javascript" src="http://video.supers.live/as/muiplayer/flv.min.js"></script>
     <style>
         .row {
             margin-right: 0;
@@ -413,8 +414,8 @@
     </div>
 </div>
 
-<script src="as/bootstrap-3/js/jquery.min.js"></script>
-<script src="as/bootstrap-3/js/bootstrap.min.js"></script>
+<script src="http://video.supers.live/as/bootstrap-3/js/jquery.min.js"></script>
+<script src="http://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -581,7 +582,7 @@
 
     function runWs() {
         console.log('run');
-        ws = new WebSocket("ws://live.com:9502");
+        ws = new ReconnectingWebSocket("ws://wss.supers.live");
         ws.onopen = function (event) {
             console.log('onopen');
             let userInfo = localStorage.getItem("userinfo");
@@ -662,6 +663,7 @@
 
         ws.onclose = function (event) {
             // almsg('进入聊天室失败!请刷新或更换浏览器!');
+
             $('.c.tb span').text('进入聊天室失败!请刷新或更换浏览器!');
         };
     }
