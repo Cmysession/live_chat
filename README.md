@@ -7,10 +7,12 @@
 ##### firewall-cmd --zone=public --add-port=9502/tcp --permanent
 ##### firewall-cmd --zone=public --add-port=3307/tcp --permanent
 ##### firewall-cmd --zone=public --add-port=80/tcp --permanent
+##### firewall-cmd --zone=public --add-port=443/tcp --permanent
 
 
 ##### firewall-cmd --zone=public --remove-port=9502/tcp --permanent
 ##### firewall-cmd --zone=public --remove-port=3307/tcp --permanent
+##### firewall-cmd --zone=public --remove-port=443/tcp --permanent
 ##### firewall-cmd --zone=public --remove-port=80/tcp --permanent
 #### 立即生效: firewall-cmd --reload
 ##### 关闭： systemctl stop firewalld
@@ -23,5 +25,12 @@
 
 #### 证书
 ##### https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E
+##### cp /root/.acme.sh/xm.supers.live_ecc/xm.supers.live.cer /root/www/works/live_chat/KEY_CERT/
+##### cp /root/.acme.sh/xm.supers.live_ecc/xm.supers.live.key /root/www/works/live_chat/KEY_CERT/
+##### cp /root/.acme.sh/xm.supers.live_ecc/ca.cer /root/www/works/live_chat/KEY_CERT/
+##### cp /root/.acme.sh/xm.supers.live_ecc/fullchain.cer /root/www/works/live_chat/KEY_CERT/
 
+#### 查看端口: firewall-cmd --list-all
+#### 刷一遍端口
+/root/www/service/docker-composer/secure/shell/firewall-cmd.docker.sh
 
