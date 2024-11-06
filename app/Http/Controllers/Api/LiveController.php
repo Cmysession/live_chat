@@ -19,12 +19,12 @@ class LiveController extends Controller
             $liveRoomModel = LiveRoomModel::where([
                 'status' => 1,
             ])->orderBy('sort', 'desc')
-                ->select('uuid', 'title', 'live_url as video', 'cover as video_img')
+                ->select('uuid', 'title', 'live_url as video', 'cover as video_img','type')
                 ->get();
             $data = [];
             foreach ($liveRoomModel as $liveRoom) {
                 $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
-                $data[] = $liveRoom;
+                $data[$liveRoom->uuid] = $liveRoom;
             }
             return $data;
         });

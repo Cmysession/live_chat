@@ -251,6 +251,7 @@ CREATE TABLE `live_room` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '直播间标题',
   `cover` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '封面',
   `live_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '直播源url',
+  `type` int NOT NULL DEFAULT '1' COMMENT '1:hls,2:flv',
   `status` int NOT NULL DEFAULT '1' COMMENT '直播状态',
   `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '备注',
   `sort` int NOT NULL DEFAULT '1000' COMMENT '排序',

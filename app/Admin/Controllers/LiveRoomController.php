@@ -20,14 +20,22 @@ class LiveRoomController extends AdminController
         'on' => ['value' => 1, 'text' => '开启直播', 'color' => 'success'],
         'off' => ['value' => 2, 'text' => '关闭直播', 'color' => 'danger'],
     ];
+    private $type = [
+        1 => 'hls',
+        2 => 'flv',
+    ];
 
     protected function grid(): Grid
     {
         $grid = new Grid(new LiveRoomModel());
         $grid->column('uuid', 'UUID');
         $grid->column('title', '直播间标题');
-        $grid->column('cover','封面')
+        $grid->column('cover', '封面')
             ->image();
+        $typeArray = $this->type;
+        $grid->column('type', '直播类型')->display(function ($type) use ($typeArray){
+            return $typeArray[$type];
+        });
         $grid->column('live_url', '直播源');
         $grid->column('sort', '排序')
             ->editable()
@@ -80,8 +88,8 @@ class LiveRoomController extends AdminController
                 'max' => '直播间标题不能大于10个字符!',
                 'unique' => '直播间标题已存在!',
             ]);
-        $form->image('cover','封面')
-            ->move('cover/'.date('Y-m'), uniqid().'.jpg')
+        $form->image('cover', '封面')
+            ->move('cover/' . date('Y-m'), uniqid() . '.jpg')
             ->rules('required');
         $form->text('live_url', '直播源')
             ->creationRules("required|url|unique:" . $liveRoomModel->table, [
@@ -94,6 +102,9 @@ class LiveRoomController extends AdminController
                 'url' => '直播源地址有误!',
                 'unique' => '直播源已存在!',
             ]);
+        $form->select('type','直播类型')->options($this->type)
+            ->default(1)
+            ->required();
         $form->number('sort', '排序')
             ->default(1000)
             ->rules('required');

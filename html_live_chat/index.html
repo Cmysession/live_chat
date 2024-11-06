@@ -464,7 +464,7 @@
                     $('#colse-barrage').css('background-color', '#cf3333');
                 }
             });
-        }else{
+        } else {
             // 关闭弹幕
             $("#colse-barrage").click(function () {
                 let colse_barrage = $('#mplayer-header').css('display');
@@ -480,20 +480,22 @@
             });
         }
 
-        $.post('http://live.com/api/live-room', function (data) {
-            console.log(data);
-            let muiMuiPlayerSrc = data[0].video;
-            let muiMuiPlayerPoster = data[0].video_img;
-            v = data[0].uuid;
-            t = data[0].title;
-            runWs();
+        $.post('http://live.com/api/live-room?code='+Math.random(), function (data) {
+            let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
+            let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
+            let dataType = null;
             if (data[v] && t && v && (data[v].title === decodeURI(t))) {
                 muiMuiPlayerSrc = data[v].video;
                 muiMuiPlayerPoster = data[v].video_img;
+                dataType = data[v].type;
                 $('#video-title').text(decodeURI(t));
             } else {
-                $('#video-title').text(data[0].title);
+                $('#video-title').text(data[Object.keys(data)[0]].title);
+                v = data[Object.keys(data)[0]].uuid;
+                t = data[Object.keys(data)[0]].title;
+                dataType = data[Object.keys(data)[0]].type;
             }
+            runWs();
             let muiMuiPlayer = {
                 container: document.getElementById("mui-player"),
                 src: muiMuiPlayerSrc,
@@ -504,8 +506,8 @@
                 autoFit: false,
                 lang: "en",
                 parse: {
-                    type: 'hls',
-                    loader: Hls,
+                    type: dataType === 1 ? 'hls' : 'flv',
+                    loader: dataType === 1 ? Hls : flvjs,
                     config: {
                         debug: false,
                     },
@@ -520,12 +522,13 @@
                 muiMuiPlayer.autoFit = true;
                 delete muiMuiPlayer.height;
             }
+
             // 示例 hls 配置
             var mp = new MuiPlayer(muiMuiPlayer);
 
             let tv_box = '';
-            for (let i = 0; i < data.length; i++) {
-                tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(data[i].title) + '&v=' + data[i].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + data[i].title + '</a></div>';
+            for (key in data){
+                tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(data[key].title) + '&v=' + data[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + data[key].title + '</a></div>';
             }
             $('#tv-box').append(tv_box);
             // 判断是否开始准备完成
@@ -574,9 +577,6 @@
             }
         });
     })
-
-
-
 
 
     function runWs() {
