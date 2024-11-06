@@ -11,7 +11,7 @@ class LiveRoomModel extends Model
     public static function boot()
     {
         parent::boot();
-        static::saving(function ($model) {
+        static::creating(function ($model) {
             $model->uuid = Str::random(9);
             Cache::forget('room');
         });

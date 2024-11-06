@@ -58,7 +58,7 @@ class LiveRoomController extends AdminController
             // 在这里添加字段过滤器
             $filter->like('title', '直播间标题');
             $filter->like('UUID', 'UUID');
-            $filter->equal('status', '直播状态')->radio([
+            $filter->equal('status', '直播状态')->select([
                 '' => '所有',
                 $this->live_status['on']['value'] => $this->live_status['on']['text'],
                 $this->live_status['off']['value'] => $this->live_status['off']['text'],
