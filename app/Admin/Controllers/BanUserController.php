@@ -60,7 +60,11 @@ class BanUserController extends AdminController
                 $this->ban_status['on']['value'] => $this->ban_status['on']['text'],
                 $this->ban_status['off']['value'] => $this->ban_status['off']['text'],
             ]);
-
+            $filter->equal('on_line', '在线状态')->select([
+                '' => '所有',
+                1 => '在线',
+                2 => '离线',
+            ]);
         });
 
         // 关闭行内编辑
