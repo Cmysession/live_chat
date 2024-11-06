@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\LiveRoomModel;
 use App\Models\TemporaryUserModel;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -43,7 +44,8 @@ class BanUserController extends AdminController
         $grid->column('created_at', '注册时间');
         $grid->model()->orderBy('updated_at', 'desc');
         // 查询
-        $grid->filter(function ($filter) {
+        $liveRoomModel =  LiveRoomModel::pluck('title', 'uuid');
+        $grid->filter(function ($filter) use ($liveRoomModel) {
 
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
@@ -52,8 +54,8 @@ class BanUserController extends AdminController
             $filter->like('UUID', 'UUID');
             $filter->like('fd', '对话ID');
             $filter->like('username', '用户名');
-            $filter->like('live_room_id', '所在聊天室');
-            $filter->equal('status', '对话状态')->radio([
+            $filter->equal('live_room_id', '所在聊天室')->select($liveRoomModel);
+            $filter->equal('status', '对话状态')->select([
                 '' => '所有',
                 $this->ban_status['on']['value'] => $this->ban_status['on']['text'],
                 $this->ban_status['off']['value'] => $this->ban_status['off']['text'],
