@@ -511,6 +511,13 @@
                 lang: "en",
                 autoplay:true,
                 initFullFixed:false,
+                // "webkit-playsinline":true,
+                // playsinline:true,
+                videoAttribute:[
+                    {attrKey:'webkit-playsinline',attrValue:'true'},
+                    {attrKey:'playsinline',attrValue:'true'},
+                    // {attrKey:'x5-video-player-type',attrValue:'h5-page'},
+                ],
                 parse: {
                     type: dataType === 1 ? 'hls' : 'flv',
                     loader: dataType === 1 ? Hls : flvjs,
