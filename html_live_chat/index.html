@@ -334,7 +334,7 @@
                             </div>
                             <div class="col-md-8">
                                     <textarea id="barrage-txt" style="resize:none;" type="text"
-                                              placeholder="请输入弹幕信息"
+                                              placeholder="请输入弹幕信息,回车键发送"
                                               class="form-control" rows="1"></textarea>
                             </div>
                             <div class="col-md-2" style="text-align: center;padding: 0;">
@@ -361,7 +361,7 @@
                     </div>
                     <!-- <hr> -->
                     <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
-                            <textarea id="input-message" class="form-control"
+                            <textarea id="input-message" placeholder="发送消息,回车键发送" class="form-control"
                                       style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
                         <button type="button" disabled="true" id="send-btn"
                                 class="send-btn btn btn-primary btn-lg btn-block"> 发 送
@@ -511,12 +511,9 @@
                 lang: "en",
                 autoplay:true,
                 initFullFixed:false,
-                // "webkit-playsinline":true,
-                // playsinline:true,
                 videoAttribute:[
                     {attrKey:'webkit-playsinline',attrValue:'true'},
                     {attrKey:'playsinline',attrValue:'true'},
-                    // {attrKey:'x5-video-player-type',attrValue:'h5-page'},
                 ],
                 parse: {
                     type: dataType === 1 ? 'hls' : 'flv',
