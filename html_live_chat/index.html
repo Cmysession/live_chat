@@ -419,6 +419,7 @@
 <script>
     let wss = 'wss.supers.live';
     let https = 'https://api.supers.live';
+
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -483,7 +484,7 @@
             });
         }
 
-        $.post(https+'/api/live-room?code='+Math.random(), function (data) {
+        $.post(https + '/api/live-room?code=' + Math.random(), function (data) {
             let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
             let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
             let dataType = null;
@@ -530,7 +531,7 @@
             var mp = new MuiPlayer(muiMuiPlayer);
 
             let tv_box = '';
-            for (key in data){
+            for (key in data) {
                 tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(data[key].title) + '&v=' + data[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + data[key].title + '</a></div>';
             }
             $('#tv-box').append(tv_box);
@@ -585,7 +586,7 @@
 
     function runWs() {
         console.log('run');
-        ws = new ReconnectingWebSocket(wss);
+        ws = new ReconnectingWebSocket("ws://" + wss);
         ws.onopen = function (event) {
             console.log('onopen');
             let userInfo = localStorage.getItem("userinfo");
