@@ -16,7 +16,7 @@ class LiveController extends Controller
     public function liveRoom($area)
     {
         $areaArray = config('live_area');
-        if (!in_array($area, $areaArray)) {
+        if (!in_array($area, array_keys($areaArray))) {
             return [];
         }
         return Cache::remember($area.'_room', 86400, function () use ($area) {
