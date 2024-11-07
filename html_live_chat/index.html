@@ -417,6 +417,8 @@
 <script src="http://video.supers.live/as/bootstrap-3/js/jquery.min.js"></script>
 <script src="http://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
+    let wss = 'wss.supers.live';
+    let https = 'https://api.supers.live';
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -481,7 +483,7 @@
             });
         }
 
-        $.post('http://api.supers.live/api/live-room?code='+Math.random(), function (data) {
+        $.post(https+'/api/live-room?code='+Math.random(), function (data) {
             let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
             let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
             let dataType = null;
@@ -496,7 +498,7 @@
                 t = data[Object.keys(data)[0]].title;
                 dataType = data[Object.keys(data)[0]].type;
             }
-            runWs();
+
             let muiMuiPlayer = {
                 container: document.getElementById("mui-player"),
                 src: muiMuiPlayerSrc,
@@ -561,6 +563,7 @@
                     $('#play').css('display', 'none');
                 }
             });
+            runWs();
         });
 
 
@@ -582,7 +585,7 @@
 
     function runWs() {
         console.log('run');
-        ws = new ReconnectingWebSocket("ws://wss.supers.live");
+        ws = new ReconnectingWebSocket(wss);
         ws.onopen = function (event) {
             console.log('onopen');
             let userInfo = localStorage.getItem("userinfo");
