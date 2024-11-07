@@ -586,7 +586,7 @@
 
     function runWs() {
         console.log('run');
-        ws = new ReconnectingWebSocket("ws://" + wss);
+        ws = new ReconnectingWebSocket("wss://" + wss);
         ws.onopen = function (event) {
             console.log('onopen');
             let userInfo = localStorage.getItem("userinfo");
