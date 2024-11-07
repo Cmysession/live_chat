@@ -13,7 +13,10 @@ class LiveRoomModel extends Model
         parent::boot();
         static::creating(function ($model) {
             $model->uuid = Str::random(9);
-            Cache::forget('room');
+            $areaArray = config('live_area');
+            foreach ($areaArray as $area) {
+                Cache::forget($area.'_room');
+            }
         });
     }
 }
