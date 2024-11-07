@@ -591,14 +591,11 @@
 
 
     function runWs() {
-        console.log('run');
         ws = new ReconnectingWebSocket("wss://" + wss);
         ws.onopen = function (event) {
-            console.log('onopen');
             let userInfo = localStorage.getItem("userinfo");
             let userInfoJsonGetItem = JSON.parse(userInfo) ?? {};
             userInfoJsonGetItem.code = 111;
-            console.log(userInfoJsonGetItem.username);
             if (userInfoJsonGetItem) {
                 user.username = userInfoJsonGetItem.username ?? 'null';
                 user.user_id = userInfoJsonGetItem.user_id ?? 'null';
@@ -615,8 +612,6 @@
 
         ws.onmessage = function (event) {
             let data = JSON.parse(event.data);
-            console.log('---收到的消息----');
-            console.log(data);
             const dow = window.document.getElementById('user-msg');
             switch (data.code) {
                 case 100:
@@ -627,7 +622,6 @@
                     user.username = data.username;
                     user.user_id = data.user_id;
                     localStorage.setItem("userinfo", JSON.stringify(user));
-                    console.log('储存');
                     $('.c.tb span').text(data.message);
                     break;
                 case 300:
@@ -635,7 +629,6 @@
                     break;
                 case 401:
                     // 被限制
-                    // $(".c.tb span").text(data.message);
                     almsg(data.message);
                     break;
                 case 101:
@@ -745,7 +738,6 @@
             live_room_id: v,
             message: input_message,
         };
-        console.log(data);
         ws.send(JSON.stringify(data));
         $('#input-message').val('');
         is_send = false;

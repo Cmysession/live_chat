@@ -118,24 +118,18 @@ class Swoole extends Command
                         //  参数出错
                         $data = $this->model->parameterError($data);
                 }
-                $this->info('判断DATA');
-                var_dump($data);
                 $user_fd = $data['fd'];
                 unset($data['fd']);
                 // 发送消息
                 if ($data['code'] === $this->model::KEY_USERNAME) {
                     // 首次分配名字
-                    $this->info('首次发给自己:' . $user_fd);
                     $this->ws->push($user_fd, json_encode($data, JSON_UNESCAPED_UNICODE));
                     $data = $this->model->joinRoom($data);
                 } else if ($data['code'] === $this->model::EDIT_USERNAME) {
-                    $this->info('修改发给自己:' . $user_fd);
                     $ToMeData = $data;
                     $ToMeData['code'] = $this->model::KEY_USERNAME;
                     $this->ws->push($user_fd, json_encode($ToMeData, JSON_UNESCAPED_UNICODE));
                 }
-                $this->info('发送给发所有人');
-                var_dump($data);
                 $fds = TemporaryUserModel::where([
                     'live_room_id' => $data['live_room_id']
                 ])->pluck('uuid', 'fd')
@@ -144,7 +138,6 @@ class Swoole extends Command
                 foreach ($this->ws->connections as $fd) {
                     if (in_array($fd, $fdsKeys)) {
                         if ($this->ws->isEstablished($fd)) {
-                            $this->info('发送消息给:' . $fd);
                             $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
                         }
                     }
