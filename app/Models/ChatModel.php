@@ -81,7 +81,6 @@ class ChatModel
        $banUsers = Cache::remember('ban_users', 600, function () {
             return TemporaryUserModel::where('status', 2)->pluck('fd','uuid')->toArray();
         });
-       var_dump(array_keys($banUsers));
        if (in_array($data['user_id'], array_keys($banUsers))) {
            return true;
        }
@@ -121,7 +120,6 @@ class ChatModel
                 ->first(['uuid', 'live_room_id', 'fd', 'username', 'status', 'updated_at']);
             if (!$first) {
                 // 不存在
-                var_dump('不存在');
                 $data['user_id'] = $this->cacheKey();
                 $data['username'] = "游客(" . $data['user_id'] . ")";
                 TemporaryUserModel::create([
@@ -135,7 +133,6 @@ class ChatModel
                 ]);
             } else {
                 // 存在
-                var_dump('存在');
                 TemporaryUserModel::where('uuid', $data['user_id'])
                     ->update([
                         'live_room_id' => $data['live_room_id'],
