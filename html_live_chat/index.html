@@ -526,7 +526,18 @@
                 muiMuiPlayer.autoFit = true;
                 delete muiMuiPlayer.height;
             }
-
+            //视频缩放,ios播放视频不会全屏
+            let flag = false; //是否进入全屏，默认未进入
+            document.addEventListener("webkitfullscreenchange", function (e) {
+                if ($('#mui-player').videoWidth < $('#mui-player').videoHeight) {
+                    flag = !flag;
+                    if (flag) {
+                        $('#mui-player').css('object-fit', 'fill')
+                    } else {
+                        $('#mui-player').css('object-fit', 'contain')
+                    }
+                }
+            });
             // 示例 hls 配置
             var mp = new MuiPlayer(muiMuiPlayer);
 
