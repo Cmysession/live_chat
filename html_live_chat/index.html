@@ -484,7 +484,7 @@
             });
         }
 
-        $.post(https + '/api/live-room?code=' + Math.random(), function (data) {
+        $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
             let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
             let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
             let dataType = null;

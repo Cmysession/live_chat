@@ -13,11 +13,12 @@ class LiveController extends Controller
      * 获取聊天室
      * @return mixed
      */
-    public function liveRoom()
+    public function liveRoom($area)
     {
-        return Cache::remember('room', 86400, function () {
+        return Cache::remember('room', 86400, function () use ($area) {
             $liveRoomModel = LiveRoomModel::where([
                 'status' => 1,
+                'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
                 ->select('uuid', 'title', 'live_url as video', 'cover as video_img','type')
                 ->get();
