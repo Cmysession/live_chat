@@ -121,7 +121,7 @@ class ChatModel
             if (!$first) {
                 // 不存在
                 $data['user_id'] = $this->cacheKey();
-                $data['username'] = "游客(" . $data['user_id'] . ")";
+                $data['username'] = "user(" . $data['user_id'] . ")";
                 TemporaryUserModel::create([
                     'uuid' => $data['user_id'],
                     'username' => $data['username'],

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>超级直播间</title>
+    <title>Phòng siêu sống động</title>
     <link rel="stylesheet" href="http://video.supers.live/as/bootstrap-3/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://video.supers.live/as/muiplayer/mui-player.min.css">
     <script type="text/javascript" src="http://video.supers.live/as/bootstrap-3/js/reconnecting-websocket.js"></script>
@@ -329,17 +329,17 @@
                         <div class="row">
                             <div class="col-md-2" style="text-align: center;padding: 0;">
                                 <button id="colse-barrage" type="submit" class="btn btn-primary">
-                                    关 闭 弹 幕
+                                    Đóng rào chắn
                                 </button>
                             </div>
                             <div class="col-md-8">
                                     <textarea id="barrage-txt" style="resize:none;" type="text"
-                                              placeholder="请输入弹幕信息,回车键发送"
+                                              placeholder="Hãy nhập thông tin đập rồi nhấn Enter để gửi"
                                               class="form-control" rows="1"></textarea>
                             </div>
                             <div class="col-md-2" style="text-align: center;padding: 0;">
                                 <button id="send-barrage" type="submit" class="btn btn-primary">
-                                    发 送 弹 幕
+                                    Gửi rào cản
                                 </button>
                             </div>
 
@@ -350,10 +350,10 @@
             <div class="col-md-4 col" id="msg-box">
                 <div id="msg-box-1">
                     <div>
-                        <h2> 聊天室 <small></small></h2>
+                        <h2> phòng trò chuyện <small></small></h2>
                     </div>
                     <div id="user-msg">
-                        <div id="chart-to-btm">↓ 消 息 ↓</div>
+                        <div id="chart-to-btm">↓ thông tin ↓</div>
                     </div>
                     <div class="c tb"
                          style="background-color: #f0f0f0;width: 100%;text-align: center;border-top: 1px solid #e3e3e3;">
@@ -361,10 +361,10 @@
                     </div>
                     <!-- <hr> -->
                     <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
-                            <textarea id="input-message" placeholder="发送消息,回车键发送" class="form-control"
+                            <textarea id="input-message" placeholder="Gửi tin nhắn, nhấn phím Enter để gửi" class="form-control"
                                       style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
                         <button type="button" disabled="true" id="send-btn"
-                                class="send-btn btn btn-primary btn-lg btn-block"> 发 送
+                                class="send-btn btn btn-primary btn-lg btn-block"> gửi
                         </button>
                     </form>
                 </div>
@@ -379,7 +379,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalWitLabel">出错!</h4>
+                    <h4 class="modal-title" id="myModalWitLabel">sai lầm!</h4>
                 </div>
                 <div class="modal-body">
                     ...
@@ -395,7 +395,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userNameFormLabel">修改名称</h4>
+                    <h4 class="modal-title" id="userNameFormLabel">Sửa đổi tên</h4>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -406,8 +406,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" id="form-sub" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                    <button type="button" id="form-sub" class="btn btn-primary">Chắc chắn</button>
                 </div>
             </div>
         </div>
@@ -458,13 +458,13 @@
                     $('#barrage-txt').css('display', 'none');
                     $('#send-barrage').css('display', 'none');
                     $('#mplayer-header').css('display', 'none');
-                    $('#colse-barrage').text('开 启 弹 幕');
+                    $('#colse-barrage').text('Bật rào cản');
                     $('#colse-barrage').css('background-color', '#54911d');
                 } else {
                     $('#barrage-txt').css('display', 'block');
                     $('#send-barrage').css('display', 'block');
                     $('#mplayer-header').css('display', 'block');
-                    $('#colse-barrage').text('关 闭 弹 幕');
+                    $('#colse-barrage').text('Đóng rào chắn');
                     $('#colse-barrage').css('background-color', '#cf3333');
                 }
             });
@@ -474,11 +474,11 @@
                 let colse_barrage = $('#mplayer-header').css('display');
                 if (colse_barrage === 'none') {
                     $('#mplayer-header').css('display', 'flex');
-                    $('#colse-barrage').text('关 闭 弹 幕');
+                    $('#colse-barrage').text('Đóng rào chắn');
                     $('#colse-barrage').css('background-color', '#cf3333');
                 } else {
                     $('#mplayer-header').css('display', 'none');
-                    $('#colse-barrage').text('开 启 弹 幕');
+                    $('#colse-barrage').text('Bật rào cản');
                     $('#colse-barrage').css('background-color', '#54911d');
                 }
             });
@@ -551,8 +551,8 @@
                 }
             });
             mp.on('error', function (event) {
-                mp.showToast('视频播放错误联系管理员');
-                $('#mplayer-error .errop-tip').text('请刷新!或联系管理员!');
+                mp.showToast('Lỗi phát video liên hệ quản trị viên');
+                $('#mplayer-error .errop-tip').text('Hãy làm mới! Hoặc liên hệ với quản trị viên!');
             });
             // 点击播放
 
@@ -615,21 +615,21 @@
             const dow = window.document.getElementById('user-msg');
             switch (data.code) {
                 case 100:
-                    $('.c.tb span').text(data.message);
+                    $('.c.tb span').text('~🎉 Chào mừng 🎊~' + data.username);
                     break;
                 case 111:
                     me = user.username = data.username;
                     user.username = data.username;
                     user.user_id = data.user_id;
                     localStorage.setItem("userinfo", JSON.stringify(user));
-                    $('.c.tb span').text(data.message);
+                    $('.c.tb span').text('~🎉 Chào mừng 🎊~' + data.username);
                     break;
                 case 300:
                     $(".c.tb span").text(data.message + '!');
                     break;
                 case 401:
                     // 被限制
-                    almsg(data.message);
+                    almsg("bạn bị hạn chế");
                     break;
                 case 101:
                     let elClass = "c co";
@@ -667,7 +667,7 @@
         ws.onclose = function (event) {
             // almsg('进入聊天室失败!请刷新或更换浏览器!');
 
-            $('.c.tb span').text('连接中...');
+            $('.c.tb span').text('Đang kết nối...');
         };
     }
 
@@ -725,7 +725,7 @@
         }
         let input_message = $("#input-message").val();
         if (parseInt(input_message.length) <= 0) {
-            almsg('请输入信息!');
+            almsg('Vui lòng nhập thông tin!');
             return false;
         }
         is_send = true;
@@ -822,7 +822,7 @@
             live_room_id: v,
             username: form_username,
             'user_id': user.user_id,
-            message: user.username + '改名为:' + form_username,
+            message: user.username + 'đổi tên:' + form_username,
         };
         let userInfo = localStorage.getItem("userinfo");
         let userInfoJsonGetItem = JSON.parse(userInfo);
