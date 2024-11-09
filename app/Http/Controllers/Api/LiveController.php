@@ -21,10 +21,9 @@ class LiveController extends Controller
         }
         return Cache::remember($area.'_room', 86400, function () use ($area) {
             $liveRoomModel = LiveRoomModel::where([
-                'status' => 1,
                 'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
-                ->select('uuid', 'title', 'live_url as video', 'cover as video_img','type')
+                ->select('uuid', 'title','status', 'live_url as video', 'cover as video_img','type')
                 ->get();
             $data = [];
             foreach ($liveRoomModel as $liveRoom) {
