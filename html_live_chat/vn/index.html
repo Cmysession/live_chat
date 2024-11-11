@@ -495,7 +495,6 @@
         }
 
         $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
-            console.log(data);
             let roomList = data.lists;
             let defData = (data.first[Object.keys(data.first)[0]]);
             let muiMuiPlayerSrc = defData.video + '?code=' + Math.random();
@@ -503,7 +502,6 @@
             let playStatus = defData.status;
             let dataType = null;
             if (roomList[v] && t && v && (roomList[v].title === decodeURI(t))) {
-                console.log(playStatus);
                 muiMuiPlayerSrc = roomList[v].video + '?code=' + Math.random();
                 muiMuiPlayerPoster = roomList[v].video_img;
                 dataType = roomList[v].type;
@@ -516,7 +514,6 @@
                 dataType = defData.type;
                 playStatus = defData.status;
             }
-            console.log(playStatus);
             if (playStatus !== 1) {
                 muiMuiPlayerSrc = '/';
             }
