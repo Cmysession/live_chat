@@ -23,6 +23,21 @@
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/hls.min.js"></script>
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/flv.min.js"></script>
     <style>
+        /*LOGO*/
+        #room-logo-box{
+            height: 80px;
+            background-color: #eeeeee;
+            margin:0 20px;
+            text-align: center;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        #room-logo-box img{
+            height: 80px;
+        }
+        /*LOGO end*/
+    </style>
+    <style>
         .row {
             margin-right: 0;
             margin-left: 0;
@@ -239,6 +254,17 @@
         }
 
         @media (max-width: 1000px) {
+            /*LOGO*/
+            #room-logo-box{
+                height: 50px;
+                margin:0 0;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            #room-logo-box img{
+                height: 50px;
+            }
+            /*LOGO end*/
             #video-box {
                 padding: 0;
             }
@@ -323,6 +349,9 @@
 
 <body style="background-color: #000000">
 <div style="max-width: 1500px;margin: auto;">
+    <div id="room-logo-box">
+        <img src="https://spsvn.live/images/logo-4.png" alt="https://spsvn.live/">
+    </div>
     <div id="video-box">
         <div class="row">
             <div class="col-md-8 col" id="vd-box">
