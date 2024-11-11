@@ -31,10 +31,12 @@ class LiveController extends Controller
                 'lists' => [],
             ];
             foreach ($liveRoomModel as $liveRoom) {
+                $video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
                 if (!$data['first']) {
-                    $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
+                    $liveRoom->video_img = $video_img;
                     $data['first'][$liveRoom->uuid] = $liveRoom;
                 }
+                $liveRoom->video_img = $video_img;
                 $data['lists'][$liveRoom->uuid] = $liveRoom;
             }
             return $data;
