@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Truyền hình trực tiếp tuyệt vời - spsvn.live</title>
-    <meta name="keywords" content="Trực tiếp bóng đá hôm nay,Truyền hình trực tiếp eSports,Xem trực tiếp bóng đá & game">
-    <meta name="description" content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
-    <meta property="og:title" content="Truyền hình trực tiếp tuyệt vời - spsvn.live">
-    <meta name="og:description" content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
+    <title>Truyền hình trực tiếp tuyệt vời spsvn.live</title>
+    <meta name="keywords"
+          content="Trực tiếp bóng đá hôm nay,Truyền hình trực tiếp eSports,Xem trực tiếp bóng đá & game">
+    <meta name="description"
+          content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
+    <meta property="og:title" content="Truyền hình trực tiếp tuyệt vời spsvn.live">
+    <meta name="og:description"
+          content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
     <meta property="og:image" content="http:///spsvn.live/images/logo-1.png">
     <meta property="og:url" content="http:///spsvn.live">
     <link rel="canonical" href="https:///spsvn.live">
@@ -369,7 +372,8 @@
                     </div>
                     <!-- <hr> -->
                     <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
-                            <textarea id="input-message" placeholder="Gửi tin nhắn, nhấn phím Enter để gửi" class="form-control"
+                            <textarea id="input-message" placeholder="Gửi tin nhắn, nhấn phím Enter để gửi"
+                                      class="form-control"
                                       style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
                         <button type="button" disabled="true" id="send-btn"
                                 class="send-btn btn btn-primary btn-lg btn-block"> gửi
@@ -506,7 +510,8 @@
                 t = data[Object.keys(data)[0]].title;
                 dataType = data[Object.keys(data)[0]].type;
             }
-
+            let t_t = $('title').text();
+            $("title").text(decodeURI(t) + " " + t_t);
             let muiMuiPlayer = {
                 container: document.getElementById("mui-player"),
                 src: muiMuiPlayerSrc,
