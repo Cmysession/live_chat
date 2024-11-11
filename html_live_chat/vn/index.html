@@ -430,6 +430,7 @@
 <script>
     let wss = 'wss.supers.live';
     let https = 'https://api.supers.live';
+
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -495,15 +496,15 @@
 
         $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
             console.log(data);
-            let roomList  =data.lists;
+            let roomList = data.lists;
             let defData = (data.first[Object.keys(data.first)[0]]);
-            let muiMuiPlayerSrc = defData.video;
+            let muiMuiPlayerSrc = defData.video + '?code=' + Math.random();
             let muiMuiPlayerPoster = defData.video_img;
             let playStatus = defData.status;
             let dataType = null;
             if (roomList[v] && t && v && (roomList[v].title === decodeURI(t))) {
                 console.log(playStatus);
-                muiMuiPlayerSrc = roomList[v].video;
+                muiMuiPlayerSrc = roomList[v].video + '?code=' + Math.random();
                 muiMuiPlayerPoster = roomList[v].video_img;
                 dataType = roomList[v].type;
                 playStatus = roomList[v].status;
@@ -516,7 +517,7 @@
                 playStatus = defData.status;
             }
             console.log(playStatus);
-            if (playStatus !==1){
+            if (playStatus !== 1) {
                 muiMuiPlayerSrc = '/';
             }
 
@@ -572,11 +573,11 @@
                 }
             });
             mp.on('error', function (event) {
-                if (playStatus !== 1){
+                if (playStatus !== 1) {
                     // 未开播
                     mp.showToast('Người dẫn chương trình vẫn chưa bắt đầu phát sóng trực tiếp');
                     $('#mplayer-error .errop-tip').text('Người dẫn chương trình vẫn chưa bắt đầu phát sóng trực tiếp');
-                }else{
+                } else {
                     mp.showToast('Lỗi phát video liên hệ quản trị viên');
                     $('#mplayer-error .errop-tip').text('Hãy làm mới! Hoặc liên hệ với quản trị viên!');
                 }
@@ -598,9 +599,9 @@
                 }
             });
             // 未开播
-            if (playStatus !== 1){
+            if (playStatus !== 1) {
                 $('#ready').html('');
-                $('#progress').css('display','none');
+                $('#progress').css('display', 'none');
             }
 
             runWs();
