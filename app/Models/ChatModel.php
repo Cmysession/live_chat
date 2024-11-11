@@ -173,10 +173,10 @@ class ChatModel
         $data['code'] = self::SEND_MESSAGE;
         // 是否有这个直播间
         $roomArray = Cache::remember('room', 600, function () {
-            return LiveRoomModel::pluck('fd', 'uuid')->toArray();
+            return LiveRoomModel::where('status', 1)->pluck('fd', 'uuid')->toArray();
         });
         // 房间不存在
-        if (!empty($data['live_room_id'])){
+        if (!empty($data['live_room_id'])) {
             $data['code'] = self::PARAMETER_ERROR;
         }
         dump(array_keys($roomArray));
