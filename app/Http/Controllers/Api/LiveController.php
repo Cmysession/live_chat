@@ -19,11 +19,12 @@ class LiveController extends Controller
         if (!in_array($area, array_keys($areaArray))) {
             return [];
         }
-        return Cache::remember($area.'_room', 86400, function () use ($area) {
+        return Cache::remember($area . '_room', 86400, function () use ($area) {
             $liveRoomModel = LiveRoomModel::where([
                 'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
-                ->select('uuid', 'title','status', 'live_url as video', 'cover as video_img','type')
+                ->orderBy('id', 'desc')
+                ->select('uuid', 'title', 'status', 'live_url as video', 'cover as video_img', 'type')
                 ->get();
             $data = [];
             foreach ($liveRoomModel as $liveRoom) {
