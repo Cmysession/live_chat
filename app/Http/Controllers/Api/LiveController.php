@@ -20,25 +20,25 @@ class LiveController extends Controller
             return [];
         }
         return Cache::remember($area . '_room', 86400, function () use ($area) {
-        $liveRoomModel = LiveRoomModel::where([
-            'live_area_uuid' => $area,
-        ])->orderBy('sort', 'desc')
-            ->orderBy('id', 'desc')
-            ->select('uuid', 'title', 'status', 'live_url as video', 'cover as video_img', 'type')
-            ->get();
-        $data = [
-            'first' => [],
-            'lists' => [],
-        ];
-        foreach ($liveRoomModel as $liveRoom) {
-            if (!$data['first']) {
-                $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
-                $data['first'][$liveRoom->uuid] = $liveRoom;
+            $liveRoomModel = LiveRoomModel::where([
+                'live_area_uuid' => $area,
+            ])->orderBy('sort', 'desc')
+                ->orderBy('id', 'desc')
+                ->select('uuid', 'title', 'status', 'live_url as video', 'cover as video_img', 'type')
+                ->get();
+            $data = [
+                'first' => [],
+                'lists' => [],
+            ];
+            foreach ($liveRoomModel as $liveRoom) {
+                if (!$data['first']) {
+                    $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
+                    $data['first'][$liveRoom->uuid] = $liveRoom;
+                }
+                $liveRoom->video_img = $liveRoom->video_img;
+                $data['lists'][$liveRoom->uuid] = $liveRoom;
             }
-            $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
-            $data['lists'][$liveRoom->uuid] = $liveRoom;
-        }
-        return $data;
+            return $data;
         });
     }
 }
