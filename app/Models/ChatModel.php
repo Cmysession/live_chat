@@ -65,17 +65,6 @@ class ChatModel
         try {
             $dataStr = json_decode($dataStr, true);
             $dataStr['fd'] = $fd;
-            // 是否有这个直播间
-            $roomArray = Cache::remember('room', 600, function () {
-                return TemporaryUserModel::pluck('fd', 'uuid')->toArray();
-            });
-            if (!empty($dataStr['live_room_id'])){
-                return false;
-            }
-            if (!in_array($dataStr['live_room_id'], array_keys($roomArray))) {
-                echo $dataStr['live_room_id'] . '-操作聊天室不存在:' . $dataStr['live_room_id'] . "\n";
-                return false;
-            }
             return $dataStr;
         } catch (\Exception $e) {
             return false;
@@ -182,6 +171,18 @@ class ChatModel
     public function sendMessage($data)
     {
         $data['code'] = self::SEND_MESSAGE;
+        // 是否有这个直播间
+        $roomArray = Cache::remember('room', 600, function () {
+            return TemporaryUserModel::pluck('fd', 'uuid')->toArray();
+        });
+        // 房间不存在
+        if (!empty($data['live_room_id'])){
+            $data['code'] = self::PARAMETER_ERROR;
+        }
+        if (!in_array($data['live_room_id'], array_keys($roomArray))) {
+            echo $data['live_room_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
+            $data['code'] = self::PARAMETER_ERROR;
+        }
         return $data;
     }
 
