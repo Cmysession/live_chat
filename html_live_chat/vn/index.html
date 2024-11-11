@@ -22,7 +22,6 @@
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/mui-player.min.js"></script>
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/hls.min.js"></script>
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/flv.min.js"></script>
-
     <style>
         .row {
             margin-right: 0;
@@ -430,8 +429,8 @@
 <script src="http://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     let wss = 'wss.supers.live';
-    let https = 'https://api.supers.live';
-
+    // let https = 'https://api.supers.live';
+    let https = 'http://live.com';
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -496,22 +495,26 @@
         }
 
         $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
-            let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
-            let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
-            let playStatus = data[Object.keys(data)[0]].status;
+            console.log(data);
+            let roomList  =data.lists;
+            let defData = (data.first[Object.keys(data.first)[0]]);
+            let muiMuiPlayerSrc = defData.video;
+            let muiMuiPlayerPoster = defData.video_img;
+            let playStatus = defData.status;
             let dataType = null;
-            if (data[v] && t && v && (data[v].title === decodeURI(t))) {
-                muiMuiPlayerSrc = data[v].video;
-                muiMuiPlayerPoster = data[v].video_img;
-                dataType = data[v].type;
-                playStatus = data[v].status;
+            if (roomList[v] && t && v && (roomList[v].title === decodeURI(t))) {
+                console.log(playStatus);
+                muiMuiPlayerSrc = roomList[v].video;
+                muiMuiPlayerPoster = roomList[v].video_img;
+                dataType = roomList[v].type;
+                playStatus = roomList[v].status;
                 $('#video-title').text(decodeURI(t));
             } else {
-                $('#video-title').text(data[Object.keys(data)[0]].title);
-                v = data[Object.keys(data)[0]].uuid;
-                t = data[Object.keys(data)[0]].title;
-                dataType = data[Object.keys(data)[0]].type;
-                playStatus = data[Object.keys(data)[0]].playStatus;
+                $('#video-title').text(defData.title);
+                v = defData.uuid;
+                t = defData.title;
+                dataType = defData.type;
+                playStatus = defData.status;
             }
             console.log(playStatus);
             if (playStatus !==1){
@@ -553,11 +556,9 @@
                 delete muiMuiPlayer.height;
             }
             // 示例 hls 配置
-
-
             let tv_box = '';
-            for (key in data) {
-                tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(data[key].title) + '&v=' + data[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + data[key].title + '</a></div>';
+            for (key in roomList) {
+                tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(roomList[key].title) + '&v=' + roomList[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + roomList[key].title + '</a></div>';
             }
             $('#tv-box').append(tv_box);
             // 判断是否开始准备完成
