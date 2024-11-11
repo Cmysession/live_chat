@@ -9,6 +9,7 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('live-room/{area}', '\App\Http\Controllers\Api\LiveController@liveRoom');
 Route::post('live-room/{area}', '\App\Http\Controllers\Api\LiveController@liveRoom');
 
 
