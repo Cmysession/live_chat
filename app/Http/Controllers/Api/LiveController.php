@@ -35,7 +35,6 @@ class LiveController extends Controller
                     $liveRoom->video_img = config('filesystems.disks.admin.url') . '/' . $liveRoom->video_img;
                     $data['first'][$liveRoom->uuid] = $liveRoom;
                 }
-                $liveRoom->video_img = $liveRoom->video_img;
                 $data['lists'][$liveRoom->uuid] = $liveRoom;
             }
             return $data;
