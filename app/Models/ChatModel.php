@@ -173,14 +173,14 @@ class ChatModel
         $data['code'] = self::SEND_MESSAGE;
         // 是否有这个直播间
         $roomArray = Cache::remember('room', 600, function () {
-            return TemporaryUserModel::pluck('fd', 'uuid')->toArray();
+            return LiveRoomModel::pluck('fd', 'uuid')->toArray();
         });
         // 房间不存在
         if (!empty($data['live_room_id'])){
             $data['code'] = self::PARAMETER_ERROR;
         }
         if (!in_array($data['live_room_id'], array_keys($roomArray))) {
-            echo $data['live_room_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
+            echo $data['user_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
             $data['code'] = self::PARAMETER_ERROR;
         }
         return $data;
