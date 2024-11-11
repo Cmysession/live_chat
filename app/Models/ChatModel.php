@@ -179,6 +179,7 @@ class ChatModel
         if (!empty($data['live_room_id'])){
             $data['code'] = self::PARAMETER_ERROR;
         }
+        dump(array_keys($roomArray));
         if (!in_array($data['live_room_id'], array_keys($roomArray))) {
             echo $data['user_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
             $data['code'] = self::PARAMETER_ERROR;
