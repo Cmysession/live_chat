@@ -172,20 +172,6 @@ class ChatModel
     public function sendMessage($data)
     {
         $data['code'] = self::SEND_MESSAGE;
-        // 房间不存在
-        if (!empty($data['live_room_id'])) {
-            $data['code'] = self::PARAMETER_ERROR;
-            return $data;
-        }
-        // 是否有这个直播间
-        $roomArray = Cache::remember('room', 600, function () {
-            return DB::table('live_room')->pluck('fd', 'uuid')->toArray();
-        });
-        dump(array_keys($roomArray));
-        if (!in_array($data['live_room_id'], array_keys($roomArray))) {
-            echo $data['user_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
-            $data['code'] = self::PARAMETER_ERROR;
-        }
         return $data;
     }
 
