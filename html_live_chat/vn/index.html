@@ -498,18 +498,26 @@
         $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
             let muiMuiPlayerSrc = data[Object.keys(data)[0]].video;
             let muiMuiPlayerPoster = data[Object.keys(data)[0]].video_img;
+            let playStatus = data[Object.keys(data)[0]].status;
             let dataType = null;
             if (data[v] && t && v && (data[v].title === decodeURI(t))) {
                 muiMuiPlayerSrc = data[v].video;
                 muiMuiPlayerPoster = data[v].video_img;
                 dataType = data[v].type;
+                playStatus = data[v].status;
                 $('#video-title').text(decodeURI(t));
             } else {
                 $('#video-title').text(data[Object.keys(data)[0]].title);
                 v = data[Object.keys(data)[0]].uuid;
                 t = data[Object.keys(data)[0]].title;
                 dataType = data[Object.keys(data)[0]].type;
+                playStatus = data[Object.keys(data)[0]].playStatus;
             }
+            console.log(playStatus);
+            if (playStatus !==1){
+                muiMuiPlayerSrc = '/';
+            }
+
             let t_t = $('title').text();
             $("title").text(decodeURI(t) + " " + t_t);
             let muiMuiPlayer = {
@@ -521,7 +529,7 @@
                 height: 585,
                 autoFit: false,
                 lang: "en",
-                autoplay: true,
+                // autoplay: true,
                 initFullFixed: false,
                 videoAttribute: [
                     {attrKey: 'webkit-playsinline', attrValue: 'true'},
@@ -544,9 +552,8 @@
                 muiMuiPlayer.autoFit = true;
                 delete muiMuiPlayer.height;
             }
-            //视频缩放,ios播放视频不会全屏
             // 示例 hls 配置
-            var mp = new MuiPlayer(muiMuiPlayer);
+
 
             let tv_box = '';
             for (key in data) {
@@ -555,6 +562,8 @@
             $('#tv-box').append(tv_box);
             // 判断是否开始准备完成
             let is_play = true;
+
+            var mp = new MuiPlayer(muiMuiPlayer);
             mp.on('duration-change', function (event) {
                 if (is_play) {
                     $("#loding").css('display', 'none');
@@ -563,8 +572,14 @@
                 }
             });
             mp.on('error', function (event) {
-                mp.showToast('Lỗi phát video liên hệ quản trị viên');
-                $('#mplayer-error .errop-tip').text('Hãy làm mới! Hoặc liên hệ với quản trị viên!');
+                if (playStatus !== 1){
+                    // 未开播
+                    mp.showToast('Người dẫn chương trình vẫn chưa bắt đầu phát sóng trực tiếp');
+                    $('#mplayer-error .errop-tip').text('Người dẫn chương trình vẫn chưa bắt đầu phát sóng trực tiếp');
+                }else{
+                    mp.showToast('Lỗi phát video liên hệ quản trị viên');
+                    $('#mplayer-error .errop-tip').text('Hãy làm mới! Hoặc liên hệ với quản trị viên!');
+                }
             });
             // 点击播放
 
@@ -582,6 +597,12 @@
                     $('#play').css('display', 'none');
                 }
             });
+            // 未开播
+            if (playStatus !== 1){
+                $('#ready').html('');
+                $('#progress').css('display','none');
+            }
+
             runWs();
         });
 

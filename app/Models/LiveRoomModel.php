@@ -21,6 +21,7 @@ class LiveRoomModel extends Model
             foreach ($areaArray as $key => $value) {
                 Cache::forget($key . '_room');
             }
+            Cache::forget('room');
         });
     }
 }

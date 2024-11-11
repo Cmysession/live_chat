@@ -51,6 +51,7 @@ class ChatModel
      * 禁言
      */
     const BAN_USER = 401;
+
     /**
      * @param int $fd
      * @param string $dataStr
@@ -78,14 +79,24 @@ class ChatModel
      */
     public function banUsers($data)
     {
-       $banUsers = Cache::remember('ban_users', 600, function () {
-            return TemporaryUserModel::where('status', 2)->pluck('fd','uuid')->toArray();
+        // 是否被屏蔽了
+        $banUsers = Cache::remember('ban_users', 600, function () {
+            return TemporaryUserModel::where('status', 2)->pluck('fd', 'uuid')->toArray();
         });
-       if (in_array($data['user_id'], array_keys($banUsers))) {
-           return true;
-       }
+        // 是否有这个直播间
+        $roomArray = Cache::remember('room', 600, function () {
+            return TemporaryUserModel::pluck('fd', 'uuid')->toArray();
+        });
+        if (!in_array($data['live_room_id'], array_keys($roomArray))) {
+            echo $data['live_room_id'] . '-操作聊天室不存在:' . $data['live_room_id'] . "\n";
+            return false;
+        }
+        if (in_array($data['user_id'], array_keys($banUsers))) {
+            return true;
+        }
         return false;
     }
+
     /**
      * @return string
      */
