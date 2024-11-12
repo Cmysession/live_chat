@@ -82,16 +82,16 @@ class LiveRoomController extends AdminController
         $form = new Form($liveRoomModel);
         $form->display('id', 'ID');
         $form->text('title', '直播间标题')
-            ->creationRules("required|min:3|max:10|unique:" . $liveRoomModel->table, [
+            ->creationRules("required|min:3|max:100|unique:" . $liveRoomModel->table, [
                 'required' => '直播间标题不能为空!',
                 'min' => '直播间标题不能小于3个字符!',
-                'max' => '直播间标题不能大于10个字符!',
+                'max' => '直播间标题不能大于100个字符!',
                 'unique' => '直播间标题已存在!',
             ])
-            ->updateRules("required|min:3|max:10|unique:live_room,title,{{id}}", [
+            ->updateRules("required|min:3|max:100|unique:live_room,title,{{id}}", [
                 'required' => '直播间标题不能为空!',
                 'min' => '直播间标题不能小于3个字符!',
-                'max' => '直播间标题不能大于10个字符!',
+                'max' => '直播间标题不能大于100个字符!',
                 'unique' => '直播间标题已存在!',
             ]);
         $form->image('cover', '封面')
