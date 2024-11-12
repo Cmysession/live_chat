@@ -20,6 +20,10 @@ class LiveRoomController extends AdminController
         'on' => ['value' => 1, 'text' => '开启直播', 'color' => 'success'],
         'off' => ['value' => 2, 'text' => '关闭直播', 'color' => 'danger'],
     ];
+    private $live_show = [
+        'on' => ['value' => 1, 'text' => '展示', 'color' => 'success'],
+        'off' => ['value' => 2, 'text' => '关闭', 'color' => 'danger'],
+    ];
     private $type = [
         1 => 'hls',
         2 => 'flv',
@@ -36,6 +40,7 @@ class LiveRoomController extends AdminController
         $grid->column('type', '直播类型')->display(function ($type) use ($typeArray){
             return $typeArray[$type];
         });
+
         $live_area = config('live_area');
         $grid->column('live_area_uuid', '直播地区')->display(function ($live_area_uuid) use ($live_area){
             if ($live_area_uuid){
@@ -52,6 +57,8 @@ class LiveRoomController extends AdminController
             // 去掉查看
             $actions->disableView();
         });
+        $grid->column('live_show', '展示直播')
+            ->switch($this->live_show);
         $grid->column('remarks', '备注');
         $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
@@ -112,6 +119,9 @@ class LiveRoomController extends AdminController
             ->default(1)
             ->required();
         $form->select('type','直播类型')->options($this->type)
+            ->default(1)
+            ->required();
+        $form->select('live_show','展示直播')->options($this->live_show)
             ->default(1)
             ->required();
         $form->number('sort', '排序')

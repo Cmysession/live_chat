@@ -24,7 +24,7 @@ class LiveController extends Controller
                 'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
                 ->orderBy('id', 'desc')
-                ->select('uuid', 'title', 'status', 'live_url as video', 'cover as video_img', 'type')
+                ->select('uuid', 'title','live_show', 'status', 'live_url as video', 'cover as video_img', 'type')
                 ->get();
             $data = [
                 'first' => [],

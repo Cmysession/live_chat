@@ -271,10 +271,10 @@
             }
 
             /*LOGO end*/
-
-            #tv-box .btn{
+            #tv-box .btn {
                 white-space: break-spaces;
             }
+
             #video-box {
                 padding: 0;
             }
@@ -468,7 +468,8 @@
 <script src="http://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     let wss = 'wss.supers.live';
-    let https = 'https://api.supers.live';
+    // let https = 'https://api.supers.live';
+    let https = 'http://live.com';
 
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -600,7 +601,9 @@
             // 示例 hls 配置
             let tv_box = '';
             for (key in roomList) {
-                tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(roomList[key].title) + '&v=' + roomList[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + roomList[key].title + '</a></div>';
+                if (roomList[key].live_show === 1) {
+                    tv_box += '<div class="col-xs-6 col-md-4 item-box"><a href="?t=' + encodeURI(roomList[key].title) + '&v=' + roomList[key].uuid + '" style="width: 80%;background-color: #db2b42;color: aliceblue;font-weight: bold; border: 0;" class="video-item btn btn-default" >' + roomList[key].title + '</a></div>';
+                }
             }
             $('#tv-box').append(tv_box);
             // 判断是否开始准备完成
