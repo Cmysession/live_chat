@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>Truyền hình trực tiếp tuyệt vời spsvn.live</title>
+    <title>SPSVN Sân Đấu Nền tảng phát sóng trực tiếp sự kiện thể thao chuyên nghiệp thể thao điện tử -
+        spsvn.live</title>
     <meta name="keywords"
-          content="Trực tiếp bóng đá hôm nay,Truyền hình trực tiếp eSports,Xem trực tiếp bóng đá & game">
+          content="Phát sóng trực tiếp bóng đá, phát sóng trực tiếp, phát sóng trực tiếp thể thao, điện tử, phát sóng trực tiếp điện tử, phát sóng trực tiếp thể thao điện tử">
     <meta name="description"
-          content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
-    <meta property="og:title" content="Truyền hình trực tiếp tuyệt vời spsvn.live">
+          content="Sân Đấu - Nền tảng phát sóng trực tiếp chuyên nghiệp cho các sự kiện thể thao và thể thao điện tử. Truy cập spsvn.live để theo dõi các trận bóng đá, thể thao điện tử và nhiều sự kiện trực tiếp chất lượng cao, cập nhật liên tục dành cho người hâm mộ!">
+    <meta property="og:title"
+          content="SPSVN Sân Đấu Nền tảng phát sóng trực tiếp sự kiện thể thao chuyên nghiệp thể thao điện tử - spsvn.live">
     <meta name="og:description"
-          content="Truyền hình trực tiếp tuyệt vời – Nền tảng hàng đầu cho bóng đá và eSports. Cung cấp phát trực tiếp các trận đấu hấp dẫn và game đỉnh cao, chất lượng cao, mượt mà">
+          content="Sân Đấu - Nền tảng phát sóng trực tiếp chuyên nghiệp cho các sự kiện thể thao và thể thao điện tử. Truy cập spsvn.live để theo dõi các trận bóng đá, thể thao điện tử và nhiều sự kiện trực tiếp chất lượng cao, cập nhật liên tục dành cho người hâm mộ!">
     <meta property="og:image" content="http:///spsvn.live/images/logo-1.png">
     <meta property="og:url" content="http:///spsvn.live">
     <link rel="canonical" href="https:///spsvn.live">
@@ -24,17 +26,19 @@
     <script type="text/javascript" src="http://video.supers.live/as/muiplayer/flv.min.js"></script>
     <style>
         /*LOGO*/
-        #room-logo-box{
+        #room-logo-box {
             height: 80px;
             background-color: #eeeeee;
-            margin:0 20px;
+            margin: 0 20px;
             text-align: center;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
         }
-        #room-logo-box img{
+
+        #room-logo-box img {
             height: 80px;
         }
+
         /*LOGO end*/
     </style>
     <style>
@@ -255,15 +259,17 @@
 
         @media (max-width: 1000px) {
             /*LOGO*/
-            #room-logo-box{
+            #room-logo-box {
                 height: 50px;
-                margin:0 0;
+                margin: 0 0;
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
             }
-            #room-logo-box img{
+
+            #room-logo-box img {
                 height: 50px;
             }
+
             /*LOGO end*/
             #video-box {
                 padding: 0;
@@ -458,7 +464,8 @@
 <script src="http://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     let wss = 'wss.supers.live';
-    let https = 'https://api.supers.live';
+    // let https = 'https://api.supers.live';
+    let https = 'http://live.com';
 
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -536,6 +543,15 @@
                 dataType = roomList[v].type;
                 playStatus = roomList[v].status;
                 $('#video-title').text(decodeURI(t));
+                console.log($('meta[name="og:title"]')[0]);
+                //--- 网站关键词 ---
+                let t_t = $('title').text();
+                $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
+                $('meta[property="og:title"]')[0].content = decodeURI(t) + " SPSVN Sân Đấu";
+                $('meta[name="keywords"]')[0].content = decodeURI(t) + t_t;
+                $('meta[name="description"]')[0].content = decodeURI(t) + ' ' + (playStatus === 1 ? 'phát trực tiếp' : 'tạm thời rời đi') + t_t;
+                $('meta[name="og:description"]')[0].content = decodeURI(t) + ' ' + (playStatus === 1 ? 'phát trực tiếp' : 'tạm thời rời đi') + t_t;
+                //--- END网站关键词 ---
             } else {
                 $('#video-title').text(defData.title);
                 v = defData.uuid;
@@ -546,9 +562,6 @@
             if (playStatus !== 1) {
                 muiMuiPlayerSrc = '/';
             }
-
-            let t_t = $('title').text();
-            $("title").text(decodeURI(t) + " " + t_t);
             let muiMuiPlayer = {
                 container: document.getElementById("mui-player"),
                 src: muiMuiPlayerSrc,
