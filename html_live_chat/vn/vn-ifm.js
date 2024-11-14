@@ -90,7 +90,7 @@ $(function () {
             // $('meta[name="og:description"]')[0].content = decodeURI(t) + ' ' + (playStatus === 1 ? 'phát trực tiếp' : 'tạm thời rời đi') + t_t;
             //--- END网站关键词 ---
         } else {
-            $('#video-title').text(defData.title);
+            $('#video-title').html(defData.title + (playStatus === 1 ? '<span style="color: #00a65a">phát trực tiếp</span>' : '<span style="color: darkred">tạm thời rời đi</span>'));
             v = defData.uuid;
             t = defData.title;
             dataType = defData.type;
