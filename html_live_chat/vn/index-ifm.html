@@ -1,101 +1,74 @@
-<link rel="stylesheet" href="https://video.supers.live/as/bootstrap-3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://video.supers.live/as/muiplayer/mui-player.min.css">
-<link rel="stylesheet" href="https://video.supers.live/vn/vn-ifm.css?v1.0.0">
-<script type="text/javascript" src="https://video.supers.live/as/bootstrap-3/js/reconnecting-websocket.js"></script>
-<script type="text/javascript" src="https://video.supers.live/as/muiplayer/mui-player.min.js"></script>
-<script type="text/javascript" src="https://video.supers.live/as/muiplayer/hls.min.js"></script>
-<script type="text/javascript" src="https://video.supers.live/as/muiplayer/flv.min.js"></script>
 <div class="v-box" style="max-width: 1500px;margin: auto; background-color: #000000">
     <div id="video-box">
         <div class="row">
             <div class="col-md-8 col" id="vd-box">
-                <div id="vd-box-1">
-                    <h1 style="background-color: #ffffff;padding: 10px;" id="video-title">&emsp;</h1>
+                <div id="vd-box-1"><h1 style="background-color: #ffffff;padding: 10px;" id="video-title">&emsp;</h1>
                     <div id="video-box-b">
                         <div id="mui-player"></div>
-                        <div id="ready">
-                            <img id="loding" src="https://video.supers.live/as/images/loding.gif" alt="loding">
-                            <img id="play" src="https://video.supers.live/as/images/play.png" alt="play">
-                        </div>
+                        <div id="ready"><img id="loding" src="https://video.supers.live/as/images/loding.gif"
+                                             alt="loding"><img id="play"
+                                                               src="https://video.supers.live/as/images/play.png"
+                                                               alt="play"></div>
                     </div>
                     <div id="barrage">
                         <div class="row">
                             <div class="col-md-2" style="text-align: center;padding: 0;">
-                                <button id="colse-barrage" type="submit" class="btn btn-primary">
-                                    Đóng rào chắn
-                                </button>
+                                <button id="colse-barrage" type="submit" class="btn btn-primary">Đóng rào chắn</button>
                             </div>
-                            <div class="col-md-8">
-                                    <textarea id="barrage-txt" style="resize:none;" type="text"
-                                              placeholder="Hãy nhập thông tin đập rồi nhấn Enter để gửi"
-                                              class="form-control" rows="1"></textarea>
-                            </div>
+                            <div class="col-md-8"><textarea id="barrage-txt" style="resize:none;" type="text"
+                                                            placeholder="Hãy nhập thông tin đập rồi nhấn Enter để gửi"
+                                                            class="form-control" rows="1"></textarea></div>
                             <div class="col-md-2" style="text-align: center;padding: 0;">
-                                <button id="send-barrage" type="submit" class="btn btn-primary">
-                                    Gửi rào cản
-                                </button>
+                                <button id="send-barrage" type="submit" class="btn btn-primary">Gửi rào cản</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col" id="msg-box">
                 <div id="msg-box-1" style="background-color: #ffffff">
-                    <div>
-                        <h2> phòng trò chuyện <small></small></h2>
-                    </div>
+                    <div><h2>phòng tròchuyện<small></small></h2></div>
                     <div id="user-msg">
-                        <div id="chart-to-btm">↓ thông tin ↓</div>
+                        <div id="chart-to-btm">↓thông tin↓</div>
                     </div>
                     <div class="c tb"
                          style="background-color: #f0f0f0;width: 100%;text-align: center;border-top: 1px solid #e3e3e3;">
-                        <span>***</span>
-                    </div>
-                    <!-- <hr> -->
-                    <form id="msg-form" style="border-radius: 10px;" action="#" method="post">
-                            <textarea id="input-message" placeholder="Gửi tin nhắn, nhấn phím Enter để gửi"
-                                      class="form-control"
-                                      style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
+                        <span>***</span></div><!--<hr>-->
+                    <form id="msg-form" style="border-radius: 10px;" action="#" method="post"><textarea
+                        id="input-message" placeholder="Gửi tin nhắn, nhấn phím Enter để gửi" class="form-control"
+                        style="resize:none;border-radius: 15px;margin: 2px 0;" rows="3"></textarea>
                         <button type="button" disabled="true" id="send-btn"
-                                class="send-btn btn btn-primary btn-lg btn-block"> gửi
+                                class="send-btn btn btn-primary btn-lg btn-block">gửi
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <div id="tv-box" style="text-align: center;background-color: #000000;" class="row"></div>
-    <!-- Small modal -->
+    <div id="tv-box" style="text-align: center;background-color: #000000;" class="row"></div><!--Small modal-->
     <div class="modal fade" id="myModalWit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalWitLabel">sai lầm!</h4>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
+                    <h4 class="modal-title" id="myModalWitLabel">sai lầm!</h4></div>
+                <div class="modal-body">...</div>
             </div>
         </div>
-    </div>
-
-    <!-- Small modal -->
+    </div><!--Small modal-->
     <div class="modal fade" id="userNameForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="userNameFormLabel">Sửa đổi tên</h4>
-                </div>
+                    <h4 class="modal-title" id="userNameFormLabel">Sửađổi tên</h4></div>
                 <div class="modal-body">
                     <form>
-                        <div class="form-group">
-                            <label class="control-label">username:</label>
-                            <input type="text" class="form-control" id="form-username">
+                        <div class="form-group"><label class="control-label">username:</label><input type="text"
+                                                                                                     class="form-control"
+                                                                                                     id="form-username">
                         </div>
                     </form>
                 </div>
@@ -107,6 +80,3 @@
         </div>
     </div>
 </div>
-<script src="https://video.supers.live/as/bootstrap-3/js/jquery.min.js"></script>
-<script src="https://video.supers.live/as/bootstrap-3/js/bootstrap.min.js"></script>
-<script src="https://video.supers.live/vn/vn-ifm.js?v1.0.0"></script>
