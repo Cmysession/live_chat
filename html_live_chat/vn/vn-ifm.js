@@ -25,6 +25,10 @@ if (!v) {
 }
 
 $(function () {
+    // 屏幕适配
+    if ($('.wp-block-group')){
+        $('.wp-block-group').attr('style','');
+    }
     // 获取参数
     if (
         navigator.userAgent.match(/Mobi/i) ||
@@ -48,10 +52,6 @@ $(function () {
                 $('#colse-barrage').css('background-color', '#cf3333');
             }
         });
-        // 屏幕适配
-        if ($('.wp-block-group')){
-            $('.wp-block-group').attr('style','');
-        }
     } else {
         // 关闭弹幕
         $("#colse-barrage").click(function () {
