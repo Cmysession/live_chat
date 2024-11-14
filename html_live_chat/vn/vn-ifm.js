@@ -47,8 +47,11 @@ $(function () {
                 $("#colse-barrage").text('Đóng rào chắn');
                 $('#colse-barrage').css('background-color', '#cf3333');
             }
-            $('.wp-block-group').attr('style','');
         });
+        // 屏幕适配
+        if ($('.wp-block-group')){
+            $('.wp-block-group').attr('style','');
+        }
     } else {
         // 关闭弹幕
         $("#colse-barrage").click(function () {
