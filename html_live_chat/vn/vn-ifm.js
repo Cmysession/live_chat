@@ -40,7 +40,6 @@ $(function () {
                 $('#mplayer-header').css('display', 'none');
                 $("#colse-barrage").text('Bật rào cản');
                 $('#colse-barrage').css('background-color', '#54911d');
-                $('.wp-block-group').attr('style','');
             } else {
                 $('#barrage-txt').css('display', 'block');
                 $('#send-barrage').css('display', 'block');
@@ -48,6 +47,7 @@ $(function () {
                 $("#colse-barrage").text('Đóng rào chắn');
                 $('#colse-barrage').css('background-color', '#cf3333');
             }
+            $('.wp-block-group').attr('style','');
         });
     } else {
         // 关闭弹幕
