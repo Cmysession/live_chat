@@ -37,13 +37,13 @@ class LiveRoomController extends AdminController
         $grid->column('cover', '封面')
             ->image();
         $typeArray = $this->type;
-        $grid->column('type', '直播类型')->display(function ($type) use ($typeArray){
+        $grid->column('type', '直播类型')->display(function ($type) use ($typeArray) {
             return $typeArray[$type];
         });
 
         $live_area = config('live_area');
-        $grid->column('live_area_uuid', '直播地区')->display(function ($live_area_uuid) use ($live_area){
-            if ($live_area_uuid){
+        $grid->column('live_area_uuid', '直播地区')->display(function ($live_area_uuid) use ($live_area) {
+            if ($live_area_uuid) {
                 return $live_area[$live_area_uuid];
             }
         });
@@ -115,13 +115,10 @@ class LiveRoomController extends AdminController
                 'url' => '直播源地址有误!',
                 'unique' => '直播源已存在!',
             ]);
-        $form->select('live_area_uuid','直播地区')->options(config('live_area'))
+        $form->select('live_area_uuid', '直播地区')->options(config('live_area'))
             ->default(1)
             ->required();
-        $form->select('type','直播类型')->options($this->type)
-            ->default(1)
-            ->required();
-        $form->select('live_show','展示直播')->options($this->live_show)
+        $form->select('type', '直播类型')->options($this->type)
             ->default(1)
             ->required();
         $form->number('sort', '排序')
@@ -130,6 +127,9 @@ class LiveRoomController extends AdminController
         $form->switch('status', '直播状态')
             ->states($this->live_status)->default(1)
             ->rules('required');
+        $form->switch('live_show', '展示直播')->states($this->live_show)
+            ->default(1)
+            ->required();
         $form->textarea('remarks', '备注');
         $form->confirm('确定更新吗？', 'edit');
         return $form;
