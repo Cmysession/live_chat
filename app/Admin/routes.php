@@ -10,7 +10,8 @@ Route::group([
     'middleware'    => config('admin.route.middleware'),
     'as'            => config('admin.route.prefix') . '.',
 ], function (Router $router) {
-    $router->get('/', 'HomeController@index')->name('home');
+    $router->get('/', 'LiveRoomController@index')->name('home');
     $router->resource('live-room','LiveRoomController');
     $router->resource('ban-user','BanUserController');
+    $router->resource('match','MatchController');
 });
