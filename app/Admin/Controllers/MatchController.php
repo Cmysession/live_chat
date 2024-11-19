@@ -22,11 +22,67 @@ class MatchController extends AdminController
         'on' => ['value' => 1, 'text' => '展示', 'color' => 'success'],
         'off' => ['value' => 2, 'text' => '关闭', 'color' => 'danger'],
     ];
+
     protected function grid(): Grid
     {
         $grid = new Grid(new MatchModel());
         $grid->column('uuid', 'UUID');
-        $grid->column('title', '直播间标题');
+        $grid->column('title', '赛事');
+        $grid->column('subtitle', '副标题')->editable();
+        $grid->column('start_time', '开始时间');
+        $live_area = config('live_area');
+        $grid->column('area', '地区')->display(function ($live_area_uuid) use ($live_area) {
+            if ($live_area_uuid) {
+                return $live_area[$live_area_uuid];
+            }
+        });
+        $live_room  = new LiveRoomModel();
+        $grid->column('live', '直播间')->display(function ($live_uuid) use ($live_room){
+            if ($live_uuid) {
+                return $live_room->whereIn('uuid', $live_uuid)->pluck('title','uuid');
+            }
+        })->label('danger');
+        $grid->column('sort', '排序')->editable();
+        $grid->column('is_show', '展示')->switch($this->is_show);
+        $grid->column('remarks', '备注');
+        $grid->column('one_file', 'LOGO')
+            ->image('', 80, 80);
+        $grid->column('one_title', '队名一')->editable();
+        $grid->column('one_score', '得分')->editable();
+        $grid->column('', 'VS')->display(function (){
+            return "<span style='color: #bd1515;font-weight: bold'>VS</span>";
+        });
+        $grid->column('tow_score', '得分')->editable();
+        $grid->column('tow_title', '队名二')->editable();
+        $grid->column('tow_file', 'LOGO')
+            ->image('', 80, 80);
+        $grid->model()->orderBy('sort', 'desc');
+        $grid->model()->orderBy('id', 'desc');
+        $grid->actions(function ($actions) {
+            // 去掉查看
+            $actions->disableView();
+            // 去掉删除
+            $actions->disableDelete();
+        });
+        $grid->disableExport();
+        // 查询
+        $grid->filter(function ($filter) {
+
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+
+            // 在这里添加字段过滤器
+            $filter->like('title', '直播间标题');
+            $filter->like('UUID', 'UUID');
+            $filter->equal('is_show', '直播状态')->select([
+                '' => '所有',
+                $this->is_show['on']['value'] => $this->is_show['on']['text'],
+                $this->is_show['off']['value'] => $this->is_show['off']['text'],
+            ]);
+
+        });
+        // 禁用导出
+        $grid->disableExport();
         return $grid;
     }
 
@@ -38,9 +94,9 @@ class MatchController extends AdminController
             $form->divider('信息');
             $form->text('title', '赛事')->required();
             $form->text('subtitle', '副标题');
-            $form->datetime("start_time","开始时间")
+            $form->datetime("start_time", "开始时间")
                 ->format('MM-DD HH:mm')
-                ->required();;
+                ->required();
             // 地区
             $form->select('area', '地区')->options(config('live_area'))
                 ->default(1)
@@ -53,7 +109,7 @@ class MatchController extends AdminController
             $form->number('sort', '排序')
                 ->default(1000)
                 ->rules('required');
-            $form->switch('live_show', '展示')
+            $form->switch('is_show', '展示')
                 ->states($this->is_show)
                 ->default(1)
                 ->required();
@@ -61,13 +117,15 @@ class MatchController extends AdminController
         });
         $form->column(1 / 3, function ($form) {
             $form->divider('队名一');
-            $form->file('one_file', 'LOGO');
+            $form->file('one_file', 'LOGO')
+                ->move('cover/' . date('Y-m'), uniqid() . '.jpg');
             $form->text('one_title', '队名');
             $form->number('one_score', '得分')->default(0);
         });
         $form->column(1 / 3, function ($form) {
             $form->divider('队名二');
-            $form->file('tow_file', 'LOGO');
+            $form->file('tow_file', 'LOGO')
+                ->move('cover/' . date('Y-m'), uniqid() . '.jpg');
             $form->text('tow_title', '队名');
             $form->number('tow_score', '得分')->default(0);
         });

@@ -56,6 +56,8 @@ class LiveRoomController extends AdminController
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
+            // 去掉删除
+            $actions->disableDelete();
         });
         $grid->column('live_show', '展示直播')
             ->switch($this->live_show);
@@ -64,10 +66,8 @@ class LiveRoomController extends AdminController
         $grid->model()->orderBy('id', 'desc');
         // 查询
         $grid->filter(function ($filter) {
-
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
-
             // 在这里添加字段过滤器
             $filter->like('title', '直播间标题');
             $filter->like('UUID', 'UUID');

@@ -1,0 +1,21 @@
+CREATE TABLE `match` (
+                         `id` int unsigned NOT NULL AUTO_INCREMENT,
+                         `uuid` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+                         `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '主标题',
+                         `subtitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '副标题',
+                         `area` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '地区',
+                         `start_time` char(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '开始时间',
+                         `live` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '直播间',
+                         `sort` int DEFAULT NULL COMMENT '排序',
+                         `is_show` int DEFAULT NULL COMMENT '是否展示',
+                         `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '备注',
+                         `one_file` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '队名一',
+                         `one_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '队名',
+                         `one_score` int DEFAULT '0' COMMENT '得分',
+                         `tow_file` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '队名二',
+                         `tow_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '队名',
+                         `tow_score` int DEFAULT '0' COMMENT '得分',
+                         `created_at` timestamp NULL DEFAULT NULL,
+                         `updated_at` timestamp NULL DEFAULT NULL,
+                         PRIMARY KEY (`id`,`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='比赛表';

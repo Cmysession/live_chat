@@ -9,6 +9,12 @@ use Illuminate\Support\Str;
 class MatchModel extends Model
 {
     public $table = 'match';
+
+    protected $casts = [
+        'live' => 'json',
+    ];
+
+
     public static function boot()
     {
         parent::boot();
@@ -20,3 +26,5 @@ class MatchModel extends Model
         });
     }
 }
+
+
