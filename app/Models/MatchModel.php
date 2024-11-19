@@ -22,7 +22,11 @@ class MatchModel extends Model
             $model->uuid = Str::random(9);
         });
         static::saving(function () {
-
+            $areaArray = config('live_area');
+            foreach ($areaArray as $key => $value) {
+                Cache::forget($key . '_room');
+            }
+            Cache::forget('room');
         });
     }
 }
