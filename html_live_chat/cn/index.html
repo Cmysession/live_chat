@@ -775,7 +775,7 @@
                 muiMuiPlayerPoster = roomList[v].video_img;
                 dataType = roomList[v].type;
                 playStatus = roomList[v].status;
-                $('#video-title').text(decodeURI(t));
+                $('#video-title').html(decodeURI(t) + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">直播中</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">未开播</span>'));
                 //--- 网站关键词 ---
                 let t_t = $('title').text();
                 $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
@@ -785,7 +785,7 @@
                 $('meta[name="og:description"]')[0].content = decodeURI(t) + ' ' + (playStatus === 1 ? '直播中' : '未开播') + t_t;
                 //--- END网站关键词 ---
             } else {
-                $('#video-title').text(defData.title);
+                $('#video-title').html(defData.title + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">直播中</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">未开播</span>'));
                 v = defData.uuid;
                 t = defData.title;
                 dataType = defData.type;

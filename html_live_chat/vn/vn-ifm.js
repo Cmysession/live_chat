@@ -80,7 +80,8 @@ $(function () {
             muiMuiPlayerPoster = roomList[v].video_img;
             dataType = roomList[v].type;
             playStatus = roomList[v].status;
-            $('#video-title').text(decodeURI(t));
+            $('#video-title').html(decodeURI(t) + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">phát trực tiếp</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">tạm thời rời đi</span>'));
+
             //--- 网站关键词 ---
             // let t_t = $('title').text();
             // $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
