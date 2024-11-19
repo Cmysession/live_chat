@@ -42,6 +42,12 @@ class MatchController extends AdminController
                 return $live_room->whereIn('uuid', $live_uuid)->pluck('title','uuid');
             }
         })->label('danger');
+        $live_type_cn  = config('live_type.cn');
+        $grid->column('live_type', '直播类型')->display(function ($live_type) use ($live_type_cn) {
+            if ($live_type) {
+                return $live_type_cn[$live_type];
+            }
+        });
         $grid->column('sort', '排序')->editable();
         $grid->column('is_show', '展示')->switch($this->is_show);
         $grid->column('remarks', '备注');
@@ -103,8 +109,9 @@ class MatchController extends AdminController
                 ->required();
             // 直播间
             $liveRoomModel = LiveRoomModel::pluck('title', 'uuid');
-            $form->multipleSelect('live', '直播间')->options($liveRoomModel)
-                ->default(1)
+            $form->multipleSelect('live', '直播间')->options($liveRoomModel);
+            // 直播类型
+            $form->select('live_type', '直播类型')->options(config('live_type.cn'))
                 ->required();
             $form->number('sort', '排序')
                 ->default(1000)

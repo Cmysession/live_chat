@@ -37,6 +37,115 @@
         /*LOGO end*/
     </style>
     <style>
+        #match-box {
+            color: #ffffff;
+            margin: 20px;
+            font-weight: bold;
+        }
+        #match-menu a{
+            color: #fdfeff;
+            text-decoration: none;
+        }
+        #match-menu a:hover{
+            color: #6a6a6a;
+        }
+        #match-menu > .active a{
+            color: #070707 !important;
+        }
+        #match-box .item .top, #match-box .item .item-vs {
+            display: flex;
+            margin: 10px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #ty .top > div:nth-child(2){
+            text-align: center;
+        }
+        #ty .top > div:nth-child(3){
+            text-align: end;
+        }
+
+        #match-box .panel-body .item {
+            padding: 20px;
+            background-color: #2d2d2d59;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #000000;
+            border-width: 9px;
+        }
+
+        #match-box .item .top div, #match-box .item-vs-box {
+            flex: 1;
+        }
+
+        #match-box .item-vs-box:nth-child(1) {
+            direction: rtl;
+        }
+
+        #match-box .item-vs-box:nth-child(2) {
+            text-align: center;
+            line-height: 50px;
+        }
+
+        #match-box .item-vs-box:nth-child(1) span, #match-box .item-vs-box:nth-child(3) span {
+            margin: 0 10px;
+        }
+
+        #match-box .item-vs-box .vs-str {
+            margin: 0 20px;
+            background: red;
+            padding: 10px;
+            border-radius: 50px;
+        }
+
+        #match-box .item-vs-box:nth-child(3) {
+            direction: ltr;
+        }
+
+        #match-box > div.panel-body > div > div > div.top > div:nth-child(3) {
+            direction: rtl;
+        }
+
+        #match-box > div.panel-body > div > div > div.top > div:nth-child(2) {
+            text-align: center;
+        }
+
+
+        #match-box .top .title {
+            text-align: center;
+        }
+
+        #match-box .item .item-vs div img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            border: 2px solid #ffffff;
+        }
+
+        #match-box .item .top div .title {
+            color: red;
+        }
+
+        #match-box .item .live-room {
+            text-align: center;
+            border-top: 1px solid #4a4a4a;
+            padding-top: 10px;
+        }
+
+        #match-box .item .live-room a {
+            color: rgba(255, 0, 0, 0);
+        }
+
+        #match-box .item .live-room a img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50px;
+            border: 2px solid #ffff00;
+            margin: 0 10px;
+        }
+
         .row {
             margin-right: 0;
             margin-left: 0;
@@ -73,11 +182,9 @@
 
         video {
             width: 100%;
-            /* max-height: 585px; */
         }
 
         #msg-box-1 {
-            /*background-color: aqua;*/
             border-radius: 10px;
             /* padding: 10px; */
             margin-left: 5px;
@@ -117,7 +224,6 @@
 
         #user-msg::-webkit-scrollbar {
             display: none;
-            /* Chrome Safari */
         }
 
         #user-msg .c {
@@ -149,7 +255,6 @@
         }
 
         #msg-form .send-btn {
-            /* width: 100%; */
             color: #fff;
             border: none;
             height: 40px;
@@ -266,6 +371,14 @@
             }
 
             /*LOGO end*/
+            #match-box {
+                margin: 20px 0;
+            }
+
+            #match-box .panel-body {
+                padding: 0 !important;
+            }
+
             #tv-box .btn {
                 white-space: break-spaces;
             }
@@ -353,7 +466,7 @@
 </head>
 
 <body style="background-color: #000000">
-<div style="max-width: 1500px;margin: auto;">
+<div id="live-body" style="max-width: 1500px;margin: auto;">
     <div id="room-logo-box">
         <img src="https://spsvn.live/images/logo-4.png" alt="https://spsvn.live/">
     </div>
@@ -416,7 +529,123 @@
             </div>
         </div>
     </div>
-    <div id="tv-box" style="text-align: center;background-color: #000000;" class="row"></div>
+    <div id="tv-box" style="text-align: center;background-color: #000000;margin: 15px 0;" class="row"></div>
+    <div id="match-box" style="border-color:#3e3e3e" class="panel panel-default">
+        <div class="panel-heading" style="background-color: #000000;border-color:#000000;">
+            <h3 class="panel-title" style="text-align: center;color: #FFFFFF">赛 事 直 播</h3>
+        </div>
+        <div class="panel-body" style="background-color: #000000">
+            <ul id="match-menu" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#ty" data-toggle="tab">Home</a>
+                </li>
+                <li>
+                    <a href="#zu" data-toggle="tab">Profile</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="ty">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 item">
+                            <div class="top" style="width: 100%;">
+                                <div>中超</div>
+                                <div><span class="title">直播中</span></div>
+                                <div>11/09 22:00</div>
+                            </div>
+                            <div class="item-vs">
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/3e8a526e2cffda6a5789a9d99701ab7a.jpeg"
+                                         alt="">
+                                    <span>女足</span>
+                                </div>
+                                <div class="item-vs-box">
+                                    <div>1<span class="vs-str">VS</span>2</div>
+                                </div>
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/359ad8cb7a4ddba41615593c27dcaca7.jpeg"
+                                         alt="">
+                                    <span>男足</span>
+                                </div>
+                            </div>
+                            <div class="live-room">
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b678940f7d.jpg" alt="">
+                                </a>
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b2558e8e77.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 item">
+                            <div class="top" style="width: 100%;">
+                                <div>中超</div>
+                                <div><span class="title">直播中</span></div>
+                                <div>11/09 22:00</div>
+                            </div>
+                            <div class="item-vs">
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/3e8a526e2cffda6a5789a9d99701ab7a.jpeg"
+                                         alt="">
+                                    <span>女足</span>
+                                </div>
+                                <div class="item-vs-box">
+                                    <div>1<span class="vs-str">VS</span>2</div>
+                                </div>
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/359ad8cb7a4ddba41615593c27dcaca7.jpeg"
+                                         alt="">
+                                    <span>男足</span>
+                                </div>
+                            </div>
+                            <div class="live-room">
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b678940f7d.jpg" alt="">
+                                </a>
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b2558e8e77.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="zu">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 item">
+                            <div class="top" style="width: 100%;">
+                                <div>中超</div>
+                                <div><span class="title">直播中</span></div>
+                                <div>11/09 22:00</div>
+                            </div>
+                            <div class="item-vs">
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/3e8a526e2cffda6a5789a9d99701ab7a.jpeg"
+                                         alt="">
+                                    <span>女足</span>
+                                </div>
+                                <div class="item-vs-box">
+                                    <div>1<span class="vs-str">VS</span>2</div>
+                                </div>
+                                <div class="item-vs-box">
+                                    <img src="http://live.com/storage/files/359ad8cb7a4ddba41615593c27dcaca7.jpeg"
+                                         alt="">
+                                    <span>男足</span>
+                                </div>
+                            </div>
+                            <div class="live-room">
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b678940f7d.jpg" alt="">
+                                </a>
+                                <a href="/">
+                                    <img src="http://live.com/storage/cover/2024-11/672b2558e8e77.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Small modal -->
     <div class="modal fade" id="myModalWit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
@@ -465,6 +694,7 @@
     let wss = 'wss.supers.live';
     // let https = 'https://api.supers.live';
     let https = 'http://live.com';
+
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -527,7 +757,6 @@
                 }
             });
         }
-
         $.post(https + '/api/live-room/vn/?code=' + Math.random(), function (data) {
             let roomList = data.lists;
             let defData = (data.first[Object.keys(data.first)[0]]);
