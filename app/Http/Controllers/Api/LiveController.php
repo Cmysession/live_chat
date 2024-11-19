@@ -21,7 +21,7 @@ class LiveController extends Controller
         if (!in_array($area, array_keys($areaArray))) {
             return [];
         }
-        return Cache::remember($area . '_room', 86400, function () use ($area) {
+//        return Cache::remember($area . '_room', 86400, function () use ($area) {
             $liveRoomModel = LiveRoomModel::where([
                 'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
@@ -57,7 +57,7 @@ class LiveController extends Controller
                     'one_file',
                     'one_title',
                     'one_score',
-                    'tow_file',
+                    'tow_title',
                     'tow_file',
                     'tow_score',
                     'live')
@@ -72,6 +72,8 @@ class LiveController extends Controller
                 $data["live_type"] = $live_type;
                 if ($live_type && $matchModel) {
                     foreach ($matchModel as $match) {
+                        $match['one_file'] = config('filesystems.disks.admin.url') . '/' . $match['one_file'];
+                        $match['tow_file'] = config('filesystems.disks.admin.url') . '/' . $match['tow_file'];
                         // type 对应
                         $match['live_room'] = [];
                         if (!empty($live_type[$match['live_type']])) {
@@ -89,6 +91,6 @@ class LiveController extends Controller
                 }
             }
             return $data;
-        });
+//        });
     }
 }
