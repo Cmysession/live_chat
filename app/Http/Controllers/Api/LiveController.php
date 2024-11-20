@@ -72,8 +72,12 @@ class LiveController extends Controller
                 $data["live_type"] = $live_type;
                 if ($live_type && $matchModel) {
                     foreach ($matchModel as $match) {
-                        $match['one_file'] = config('filesystems.disks.admin.url') . '/' . $match['one_file'];
-                        $match['tow_file'] = config('filesystems.disks.admin.url') . '/' . $match['tow_file'];
+                        if ($match['one_file']){
+                            $match['one_file'] = config('filesystems.disks.admin.url') . '/' . $match['one_file'];
+                        }
+                        if ($match['tow_file']){
+                            $match['tow_file'] = config('filesystems.disks.admin.url') . '/' . $match['tow_file'];
+                        }
                         // type 对应
                         $match['live_room'] = [];
                         if (!empty($live_type[$match['live_type']])) {

@@ -877,59 +877,53 @@
             }
             runWs();
             // 列表
-            // console.log(data);
             let matchMenu = '';
             let matchContent = '';
-            for (key in data.live_type){
-                if (data.live_room_list[key]){
+
+            for (key in data.live_type) {
+                if (data.live_room_list[key]) {
                     // 菜单
-                    if (matchMenu){
-                        matchMenu += '<li><a href="#'+data.live_type[key]+'" data-toggle="tab">'+data.live_type[key]+'</a></li>';
-                    }else{
-                        matchMenu = '<li class="active"><a href="#'+data.live_type[key]+'" data-toggle="tab">'+data.live_type[key]+'</a></li>';
+                        matchMenu += '<li class="'+(matchMenu===''?' active':'')+'"><a href="#' + key + '" data-toggle="tab">' + data.live_type[key] + '</a></li>';
                         // 内容
-                        matchContent ='<div class="tab-pane active" id="'+data.live_type[key]+'"><div class="row">';
-                        for(contentKey in data.live_room_list[key]){
+                        matchContent += '<div class="tab-pane '+(matchContent===''?' active':'')+'" id="' + key + '"><div class="row">';
+                        for (contentKey in data.live_room_list[key]) {
                             let item = data.live_room_list[key][contentKey];
-                            console.log(item);
-                            matchContent +='<div class="col-xs-12 col-md-6 item">\n' +
-                                '                            <div class="top" style="width: 100%;">\n' +
-                                '                                <div>'+item.title+'</div>\n' +
-                                '                                <div><span class="title">'+item.subtitle+'</span></div>\n' +
-                                '                                <div>'+item.start_time+'</div>\n' +
-                                '                            </div>';
+                            matchContent += '<div class="col-xs-12 col-md-6 item">\n' +
+                                '              <div class="top" style="width: 100%;">\n' +
+                                '                    <div>' + item.title + '</div>\n' +
+                                '              <div><span class="title">' + item.subtitle + '</span></div>\n' +
+                                '              <div>' + item.start_time + '</div>\n' +
+                                '             </div>';
                             // 比赛详情
-                            matchContent +='<div class="item-vs">\n' +
-                                '                                <div class="item-vs-box">\n' +
-                                '                                    <img src="'+item.one_file+'"\n' +
-                                '                                         alt="">\n' +
-                                '                                    <span>'+item.one_title+'</span>\n' +
-                                '                                </div>\n' +
-                                '                                <div class="item-vs-box">\n' +
-                                '                                    <div>'+item.one_score+'<span class="vs-str">VS</span>'+item.tow_score+'</div>\n' +
-                                '                                </div>\n' +
-                                '                                <div class="item-vs-box">\n' +
-                                '                                    <img src="'+item.tow_file+'"\n' +
-                                '                                         alt="">\n' +
-                                '                                    <span>'+item.one_title+'</span>\n' +
-                                '                                </div>\n' +
-                                '                            </div>\n' +
-                                '                            ';
+                            if (item.one_file && item.one_title && item.tow_file && item.tow_title){
+                                matchContent += '<div class="item-vs">\n' +
+                                    '             <div class="item-vs-box">\n' +
+                                    '                  <img src="' + item.one_file + '" alt="">\n' +
+                                    '                     <span>' + item.one_title + '</span>\n' +
+                                    '             </div>\n' +
+                                    '             <div class="item-vs-box">\n' +
+                                    '                 <div>' + item.one_score + '<span class="vs-str">VS</span>' + item.tow_score + '</div>\n' +
+                                    '             </div>\n' +
+                                    '             <div class="item-vs-box">\n' +
+                                    '                  <img src="' + item.tow_file + '" alt="">\n' +
+                                    '                   <span>' + item.one_title + '</span>\n' +
+                                    '             </div>\n' +
+                                    '            </div>';
+                            }
                             // 直播间
-                                matchContent+='                            <div class="live-room">\n' +
-                                '                                <a href="/">\n' +
-                                '                                    <img src="http://live.com/storage/cover/2024-11/672b678940f7d.jpg" alt="">\n' +
-                                '                                </a>\n' +
-                                '                                <a href="/">\n' +
-                                '                                    <img src="http://live.com/storage/cover/2024-11/672b2558e8e77.jpg" alt="">\n' +
-                                '                                </a>\n' +
-                                '                            </div>\n' +
-                                '                        </div>';
+                            if (item.live_room.length) {
+                                matchContent += '<div class="live-room">';
+                                for (room in item.live_room) {
+                                    console.log(item.live_room[room].video_img);
+                                    if (item.live_room[room].title && item.live_room[room].uuid){
+                                        matchContent += '<a href="?t='+item.live_room[room].title+'&v='+item.live_room[room].uuid+'"><img src="'+item.live_room[room].video_img+'" alt="'+item.live_room[room].title+'"></a>';
+                                    }
+                                }
+                                matchContent += '</div>';
+                            }
+                            matchContent += '</div>';
                         }
-                        matchContent +='</div></div>';
-                    }
-
-
+                        matchContent += '</div></div>';
                 }
             }
             $('#match-menu').html(matchMenu);
