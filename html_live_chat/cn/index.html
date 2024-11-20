@@ -677,21 +677,24 @@
                 playStatus = roomList[v].status;
                 $('#video-title').html(decodeURI(t) + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">直播中</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">未开播</span>'));
                 //--- 网站关键词 ---
-                let t_t = $('title').text();
                 if (title) {
-                    $("title").text(title + ' ' + decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = title + ' ' + decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    ;
-                    $('meta[name="keywords"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    $('meta[name="description"]')[0].content = title + ' ' + decodeURI(t)+ " " + (playStatus === 1 ? '直播中' : '未开播') + ' ' + $('meta[name="description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    $('meta[name="og:description"]')[0].content = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="og:description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    $("title").text(title + ' ' + decodeURI(t) + " SPSVN phát trực tiếp");
+                    let selfTitle = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播') + " SPSVN phát trực tiếp";
+                    let selfKeywords = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    let selfDescription = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播') + ' ' + $('meta[name="description"]')[0].content;
+                    $('meta[property="og:title"]')[0].content = selfTitle;
+                    $('meta[name="keywords"]')[0].content = selfKeywords;
+                    $('meta[name="description"]')[0].content = selfDescription;
+                    $('meta[name="og:description"]')[0].content = selfDescription;
                 } else {
-                    $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    ;
-                    $('meta[name="keywords"]')[0].content = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    $('meta[name="description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="description"]')[0].content;
-                    $('meta[name="og:description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="og:description"]')[0].content;
+                    $("title").text(decodeURI(t) + " SPSVN phát trực tiếp");
+                    let selfTitle = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播') + " SPSVN phát trực tiếp";
+                    let selfKeywords = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    let selfDescription = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播') + ' ' + $('meta[name="description"]')[0].content;
+                    $('meta[property="og:title"]')[0].content = selfTitle;
+                    $('meta[name="keywords"]')[0].content = selfKeywords;
+                    $('meta[name="description"]')[0].content = selfDescription;
+                    $('meta[name="og:description"]')[0].content = selfDescription;
                 }
                 $('meta[property="og:url"]')[0].content = window.location.href;
                 $('link[rel="canonical"]')[0].href = window.location.href;
@@ -827,9 +830,16 @@
                         // 直播间
                         if (item.live_room.length) {
                             matchContent += '<div class="live-room">';
+                            console.log(item);
+                            console.log('-----');
+                            console.log(item.one_title + " VS " + item.tow_title);
                             for (room in item.live_room) {
                                 if (item.live_room[room].title && item.live_room[room].uuid) {
-                                    matchContent += '<a href="?title=' + encodeURI(item.title) + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"></a>';
+                                    let vs = item.title;
+                                    if (item.one_title && item.tow_title) {
+                                        vs += ' ' + item.one_title + " VS " + item.tow_title;
+                                    }
+                                    matchContent += '<a href="?title=' + encodeURI(vs) + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"></a>';
                                 }
                             }
                             matchContent += '</div>';

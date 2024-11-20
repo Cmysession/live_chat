@@ -681,21 +681,24 @@
                 playStatus = roomList[v].status;
                 $('#video-title').html(decodeURI(t) + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">Đang phát trực tiếp</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">Chưa livestream</span>'));
                 //--- 网站关键词 ---
-                let t_t = $('title').text();
                 if (title) {
-                    $("title").text(title + ' ' + decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = title + ' ' + decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream');
-                    ;
-                    $('meta[name="keywords"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    $('meta[name="description"]')[0].content = title + ' ' + decodeURI(t)+ " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream');
-                    $('meta[name="og:description"]')[0].content = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream')+ ' ' + $('meta[name="og:description"]')[0].content + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream');
+                    $("title").text(title + ' ' + decodeURI(t) + " SPSVN phát trực tiếp");
+                    let selfTitle = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " SPSVN phát trực tiếp";
+                    let selfKeywords = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    let selfDescription = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
+                    $('meta[property="og:title"]')[0].content = selfTitle;
+                    $('meta[name="keywords"]')[0].content = selfKeywords;
+                    $('meta[name="description"]')[0].content = selfDescription;
+                    $('meta[name="og:description"]')[0].content = selfDescription;
                 } else {
-                    $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = decodeURI(t) + " Phòng phát sóng trực tiếp" + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream');
-                    ;
-                    $('meta[name="keywords"]')[0].content = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    $('meta[name="description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream')+ ' ' + $('meta[name="description"]')[0].content;
-                    $('meta[name="og:description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream')+ ' ' + $('meta[name="og:description"]')[0].content;
+                    $("title").text(decodeURI(t) + " SPSVN phát trực tiếp");
+                    let selfTitle = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " SPSVN phát trực tiếp";
+                    let selfKeywords = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    let selfDescription = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
+                    $('meta[property="og:title"]')[0].content = selfTitle;
+                    $('meta[name="keywords"]')[0].content = selfKeywords;
+                    $('meta[name="description"]')[0].content = selfDescription;
+                    $('meta[name="og:description"]')[0].content = selfDescription;
                 }
                 $('meta[property="og:url"]')[0].content = window.location.href;
                 $('link[rel="canonical"]')[0].href = window.location.href;
