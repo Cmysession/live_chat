@@ -72,14 +72,15 @@ class MatchController extends AdminController
         });
         $grid->disableExport();
         // 查询
-        $grid->filter(function ($filter) {
+        $grid->filter(function ($filter) use ($live_area,$live_type_cn) {
 
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
-
             // 在这里添加字段过滤器
             $filter->like('title', '直播间标题');
             $filter->like('UUID', 'UUID');
+            $filter->equal('area', '地区')->select($live_area);
+            $filter->equal('live_type', '直播类型')->select($live_type_cn);
             $filter->equal('is_show', '直播状态')->select([
                 '' => '所有',
                 $this->is_show['on']['value'] => $this->is_show['on']['text'],

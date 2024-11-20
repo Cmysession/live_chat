@@ -65,12 +65,13 @@ class LiveRoomController extends AdminController
         $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
         // 查询
-        $grid->filter(function ($filter) {
+        $grid->filter(function ($filter) use ($live_area) {
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
             // 在这里添加字段过滤器
             $filter->like('title', '直播间标题');
             $filter->like('UUID', 'UUID');
+            $filter->equal('live_area_uuid', '直播地区')->select($live_area);
             $filter->equal('status', '直播状态')->select([
                 '' => '所有',
                 $this->live_status['on']['value'] => $this->live_status['on']['text'],
