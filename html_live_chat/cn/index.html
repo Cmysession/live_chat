@@ -680,16 +680,18 @@
                 let t_t = $('title').text();
                 if (title) {
                     $("title").text(title + ' ' + decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = title + ' ' + decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');;
-                    $('meta[name="keywords"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    $('meta[name="description"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    $('meta[name="og:description"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="og:description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    $('meta[property="og:title"]')[0].content = title + ' ' + decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    ;
+                    $('meta[name="keywords"]')[0].content = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    $('meta[name="description"]')[0].content = title + ' ' + decodeURI(t)+ " " + (playStatus === 1 ? '直播中' : '未开播') + ' ' + $('meta[name="description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    $('meta[name="og:description"]')[0].content = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="og:description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
                 } else {
                     $("title").text(decodeURI(t) + " SPSVN Sân Đấu");
-                    $('meta[property="og:title"]')[0].content = decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');;
-                    $('meta[name="keywords"]')[0].content = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    $('meta[name="description"]')[0].content = decodeURI(t) + ' ' + $('meta[name="description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
-                    $('meta[name="og:description"]')[0].content = decodeURI(t) + ' ' + $('meta[name="og:description"]')[0].content + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    $('meta[property="og:title"]')[0].content = decodeURI(t) + " 直播间" + " " + (playStatus === 1 ? '直播中' : '未开播');
+                    ;
+                    $('meta[name="keywords"]')[0].content = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
+                    $('meta[name="description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="description"]')[0].content;
+                    $('meta[name="og:description"]')[0].content = decodeURI(t) + " " + (playStatus === 1 ? '直播中' : '未开播')+ ' ' + $('meta[name="og:description"]')[0].content;
                 }
                 $('meta[property="og:url"]')[0].content = window.location.href;
                 $('link[rel="canonical"]')[0].href = window.location.href;
@@ -810,14 +812,14 @@
                         if (item.one_file && item.one_title && item.tow_file && item.tow_title) {
                             matchContent += '<div class="item-vs">\n' +
                                 '             <div class="item-vs-box">\n' +
-                                '                  <img src="' + item.one_file + '" alt="">\n' +
+                                '                  <img src="' + item.one_file + '" alt="' + item.one_title + '">\n' +
                                 '                     <span>' + item.one_title + '</span>\n' +
                                 '             </div>\n' +
                                 '             <div class="item-vs-box">\n' +
                                 '                 <div>' + item.one_score + '<span class="vs-str">VS</span>' + item.tow_score + '</div>\n' +
                                 '             </div>\n' +
                                 '             <div class="item-vs-box">\n' +
-                                '                  <img src="' + item.tow_file + '" alt="">\n' +
+                                '                  <img src="' + item.tow_file + '" alt="' + item.tow_file + '">\n' +
                                 '                   <span>' + item.one_title + '</span>\n' +
                                 '             </div>\n' +
                                 '            </div>';
