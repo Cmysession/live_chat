@@ -21,7 +21,7 @@ class LiveController extends Controller
         if (!in_array($area, array_keys($areaArray))) {
             return [];
         }
-//        return Cache::remember($area . '_room', 86400, function () use ($area) {
+        return Cache::remember($area . '_room', 86400, function () use ($area) {
             $liveRoomModel = LiveRoomModel::where([
                 'live_area_uuid' => $area,
             ])->orderBy('sort', 'desc')
@@ -95,6 +95,6 @@ class LiveController extends Controller
                 }
             }
             return $data;
-//        });
+        });
     }
 }
