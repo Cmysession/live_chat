@@ -4,6 +4,7 @@ CREATE TABLE `match` (
                          `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '主标题',
                          `subtitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '副标题',
                          `area` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '地区',
+                         `live_type` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '直播类型',
                          `start_time` char(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '开始时间',
                          `live` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '' COMMENT '直播间',
                          `sort` int DEFAULT NULL COMMENT '排序',
