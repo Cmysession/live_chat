@@ -130,15 +130,19 @@ class Swoole extends Command
                     $ToMeData['code'] = $this->model::KEY_USERNAME;
                     $this->ws->push($user_fd, json_encode($ToMeData, JSON_UNESCAPED_UNICODE));
                 }
-                $fds = TemporaryUserModel::where([
-                    'live_room_id' => $data['live_room_id']
-                ])->pluck('uuid', 'fd')
-                    ->toArray();
-                $fdsKeys = array_keys($fds);
-                foreach ($this->ws->connections as $fd) {
-                    if (in_array($fd, $fdsKeys)) {
-                        if ($this->ws->isEstablished($fd)) {
-                            $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                if ($data['live_room_id']){
+                    $fds = TemporaryUserModel::where([
+                        'live_room_id' => $data['live_room_id']
+                    ])->pluck('uuid', 'fd')
+                        ->toArray();
+                    if ($fds){
+                        $fdsKeys = array_keys($fds);
+                        foreach ($this->ws->connections as $fd) {
+                            if (in_array($fd, $fdsKeys)) {
+                                if ($this->ws->isEstablished($fd)) {
+                                    $this->ws->push($fd, json_encode($data, JSON_UNESCAPED_UNICODE));
+                                }
+                            }
                         }
                     }
                 }

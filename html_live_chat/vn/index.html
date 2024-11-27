@@ -608,7 +608,8 @@
 <script src="/public/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     let wss = 'wss.supers.live';
-    let https = 'https://api.supers.live';
+    // let https = 'https://api.supers.live';
+    let https = 'http://live.com';
 
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -821,7 +822,7 @@
                         matchContent += '<div class="col-xs-12 col-md-6 item">\n' +
                             '              <div class="top" style="width: 100%;">\n' +
                             '                    <div>' + item.title + '</div>\n' +
-                            '              <div><span class="title">' + item.subtitle + '</span></div>\n' +
+                            '              <div><span class="title" style="color: '+(item.subtitle_color==''?'red':item.subtitle_color)+'">' + item.subtitle + '</span></div>\n' +
                             '              <div>' + item.start_time + '</div>\n' +
                             '             </div>';
                         // 比赛详情

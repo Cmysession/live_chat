@@ -23,45 +23,56 @@ class MatchController extends AdminController
         'off' => ['value' => 2, 'text' => '关闭', 'color' => 'danger'],
     ];
 
+    private $subtitle_color = [
+        'red' => '红色',
+        '#ffffff' => '白色',
+        '#8c8c8c' => '灰色',
+    ];
+
     protected function grid(): Grid
     {
         $grid = new Grid(new MatchModel());
-        $grid->column('uuid', 'UUID');
+        $grid->column('uuid', 'UUID')->hide();
         $grid->column('title', '赛事');
-        $grid->column('subtitle', '副标题')->editable();
+        $grid->column('subtitle', '副标题')
+            ->editable();
+        $grid->column('subtitle_color', '副标题颜色')
+        ->display(function ($subtitle_color) {
+            return "<div style='height: 20px;width: 20px;background-color: ".$subtitle_color."'></div>";
+        });
         $grid->column('start_time', '开始时间');
         $live_area = config('live_area');
         $grid->column('area', '地区')->display(function ($live_area_uuid) use ($live_area) {
             if ($live_area_uuid) {
                 return $live_area[$live_area_uuid];
             }
-        });
-        $live_room  = new LiveRoomModel();
-        $grid->column('live', '直播间')->display(function ($live_uuid) use ($live_room){
+        })->hide();
+        $live_room = new LiveRoomModel();
+        $grid->column('live', '直播间')->display(function ($live_uuid) use ($live_room) {
             if ($live_uuid) {
-                return $live_room->whereIn('uuid', $live_uuid)->pluck('title','uuid');
+                return $live_room->whereIn('uuid', $live_uuid)->pluck('title', 'uuid');
             }
         })->label('danger');
-        $live_type_cn  = config('live_type.cn');
+        $live_type_cn = config('live_type.cn');
         $grid->column('live_type', '直播类型')->display(function ($live_type) use ($live_type_cn) {
             if ($live_type) {
                 return $live_type_cn[$live_type];
             }
-        });
+        })->hide();
         $grid->column('sort', '排序')->editable();
         $grid->column('is_show', '展示')->switch($this->is_show);
-        $grid->column('remarks', '备注');
+        $grid->column('remarks', '备注')->hide();
         $grid->column('one_file', 'LOGO')
-            ->image('', 80, 80);
+            ->image('', 80, 80)->hide();
         $grid->column('one_title', '队名一')->editable();
         $grid->column('one_score', '得分')->editable();
-        $grid->column('', 'VS')->display(function (){
+        $grid->column('', 'VS')->display(function () {
             return "<span style='color: #bd1515;font-weight: bold'>VS</span>";
         });
         $grid->column('tow_score', '得分')->editable();
         $grid->column('tow_title', '队名二')->editable();
         $grid->column('tow_file', 'LOGO')
-            ->image('', 80, 80);
+            ->image('', 80, 80)->hide();
         $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
         $grid->actions(function ($actions) {
@@ -72,7 +83,7 @@ class MatchController extends AdminController
         });
         $grid->disableExport();
         // 查询
-        $grid->filter(function ($filter) use ($live_area,$live_type_cn) {
+        $grid->filter(function ($filter) use ($live_area, $live_type_cn) {
 
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
@@ -101,6 +112,8 @@ class MatchController extends AdminController
             $form->divider('信息');
             $form->text('title', '赛事')->required();
             $form->text('subtitle', '副标题');
+            $form->color('subtitle_color', '副标题颜色')->default('#ccc');
+
             $form->datetime("start_time", "开始时间")
                 ->format('MM-DD HH:mm')
                 ->required();

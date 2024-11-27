@@ -51,6 +51,7 @@ class LiveController extends Controller
                 })->select(
                     'title',
                     'subtitle',
+                    'subtitle_color',
                     'live_type',
                     'start_time',
                     'start_time',
