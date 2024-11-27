@@ -23,12 +23,6 @@ class MatchController extends AdminController
         'off' => ['value' => 2, 'text' => '关闭', 'color' => 'danger'],
     ];
 
-    private $subtitle_color = [
-        'red' => '红色',
-        '#ffffff' => '白色',
-        '#8c8c8c' => '灰色',
-    ];
-
     protected function grid(): Grid
     {
         $grid = new Grid(new MatchModel());
@@ -112,7 +106,7 @@ class MatchController extends AdminController
             $form->divider('信息');
             $form->text('title', '赛事')->required();
             $form->text('subtitle', '副标题');
-            $form->color('subtitle_color', '副标题颜色')->default('#ccc');
+            $form->color('subtitle_color', '副标题颜色')->default('#a6a6a6');
 
             $form->datetime("start_time", "开始时间")
                 ->format('MM-DD HH:mm')
