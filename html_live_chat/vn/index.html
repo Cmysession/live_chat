@@ -703,6 +703,7 @@
             let muiMuiPlayerPoster = defData.video_img;
             let playStatus = defData.status;
             let dataType = null;
+            console.log(title);
             if (roomList[v] && t && v && (roomList[v].title === decodeURI(t))) {
                 muiMuiPlayerSrc = roomList[v].video + '?code=' + Math.random();
                 muiMuiPlayerPoster = roomList[v].video_img;
@@ -711,19 +712,19 @@
                 $('#video-title').html(decodeURI(t) + (playStatus === 1 ? '<span style="color: #00a65a;margin: 0 20px;font-size: 20px;">Đang phát trực tiếp</span>' : '<span style="color: darkred;margin: 0 20px;font-size: 20px;">Chưa livestream</span>'));
                 //--- 网站关键词 ---
                 if (title) {
-                    $("title").text(title + ' ' + decodeURI(t) + " - xoilac1.cc");
-                    let selfTitle = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " - xoilac1.cc";
-                    let selfKeywords = title + ' ' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    let selfDescription = title + ' ' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
+                    $("title").text(title + ',Phòng phát sóng trực tiếp:' + decodeURI(t) + " - xoilac1.cc");
+                    let selfTitle = title + ',Phòng phát sóng trực tiếp:' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " - xoilac1.cc";
+                    let selfKeywords = title + ',Phòng phát sóng trực tiếp:' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content + ',';
+                    let selfDescription = title + ',Phòng phát sóng trực tiếp:' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
                     $('meta[property="og:title"]')[0].content = selfTitle;
                     $('meta[name="keywords"]')[0].content = selfKeywords;
                     $('meta[name="description"]')[0].content = selfDescription;
                     $('meta[name="og:description"]')[0].content = selfDescription;
                 } else {
-                    $("title").text(decodeURI(t) + " - xoilac1.cc");
-                    let selfTitle = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " - xoilac1.cc";
-                    let selfKeywords = decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content;
-                    let selfDescription = decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
+                    $("title").text('Phòng phát sóng trực tiếp:' + decodeURI(t) + " - xoilac1.cc");
+                    let selfTitle = 'Phòng phát sóng trực tiếp:' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + " - xoilac1.cc";
+                    let selfKeywords = 'Phòng phát sóng trực tiếp:' + decodeURI(t) + ' ' + $('meta[name="keywords"]')[0].content + ',';
+                    let selfDescription = 'Phòng phát sóng trực tiếp:' + decodeURI(t) + " " + (playStatus === 1 ? 'Đang phát trực tiếp' : 'Chưa livestream') + ' ' + $('meta[name="description"]')[0].content;
                     $('meta[property="og:title"]')[0].content = selfTitle;
                     $('meta[name="keywords"]')[0].content = selfKeywords;
                     $('meta[name="description"]')[0].content = selfDescription;
@@ -864,8 +865,13 @@
                         if (item.live_room.length) {
                             matchContent += '<div class="live-room">';
                             for (room in item.live_room) {
+
                                 if (item.live_room[room].title && item.live_room[room].uuid) {
-                                    matchContent += '<a href="?title=' + encodeURI(item.title) + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"></a>';
+                                    let room_vs = '';
+                                    if (item.one_title && item.one_title) {
+                                        room_vs = "," + item.one_title + ' vs ' + item.tow_title;
+                                    }
+                                    matchContent += '<a href="?title=' + encodeURI(item.title) + room_vs + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"></a>';
                                 }
                             }
                             matchContent += '</div>';
