@@ -68,7 +68,7 @@ class MatchController extends AdminController
         $grid->column('tow_title', '队名二')->editable();
         $grid->column('tow_file', 'LOGO')
             ->image('', 80, 80)->hide();
-        $grid->model()->orderBy('created_at', 'asc');
+//        $grid->model()->orderBy('created_at', 'asc');
         $grid->model()->orderBy('sort', 'desc');
         $grid->model()->orderBy('id', 'desc');
         $grid->actions(function ($actions) {
