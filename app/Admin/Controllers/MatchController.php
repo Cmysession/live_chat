@@ -26,6 +26,7 @@ class MatchController extends AdminController
     protected function grid(): Grid
     {
         $grid = new Grid(new MatchModel());
+        $grid->column('id', 'ID')->sortable();
         $grid->column('uuid', 'UUID')->hide();
         $grid->column('title', '赛事');
         $grid->column('subtitle', '副标题')
@@ -34,7 +35,7 @@ class MatchController extends AdminController
         ->display(function ($subtitle_color) {
             return "<div style='height: 20px;width: 20px;background-color: ".$subtitle_color."'></div>";
         });
-        $grid->column('start_time', '开始时间');
+        $grid->column('start_time', '开始时间')->sortable();;
         $live_area = config('live_area');
         $grid->column('area', '地区')->display(function ($live_area_uuid) use ($live_area) {
             if ($live_area_uuid) {
@@ -53,7 +54,7 @@ class MatchController extends AdminController
                 return $live_type_cn[$live_type];
             }
         })->hide();
-        $grid->column('sort', '排序')->editable();
+        $grid->column('sort', '排序')->editable()->sortable();;
         $grid->column('is_show', '展示')->switch($this->is_show);
         $grid->column('remarks', '备注')->hide();
         $grid->column('one_file', 'LOGO')
