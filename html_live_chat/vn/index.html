@@ -180,6 +180,12 @@
             border-color: #00000000;
         }
 
+        #gg div img {
+            width: 100%;
+            padding: 5px;
+            cursor: pointer;
+        }
+
         .btn:focus {
             outline-color: transparent;
             outline-style: solid;
@@ -545,6 +551,18 @@
         </div>
     </div>
     <div id="tv-box" style="text-align: center;background-color: #000000;margin: 15px 0;" class="row"></div>
+    <div class="row" id="gg">
+        <div class="col-xs-12 col-md-6">
+            <a target="_blank" rel="nofollow" href="https://veso-vn.com/#/#/register?invitationCode=23512740935">
+                <img src="/images/b1.jpg" alt="Xoilac TV B - 1">
+            </a>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <a target="_blank" rel="nofollow" href="https://veso-vn.com/#/#/register?invitationCode=23512740935">
+                <img src="/images/b2.jpg" alt="Xoilac TV B - 2">
+            </a>
+        </div>
+    </div>
     <div id="match-box" style="border-color:#3e3e3e" class="panel panel-default">
         <div class="panel-heading" style="background-color: #000000;border-color:#000000;">
             <h3 class="panel-title" style="text-align: center;color: #FFFFFF">Phát sóng trực tiếp | Sự kiện thể
@@ -599,16 +617,20 @@
     </div>
 </div>
 <div id="sm" style="text-align: center;color: #FFFFFF">
-    <a target="_blank" href="ve-chung-toi.html" style="color: #FFFFFF;text-decoration:none;cursor: pointer">về chúng tôi</a> |
-    <a target="_blank" href="tuyen-bo-mien-tru-trach-nhiem.html" style="color: #FFFFFF;text-decoration:none;cursor: pointer">Tuyên bố
+    <a target="_blank" href="ve-chung-toi.html" style="color: #FFFFFF;text-decoration:none;cursor: pointer">về chúng
+        tôi</a> |
+    <a target="_blank" href="tuyen-bo-mien-tru-trach-nhiem.html"
+       style="color: #FFFFFF;text-decoration:none;cursor: pointer">Tuyên bố
         miễn trừ trách nhiệm</a> |
-    <a target="_blank" href="luat-va-quy-dinh.html" style="color: #FFFFFF;text-decoration:none;cursor: pointer">luật và quy định</a>
+    <a target="_blank" href="luat-va-quy-dinh.html" style="color: #FFFFFF;text-decoration:none;cursor: pointer">luật và
+        quy định</a>
 </div>
 <script src="/public/bootstrap-3/js/jquery.min.js"></script>
 <script src="/public/bootstrap-3/js/bootstrap.min.js"></script>
 <script>
     let wss = 'wss.supers.live';
-    let https = 'https://api.supers.live';
+    // let https = 'https://api.supers.live';
+    let https = 'http://live.com';
 
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -820,7 +842,7 @@
                         matchContent += '<div class="col-xs-12 col-md-6 item">\n' +
                             '              <div class="top" style="width: 100%;">\n' +
                             '                    <div>' + item.title + '</div>\n' +
-                            '              <div><span class="title" style="color: '+(item.subtitle_color==''?'red':item.subtitle_color)+'">' + item.subtitle + '</span></div>\n' +
+                            '              <div><span class="title" style="color: ' + (item.subtitle_color == '' ? 'red' : item.subtitle_color) + '">' + item.subtitle + '</span></div>\n' +
                             '              <div>' + item.start_time + '</div>\n' +
                             '             </div>';
                         // 比赛详情
