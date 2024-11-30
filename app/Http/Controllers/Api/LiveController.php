@@ -62,6 +62,7 @@ class LiveController extends Controller
                     'tow_file',
                     'tow_score',
                     'live')
+                ->orderBy('created_at', 'asc')
                 ->orderBy('sort', 'desc')
                 ->orderBy('id', 'desc')
                 ->get()
