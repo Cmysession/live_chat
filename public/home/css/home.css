@@ -1,0 +1,295 @@
+#top {
+    height: 72px;
+    /*background-color: red;*/
+}
+
+#video-content {
+    height: 550px;
+    background-position: center;
+    background-size: cover;
+    background-image: url(https://sta01.sxzhjt.cn/web/assets/yy/img/banner.jpg);
+}
+
+#video-info {
+    width: 1200px;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: auto;
+}
+
+#video-box {
+    width: 1014px;
+    min-width: 850px;
+    height: 100%;
+    background-color: #000000;
+}
+
+
+#video-box, #video-list {
+    height: 100%;
+    background-color: #000000;
+}
+
+#video-list .room-list {
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+    margin: 2px 0;
+}
+
+#video-list .room-list .live-cover {
+    border-radius: 10px;
+}
+
+#video-list .room-list li {
+    list-style-type: none;
+}
+
+#video-list .room-list img {
+    height: 103px;
+    width: 180px;
+}
+
+#video-list .room-list .active img {
+    cursor: pointer;
+    border: 3px solid rgb(255 199 29);
+}
+
+
+#video-list .room-list img:hover {
+    cursor: pointer;
+    border: 3px solid rgb(255 199 29);
+}
+
+
+#video-list .room-list li i::before {
+    content: '';
+    position: absolute;
+    right: 186px;
+    top: 50px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top: 6px transparent dashed;
+    border-left: 7px transparent dashed;
+    border-bottom: 6px transparent dashed;
+    border-right: 7px #ffc71c solid;
+}
+
+#video-list .room-list li:hover::before {
+    opacity: 1; /* 在容器hover时显示箭头 */
+}
+
+/*弹幕*/
+#mplayer-header {
+    height: 100px !important;
+    background: none;
+    -webkit-transform: translateY(0) !important;
+    transform: translateY(0) !important;
+}
+
+#title-groupt {
+    display: none !important;
+}
+
+#go-room {
+    position: absolute;
+    top: 255px;
+    left: 407px;
+    width: 200px;
+    text-align: center;
+    background-color: #e6a6461f;
+}
+
+.content-row {
+    width: 1200px;
+    margin: auto;
+}
+
+.live-room-row .el-image {
+    width: 100%;
+    height: 150px;
+    background-color: #0f0f0f;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.live-room-row .block {
+    height: 196px;
+    width: 287px;
+    position: relative;
+    margin: 4px;
+    cursor: pointer;
+}
+
+.live-room .el-image img {
+    height: 150px;
+}
+
+.live-room .live-title {
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.live-room .live-name {
+    display: flex;
+    position: absolute;
+    bottom: 45px;
+    width: 100%;
+    color: #df9d3a;
+
+}
+
+.live-room .live-name div {
+    flex: 1;
+    margin: 5px;
+}
+
+.live-room .live-name div:nth-child(2) {
+    text-align: end;
+}
+
+.live-room .live-name span:nth-child(1) {
+    float: left;
+}
+
+.live-room-row .living {
+    width: 50px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: #FFFFFF;
+    height: 20px;
+    font-size: 13px;
+    padding: 0px;
+    border-radius: 5px;
+}
+
+.live-room-row .living img {
+    width: 14px;
+    height: 11px;
+    margin-left: 3px;
+}
+
+.content-row h2 {
+    display: inline-block;
+}
+
+.content-row .el-link.all {
+    float: right;
+    margin-top: 24px;
+}
+
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+}
+
+.el-carousel--horizontal {
+    width: 1200px;
+    margin: 30px auto 0 auto;
+}
+
+.el-carousel__item {
+    border-radius: 10px;
+}
+
+.el-carousel__item .time {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.el-carousel__item .vs {
+    display: flex;
+}
+
+.el-carousel__item .vs div {
+    /*flex: 1;*/
+    text-align: center;
+}
+
+.el-carousel__item .vs div:nth-child(1), .el-carousel__item .vs div:nth-child(3) {
+    width: 45%;
+}
+
+.el-carousel__item .vs div:nth-child(2) {
+    width: 5%;
+    margin-top: 24px;
+    font-size: 40px;
+    color: red;
+    font-weight: bold;
+}
+
+.content-row .live-up-row {
+    text-align: center;
+}
+
+.content-row .live-up-row img {
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}
+
+.live-other .up-info-box {
+    display: flex;
+    width: 100%;
+    color: #747373;
+    margin-top: 5px;
+}
+
+.live-other .up-info-box div:nth-child(1) {
+    /*width: 40px;*/
+    /*height: 40px;*/
+    /*border-radius: 40px;*/
+}
+
+.live-other .up-img {
+    height: 30px !important;
+    width: 30px !important;
+    background-color: rgba(15, 15, 15, 0);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.live-other .up-info-box div:nth-child(1) .up-img {
+    height: 30px !important;
+    width: 30px !important;
+    border-radius: 30px !important;
+}
+.live-other .up-info-box div:nth-child(2){
+    width: 170px;
+    margin-left: 9px;
+}
+.live-other .up-info-box div:nth-child(2),.live-other .up-info-box div:nth-child(3){
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+.live-other .live-title{
+    padding: 3px;
+}
+.live-other .live-up-title div:nth-child(1){
+    text-align: center;
+}
+
+.live-other .block {
+    height: 215px;
+}

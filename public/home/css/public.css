@@ -1,4 +1,124 @@
-#top{
-    height: 50px;
+body {
+    margin: 0;
+    background-color: #f0f1f7;
+}
+
+#header {
+    height: 72px;
+    background-color: #ffffff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+#header-box {
+    background-color: #ffffff;
+    color: #000000;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+
+}
+
+#header-logo {
+    height: 72px;
+}
+
+#header-logo img {
+    height: 100%;
+    width: 200px;
+}
+
+#header-menu ul {
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+}
+
+#header-menu ul li {
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 15px 10px;
+    cursor: pointer;
+}
+
+#header-user ul li:hover, #header-menu ul li:hover {
+    background-color: #f8c21b;
+    color: #ffffff;
+}
+
+#header-menu ul li:nth-child(4):hover {
+    background-color: #ffffff;
+    color: #f8c21b;
+}
+
+#header-menu ul li:nth-child(4) {
+    color: #f8c21b;
+}
+
+#header-user ul li {
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 15px 10px;
+    color: #f8c21b;
+    cursor: pointer;
+}
+
+#header-user {
+    position: absolute;
+    right: 0;
+    top: -15px;
+}
+
+#header-menu, #header-logo, #header-user {
+    display: table-cell;
+}
+
+#dowsup {
     background-color: red;
+    color: #FFF;
+    font-size: 10px;
+    border-radius: 2px;
+    padding: 2px
+}
+
+#content {
+    margin: 73px 0 0 0;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:before {
+    text-decoration: none;
+}
+
+#foot {
+    height: 190px;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    color: #FFFFFF;
+}
+#foot .foot-logo img{
+    width: 100px;
+    height: 100px;
+}
+#foot .foot-str{
+
 }
