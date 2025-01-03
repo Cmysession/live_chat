@@ -46,6 +46,7 @@
 
 #video-list .room-list li {
     list-style-type: none;
+    margin-bottom: 4px;
 }
 
 #video-list .room-list img {

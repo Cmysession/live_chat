@@ -107,7 +107,15 @@ a:hover {
 a:before {
     text-decoration: none;
 }
-
+a:link{
+    color: #000000;
+}
+a:visited{
+    color: #000000;
+}
+a:active{
+    color: none;
+}
 #foot {
     height: 190px;
     width: 100%;

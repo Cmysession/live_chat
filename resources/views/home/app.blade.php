@@ -24,8 +24,8 @@
                 </div>
                 <div id="header-menu">
                     <ul>
-                        <li>首页</li>
-                        <li>全部直播</li>
+                        <li><a href="/vn">首页</a></li>
+                        <li><a href="/vn/live">全部直播</a></li>
                         <li>赛事</li>
                         <el-tooltip class="item" effect="dark" content="<img src='{{$_SERVER['APP_URL']}}/favicon.ico'>"
                                     raw-content placement="bottom">
