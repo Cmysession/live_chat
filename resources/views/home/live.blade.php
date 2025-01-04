@@ -1,13 +1,14 @@
 @extends('home.app')
-@section('title','直播')
-@section('keywords','直播')
-@section('description','直播')
-<link rel="stylesheet" href="/home/css/live.css">
-<link rel="stylesheet" href="/home/muiplayer/mui-player.min.css">
-<script type="text/javascript" src="/home/js/reconnecting-websocket.js"></script>
-<script type="text/javascript" src="/home/muiplayer/mui-player.min.js"></script>
-<script type="text/javascript" src="/home/muiplayer/hls.min.js"></script>
-<script type="text/javascript" src="/home/muiplayer/flv.min.js"></script>
+@section('title','房间')
+@section('keywords','房间')
+@section('description','房间')
+<?php $__VERSION = env('HOME_VERSION');?>
+<link rel="stylesheet" href="/home/css/live.css?v={{$__VERSION}}">
+<link rel="stylesheet" href="/home/muiplayer/mui-player.min.css?v={{$__VERSION}}">
+<script type="text/javascript" src="/home/js/reconnecting-websocket.js?v={{$__VERSION}}"></script>
+<script type="text/javascript" src="/home/muiplayer/mui-player.min.js?v={{$__VERSION}}"></script>
+<script type="text/javascript" src="/home/muiplayer/hls.min.js?v={{$__VERSION}}"></script>
+<script type="text/javascript" src="/home/muiplayer/flv.min.js?v={{$__VERSION}}"></script>
 @section('content')
     <div id="live-content">
         <template>

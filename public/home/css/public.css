@@ -9,7 +9,7 @@ body {
     width: 100%;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 9999;
 }
 
 #header-box {
@@ -45,6 +45,11 @@ body {
     font-size: 18px;
     margin: 15px 10px;
     cursor: pointer;
+}
+
+#header-menu ul li a:hover{
+    background-color: #f8c21b;
+    color: #ffffff;
 }
 
 #header-user ul li:hover, #header-menu ul li:hover {

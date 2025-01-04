@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/{area}','\App\Http\Controllers\Home\HomeController@index');
 Route::get('/{area}/live','\App\Http\Controllers\Home\HomeController@live');
+Route::get('/{area}/contest','\App\Http\Controllers\Home\HomeController@contest');

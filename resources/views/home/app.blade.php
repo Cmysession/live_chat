@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?php $__VERSION = env('HOME_VERSION'); ?>
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -9,8 +10,8 @@
     <meta name="og:description" content="@yield('description')">
     <meta property="og:image" content="{{$_SERVER['APP_URL']}}/favicon.ico">
     <meta property="og:url" content="{{$_SERVER['APP_URL'].$_SERVER['REQUEST_URI']}}">
-    <link rel="stylesheet" href="/home/css/index.css">
-    <link rel="stylesheet" href="/home/css/public.css">
+    <link rel="stylesheet" href="/home/css/index.css?v={{$__VERSION}}">
+    <link rel="stylesheet" href="/home/css/public.css?v={{$__VERSION}}">
     <link rel="shortcut icon" href="{{$_SERVER['APP_URL']}}/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -24,10 +25,16 @@
                 </div>
                 <div id="header-menu">
                     <ul>
-                        <li><a href="/vn">首页</a></li>
-                        <li><a href="/vn/live">全部直播</a></li>
-                        <li>赛事</li>
-                        <el-tooltip class="item" effect="dark" content="<img src='{{$_SERVER['APP_URL']}}/favicon.ico'>"
+                        <a href="/vn">
+                            <li>首页</li>
+                        </a>
+                        <a href="/vn/live">
+                            <li>全部直播</li>
+                        </a>
+                        <a href="/vn/contest">
+                            <li>赛事</li>
+                        </a>
+                        <el-tooltip class="item" effect="dark"
                                     raw-content placement="bottom">
                             <div slot="content" style="text-align: center;min-width:180px;">
                                 <img src='{{$_SERVER['APP_URL']}}/favicon.ico' style="width:180px;"/>
@@ -50,7 +57,7 @@
         {{--   底部    --}}
         <div id="foot">
             <p class="foot-logo">
-                <el-image  src="{{$_SERVER['APP_URL']}}/favicon.ico"></el-image>
+                <el-image src="{{$_SERVER['APP_URL']}}/favicon.ico"></el-image>
             </p>
             <p class="foot-str">
                 Copyright © 2020 yuyan.live, All rights reserved.
@@ -59,8 +66,8 @@
     </template>
 </div>
 </body>
-<script src="/home/js/vue.js"></script>
-<script src="/home/js/index.js"></script>
+<script src="/home/js/vue.js?v={{$__VERSION}}"></script>
+<script src="/home/js/index.js?v={{$__VERSION}}"></script>
 <script>
     var menu = 'hello';
 </script>

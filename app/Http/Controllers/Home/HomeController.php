@@ -12,8 +12,14 @@ class HomeController extends Controller
 //        echo $area;
         return view('home.index');
     }
+
     public function live(Request $request, $area)
     {
         return view('home.live');
+    }
+
+    public function contest(Request $request, $area)
+    {
+        return view('home.contest');
     }
 }
