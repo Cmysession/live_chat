@@ -36,8 +36,14 @@
                         </a>
                         <el-tooltip class="item" effect="dark"
                                     raw-content placement="bottom">
-                            <div slot="content" style="text-align: center;min-width:180px;">
-                                <img src='{{$_SERVER['APP_URL']}}/favicon.ico' style="width:180px;"/>
+                            <div slot="content" style="text-align: center;background-color: #FFFFFF">
+                                <img src='{{$_SERVER['APP_URL']}}/favicon.ico'
+                                     style="width:150px;height:150px;border-radius: 150px"/>
+                                <div>
+                                    <div style="color: #7a7a7a">用手机浏览器扫一扫</div>
+                                    <div style="color: #7a7a7a">精彩马上呈现</div>
+                                </div>
+
                             </div>
                             <li>下载APP<sup id="dowsup">HOT</sup></li>
                         </el-tooltip>

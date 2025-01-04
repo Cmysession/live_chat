@@ -121,6 +121,10 @@ a:visited{
 a:active{
     color: none;
 }
+.el-tooltip__popper.is-dark{
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
+}
 #foot {
     height: 190px;
     width: 100%;
