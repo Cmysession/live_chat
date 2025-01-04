@@ -22,4 +22,9 @@ class HomeController extends Controller
     {
         return view('home.contest');
     }
+
+    public function room(Request $request, $area)
+    {
+        return view('home.room');
+    }
 }

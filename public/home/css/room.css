@@ -1,0 +1,159 @@
+#live-box {
+    width: 100%;
+    background-color: #25284c;
+    padding: 10px 0;
+}
+
+#live {
+    margin: auto;
+    width: 1200px;
+    height: 680px;
+    min-width: 1200px;
+    display: flex;
+}
+
+#video-box {
+    height: 100%;
+    width: 845px;
+    background-color: black;
+    margin-right: 5px;
+}
+
+#chat-box {
+    height: 100%;
+    width: 345px;
+    background-color: #FFFFFF;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+#video-title-box {
+    background-color: #FFFFFF;
+    display: flex;
+    height: 75px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#picture img {
+    width: 65px;
+    height: 65px;
+    border-radius: 65px;
+    padding: 5px;
+}
+
+#room-name h1 {
+    font-size: 20px;
+    margin: 10px 0 0 10px;
+}
+
+#room-name h4 {
+    font-size: 17px;
+    margin: 0 0 10px 10px;
+    color: #777777;
+}
+
+#video-show {
+    height: 535px;
+}
+
+#video-foot {
+    height: 70px;
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*弹幕*/
+#mplayer-header {
+    height: 100px !important;
+    background: none;
+    -webkit-transform: translateY(0) !important;
+    transform: translateY(0) !important;
+}
+
+#title-groupt {
+    display: none !important;
+}
+
+#notice {
+    font-size: 15px;
+    color: #737373;
+    padding: 10px;
+    height: 33px;
+}
+
+#chat-box .el-tabs__nav-scroll .el-tabs__nav {
+    width: 100%;
+}
+
+#chat-box .el-tabs__nav-scroll .el-tabs__nav .el-tabs__item {
+    width: 50%;
+    text-align: center;
+}
+
+#chat-box .el-tabs--border-card {
+    border: none;
+}
+
+#chat-box .el-tabs__content {
+    height: 490px;
+    background-color: #f9f9f9;
+    padding: 0;
+    overflow: auto;
+}
+
+/* 自定义整个滚动条 */
+#chat-box .el-tabs__content::-webkit-scrollbar {
+    width: 4px; /* 滚动条宽度 */
+}
+
+/* 自定义滚动条滑块 */
+#chat-box .el-tabs__content::-webkit-scrollbar-thumb {
+    background-color: darkgrey; /* 滑块颜色 */
+    border-radius: 10px; /* 滑块圆角 */
+}
+
+/* 自定义滚动条轨道 */
+#chat-box .el-tabs__content::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 轨道颜色 */
+    border-radius: 10px; /* 轨道圆角 */
+}
+
+#chat .msg .gift {
+    height: 18px;
+    vertical-align: middle;
+    margin-top: -5px;
+    width: 18px;
+}
+
+#chat .msg .hi {
+    height: 14px;
+    vertical-align: middle;
+    margin-top: -5px;
+    width: 16px;
+}
+
+#chat .msg .lv {
+    height: 14px;
+    vertical-align: middle;
+    margin-top: -5px;
+    width: 26px;
+}
+
+#chat .msg {
+    font-size: 14px;
+    padding: 5px 10px;
+}
+#chat .chat-name{
+    color: #696969;
+}
+#chat .msg.other {
+    /*background-color: red;*/
+}
+#chat .msg.come {
+    background-color: #e7e7e7;
+    color: #696969;
+}
+
+

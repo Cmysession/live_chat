@@ -16,7 +16,9 @@
             {{--    直播    --}}
             <div id="video-box">
                 <div id="mui-player"></div>
-                <el-button id="go-room" type="warning" plain>进入直播间</el-button>
+                <a href="/vn/room/xiaomi">
+                    <el-button id="go-room" type="warning" plain>进入直播间</el-button>
+                </a>
             </div>
             {{--    列表    --}}
             <div id="video-list">

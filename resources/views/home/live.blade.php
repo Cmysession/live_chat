@@ -4,11 +4,6 @@
 @section('description','房间')
 <?php $__VERSION = env('HOME_VERSION');?>
 <link rel="stylesheet" href="/home/css/live.css?v={{$__VERSION}}">
-<link rel="stylesheet" href="/home/muiplayer/mui-player.min.css?v={{$__VERSION}}">
-<script type="text/javascript" src="/home/js/reconnecting-websocket.js?v={{$__VERSION}}"></script>
-<script type="text/javascript" src="/home/muiplayer/mui-player.min.js?v={{$__VERSION}}"></script>
-<script type="text/javascript" src="/home/muiplayer/hls.min.js?v={{$__VERSION}}"></script>
-<script type="text/javascript" src="/home/muiplayer/flv.min.js?v={{$__VERSION}}"></script>
 @section('content')
     <div id="live-content">
         <template>
