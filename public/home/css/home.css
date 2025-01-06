@@ -294,3 +294,8 @@
 .live-other .block {
     height: 215px;
 }
+.content-up-row .el-image{
+    height: 100px;
+    width: 100px;
+    border-radius: 100px;
+}

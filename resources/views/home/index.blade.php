@@ -256,7 +256,7 @@
 
     </div>
     {{--  热门主播  --}}
-    <div class="content-row">
+    <div class="content-row content-up-row">
         <div class="title"><h2>热门主播</h2>
             <el-link class="all" href="https://element.eleme.io" target="_blank">
                 <i class="el-icon-plus"></i>更多
