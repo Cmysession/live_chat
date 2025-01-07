@@ -40,60 +40,15 @@
                 <template>
                     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
                         <el-tab-pane id="chat" label="聊天室" name="chat">
-                            <div id="chat-msg">
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv1.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                                </div>
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv1.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                                </div>
-                                <div class="msg come">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv1.png" alt="">
-                                    <span class="chat-name"> xiaomi </span><span>进入直播间</span>
-                                </div>
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv1.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好
-                                </div>
-                                <div class="msg come">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv1.png" alt="">
-                                    <span class="chat-name"> xiaomi </span><span>进入直播间</span>
-                                </div>
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv6.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                                </div>
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv10.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                                </div>
-                                <div class="msg other">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv4.png" alt="">
-                                    <span class="chat-name">xiaomi: </span>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好
-                                </div>
-                                <div class="msg come">
-                                    <img class="gift" src="/home/images/chat/gift.png" alt="">
-                                    <img class="hi" src="/home/images/chat/hi.png" alt="">
-                                    <img class="lv" src="/home/images/chat/lv2.png" alt="">
-                                    <span class="chat-name"> xiaomi </span><span>进入直播间</span>
+                            <div id="chat-msg" ref="scrollContainer">
+                                <div
+                                    :class="{'msg other':item.type==='other','msg come':item.type==='come','msg other me':item.type==='me'}"
+                                    v-for="item in chatRoomMessage"
+                                >
+                                    <img v-if="item.gift" class="gift" src="/home/images/chat/gift.png" alt="gift">
+                                    <img class="lv" :src="`/home/images/chat/lv${item.lv}.png`" alt="lv">
+                                    <span class="chat-name">@{{item.name}}: </span>
+                                    @{{item.message}}
                                 </div>
                             </div>
                             {{--表情包--}}
@@ -106,7 +61,7 @@
                                     popper-class="custom-popover bqb-box"
                                 >
                                     <p>
-                                    <ul class="horizontal-list">
+                                    <ul class="horizontal-list" @click.passive="bqbClick">
                                         <li data-id="grinning">😀</li>
                                         <li data-id="grin">😁</li>
                                         <li data-id="smiley">😃</li>
@@ -199,9 +154,10 @@
                                     maxlength="50"
                                     resize="none"
                                     show-word-limit
+                                    @keyup.enter.native="sendMessage"
                                 >
                                 </el-input>
-                                <el-button type="info">发送</el-button>
+                                <el-button @click="sendMessage" type="info">发送</el-button>
                             </div>
                         </el-tab-pane>
                         <el-tab-pane id="phb" label="排行榜" name="phb">
@@ -627,7 +583,6 @@
                         title: '标题',
                         src: 'http://www.w3school.com.cn/i/movie.mp4',
                         live: true,
-                        // autoFit: false,
                         lang: "en",
                         autoplay: true,
                         initFullFixed: false,
@@ -637,19 +592,109 @@
                         ],
                     },
                     mp: {},
-                    activeName: 'phb',
-                    textarea: "123123",
-                    src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
-                };
+                    activeName: 'chat',
+                    textarea: "",//发送的消息
+                    src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+                    // 聊天内容
+                    chatRoomMessage: [
+                        {
+                            id: "1",
+                            type: 'other',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 2,
+                            name: 'xiaomi',
+                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
+                        },
+                        {
+                            id: "2",
+                            type: 'come',
+                            gift: false,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 3,
+                            name: 'xiaomi',
+                            message: '你好',
+                        },
+                        {
+                            id: "3",
+                            type: 'me',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 4,
+                            name: 'xiaomi',
+                            message: '你好',
+                        },
+                        {
+                            id: "4",
+                            type: 'other',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 1,
+                            name: 'xiaomi',
+                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
+                        },
+                        {
+                            id: "1",
+                            type: 'other',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 2,
+                            name: 'xiaomi',
+                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
+                        },
+                        {
+                            id: "2",
+                            type: 'come',
+                            gift: false,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 3,
+                            name: 'xiaomi',
+                            message: '你好',
+                        },
+                        {
+                            id: "3",
+                            type: 'me',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 4,
+                            name: 'xiaomi',
+                            message: '你好',
+                        },
+                        {
+                            id: "4",
+                            type: 'other',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 1,
+                            name: 'xiaomi',
+                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
+                        },
+                    ],
+                    lvFun: function () {
+                        return 1232
+                    },
+                }
+            },
+            // 加载时执行
+            mounted() {
+                this._data.mp = new MuiPlayer(this._data.MuiPlayer);
+                this.$nextTick(() => {
+                    // 确保DOM已经更新完成
+                    this.scrollToBottom();
+                });
             },
             // 首次执行
             created() {
 
             },
-            // 加载时执行
-            mounted() {
-                this._data.mp = new MuiPlayer(this._data.MuiPlayer);
+            // 生命周期
+            updated() {
+                // 当组件的数据更新后，再次滚动到底部
+                this.$nextTick(() => {
+                    this.scrollToBottom();
+                });
             },
+
             // 监听变化
             watch: {},
 
@@ -657,7 +702,38 @@
             methods: {
                 handleClick(tab, event) {
                     console.log(tab, event);
-                }
+                },
+
+                // 获取表情包
+                bqbClick(e) {
+                    if (e.target.nodeName === "LI") {
+                        if (e.target.innerText) {
+                            this.textarea += e.target.innerText;
+                        }
+                    }
+                },
+                // 滚动到底部
+                scrollToBottom(event) {
+                    const container = this.$refs.scrollContainer;
+                    container.scrollTop = container.scrollHeight;
+                },
+                // 发送消息
+                sendMessage(event) {
+                    this.textarea = this.textarea.replace(/\n/g, '');
+                    if (this.textarea !== '') {
+                        this.chatRoomMessage.push({
+                            id: "3",
+                            type: 'me',
+                            gift: true,// 是否是送礼物
+                            hi: true,// 是否首次进入
+                            lv: 4,
+                            name: 'xiaomi',
+                            message: this.textarea,
+                        });
+                        this.textarea = '';
+                    }
+                },
+
             },
         })
     </script>

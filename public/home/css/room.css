@@ -114,8 +114,9 @@
 }
 
 #chat-msg {
-    overflow: auto;
+    overflow-y: scroll;
     height: 490px;
+
 }
 
 /* 自定义整个滚动条 */
@@ -466,5 +467,8 @@
     line-height: 3;
     margin-left: 10px;
     color: #6f6f6f;
+}
+#chat .msg.me{
+    background-color: #b2daff;
 }
 
