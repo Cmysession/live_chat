@@ -216,7 +216,24 @@
 }
 
 #phb {
-    height: 580px;
+    height: 587px;
+    overflow: auto;
+}
+/* 自定义整个滚动条 */
+#phb::-webkit-scrollbar {
+    width: 3px; /* 滚动条宽度 */
+}
+
+/* 自定义滚动条滑块 */
+#phb::-webkit-scrollbar-thumb {
+    background-color: darkgrey; /* 滑块颜色 */
+    border-radius: 10px; /* 滑块圆角 */
+}
+
+/* 自定义滚动条轨道 */
+#phb::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 轨道颜色 */
+    border-radius: 10px; /* 轨道圆角 */
 }
 
 .content-row {
