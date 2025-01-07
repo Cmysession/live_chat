@@ -45,10 +45,6 @@
     cursor: pointer;
 }
 
-.live-room .el-image img {
-    height: 150px;
-}
-
 .live-room .live-title {
     background-color: #FFFFFF;
     padding: 10px;

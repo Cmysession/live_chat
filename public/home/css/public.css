@@ -136,6 +136,7 @@ a:active{
     width: 100px;
     height: 100px;
 }
-#foot .foot-str{
 
+img {
+    object-fit: cover;
 }

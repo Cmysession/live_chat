@@ -39,7 +39,7 @@
                 {{--聊天框--}}
                 <template>
                     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
-                        <el-tab-pane id="chat" label="聊天室" name="first">
+                        <el-tab-pane id="chat" label="聊天室" name="chat">
                             <div id="chat-msg">
                                 <div class="msg other">
                                     <img class="gift" src="/home/images/chat/gift.png" alt="">
@@ -204,7 +204,121 @@
                                 <el-button type="info">发送</el-button>
                             </div>
                         </el-tab-pane>
-                        <el-tab-pane id="phb" label="排行榜" name="second">排行榜</el-tab-pane>
+                        <el-tab-pane id="phb" label="排行榜" name="phb">
+                            <div class="sort-row">
+                                <div class="num">
+                                    <img src="/home/images/lv/no1.png"
+                                         alt="">
+                                </div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">
+                                    <img src="/home/images/lv/no1.png"
+                                         alt="">
+                                </div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">
+                                    <img src="/home/images/lv/no1.png"
+                                         alt="">
+                                </div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">5</div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">5</div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">5</div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">5</div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                            <div class="sort-row">
+                                <div class="num">5</div>
+                                <div class="picture">
+                                    <img
+                                        src="https://sta02.sxzhjt.cn/file/head/20240104/84b431006ce9b17a9ab2b2c6fa20f2e2_ss300.jpg"
+                                        alt="">
+                                </div>
+                                <div class="username">xiaomi</div>
+                                <div class="lv-img">
+                                    <img src="/home/images/chat/lv2.png"
+                                         alt="">
+                                </div>
+                            </div>
+                        </el-tab-pane>
                     </el-tabs>
                 </template>
 
@@ -496,8 +610,8 @@
                         ],
                     },
                     mp: {},
-                    activeName: 'first',
-                    textarea:"123123",
+                    activeName: 'phb',
+                    textarea: "123123",
                     src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg'
                 };
             },
