@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div id="video-show">
-                    <div id="mui-player">
+                    <div ref="mui_player" id="mui-player">
 
                     </div>
                 </div>
@@ -580,10 +580,12 @@
                 return {
                     MuiPlayer: {
                         container: '#mui-player',
-                        title: '标题',
+                        toggleControls: false,
+                        poster: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
                         src: 'http://www.w3school.com.cn/i/movie.mp4',
                         live: true,
                         lang: "en",
+                        closeControlsTimer: 10000,
                         autoplay: true,
                         initFullFixed: false,
                         videoAttribute: [
@@ -591,7 +593,7 @@
                             {attrKey: 'playsinline', attrValue: 'true'},
                         ],
                     },
-                    mp: {},
+                    mp: null,
                     activeName: 'chat',
                     textarea: "",//发送的消息
                     src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -670,17 +672,19 @@
                             message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
                         },
                     ],
-                    lvFun: function () {
-                        return 1232
-                    },
                 }
             },
             // 加载时执行
             mounted() {
                 this._data.mp = new MuiPlayer(this._data.MuiPlayer);
+                ths = this;
+                this._data.mp.on('ready',function(event) {
+                    console.log(ths._data.mp.on);
+                });
                 this.$nextTick(() => {
                     // 确保DOM已经更新完成
                     this.scrollToBottom();
+                    this.videoIsPlay();
                 });
             },
             // 首次执行
@@ -692,16 +696,28 @@
                 // 当组件的数据更新后，再次滚动到底部
                 this.$nextTick(() => {
                     this.scrollToBottom();
+                    this.videoIsPlay();
                 });
             },
 
             // 监听变化
-            watch: {},
+            watch: {
+                mp:function (newValue, oldValue) {
+                    // 当message变化时，这个函数会被调用
+                    console.log('message changed from', oldValue, 'to', newValue);
+                }
+            },
 
             // 方法
             methods: {
                 handleClick(tab, event) {
                     console.log(tab, event);
+                },
+
+                // 判断视频是否播放
+                videoIsPlay() {
+                    const mui_player = this.$refs.mui_player;
+                    console.log(mui_player.querySelector('#mplayer-footer ._play').getAttribute('style'));
                 },
 
                 // 获取表情包
