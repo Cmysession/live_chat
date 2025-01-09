@@ -40,16 +40,20 @@
                 <template>
                     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
                         <el-tab-pane id="chat" label="聊天室" name="chat">
-                            <div id="chat-msg" ref="scrollContainer">
+                            <div id="chat-msg" ref="scrollContainer" @scroll="handleScroll">
                                 <div
                                     :class="{'msg other':item.type==='other','msg come':item.type==='come','msg other me':item.type==='me'}"
                                     v-for="item in chatRoomMessage"
                                 >
+                                    <img v-if="item.hi" class="hi" src="/home/images/chat/hi.png" alt="gift">
                                     <img v-if="item.gift" class="gift" src="/home/images/chat/gift.png" alt="gift">
                                     <img class="lv" :src="`/home/images/chat/lv${item.lv}.png`" alt="lv">
                                     <span class="chat-name">@{{item.name}}: </span>
                                     @{{item.message}}
                                 </div>
+                            </div>
+                            <div id="goto-msg" :style="{display: hideGotoMsg==true?'none':'block'}"
+                                 @click="chatGotoBottom"><i class="el-icon-download"></i>底部消息
                             </div>
                             {{--表情包--}}
                             <div id="bqb">
@@ -532,8 +536,6 @@
                                 <img src="https://sta01.sxzhjt.cn/web/assets/yy/img/living.gif">
                                 <span>Live</span>
                             </div>
-
-
                         </div>
                     </div>
                 </el-col>
@@ -563,8 +565,6 @@
                                 <img src="https://sta01.sxzhjt.cn/web/assets/yy/img/living.gif">
                                 <span>Live</span>
                             </div>
-
-
                         </div>
                     </div>
                 </el-col>
@@ -578,15 +578,18 @@
             el: '#app',
             data() {
                 return {
+                    hideGotoMsg: true,// 隐藏更多消息
+                    chatIsBottom: true,// 聊天框是否到底部了
                     MuiPlayer: {
                         container: '#mui-player',
                         toggleControls: false,
                         poster: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
                         src: 'http://www.w3school.com.cn/i/movie.mp4',
-                        live: true,
+                        // live: true,
                         lang: "en",
                         closeControlsTimer: 10000,
                         autoplay: true,
+                        volume: 1,
                         initFullFixed: false,
                         videoAttribute: [
                             {attrKey: 'webkit-playsinline', attrValue: 'true'},
@@ -626,51 +629,6 @@
                             name: 'xiaomi',
                             message: '你好',
                         },
-                        {
-                            id: "4",
-                            type: 'other',
-                            gift: true,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 1,
-                            name: 'xiaomi',
-                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
-                        },
-                        {
-                            id: "1",
-                            type: 'other',
-                            gift: true,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 2,
-                            name: 'xiaomi',
-                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
-                        },
-                        {
-                            id: "2",
-                            type: 'come',
-                            gift: false,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 3,
-                            name: 'xiaomi',
-                            message: '你好',
-                        },
-                        {
-                            id: "3",
-                            type: 'me',
-                            gift: true,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 4,
-                            name: 'xiaomi',
-                            message: '你好',
-                        },
-                        {
-                            id: "4",
-                            type: 'other',
-                            gift: true,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 1,
-                            name: 'xiaomi',
-                            message: '你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好',
-                        },
                     ],
                 }
             },
@@ -678,7 +636,7 @@
             mounted() {
                 this._data.mp = new MuiPlayer(this._data.MuiPlayer);
                 ths = this;
-                this._data.mp.on('ready',function(event) {
+                this._data.mp.on('ready', function (event) {
                     console.log(ths._data.mp.on);
                 });
                 this.$nextTick(() => {
@@ -689,7 +647,40 @@
             },
             // 首次执行
             created() {
-
+                ths = this;
+                setInterval(function () {
+                    ths.chatRoomMessage.push({
+                        id: "3",
+                        type: 'other',
+                        gift: false,// 是否是送礼物
+                        hi: false,// 是否首次进入
+                        lv: 3,
+                        name: 'xiaomi',
+                        message: '阿斯顿撒旦阿萨德',
+                    });
+                }, 5000);
+                setInterval(function () {
+                    ths.chatRoomMessage.push({
+                        id: "3",
+                        type: 'come',
+                        gift: false,// 是否是送礼物
+                        hi: true,// 是否首次进入
+                        lv: 6,
+                        name: 'xiaomi',
+                        message: 'hihihi',
+                    });
+                }, 1000);
+                setInterval(function () {
+                    ths.chatRoomMessage.push({
+                        id: "3",
+                        type: 'come',
+                        gift: true,// 是否是送礼物
+                        hi: true,// 是否首次进入
+                        lv: 10,
+                        name: 'xiaomi',
+                        message: '🎁',
+                    });
+                }, 1000);
             },
             // 生命周期
             updated() {
@@ -702,7 +693,7 @@
 
             // 监听变化
             watch: {
-                mp:function (newValue, oldValue) {
+                mp: function (newValue, oldValue) {
                     // 当message变化时，这个函数会被调用
                     console.log('message changed from', oldValue, 'to', newValue);
                 }
@@ -713,11 +704,22 @@
                 handleClick(tab, event) {
                     console.log(tab, event);
                 },
+                // 监听聊天框滚动
+                handleScroll(event) {
+                    const {scrollTop, scrollHeight, clientHeight} = event.target;
+                    // 检查是否到达底部
+                    const isBottom = scrollHeight - (scrollTop + clientHeight) < 1; // 1像素的容错距离
+                    if (isBottom) {
+                        this.chatIsBottom = true;
+                    } else {
+                        this.chatIsBottom = false;
+                    }
+                },
 
                 // 判断视频是否播放
                 videoIsPlay() {
-                    const mui_player = this.$refs.mui_player;
-                    console.log(mui_player.querySelector('#mplayer-footer ._play').getAttribute('style'));
+                    // const mui_player = this.$refs.mui_player;
+                    // console.log(mui_player.querySelector('#mplayer-footer ._play').getAttribute('style'));
                 },
 
                 // 获取表情包
@@ -728,11 +730,26 @@
                         }
                     }
                 },
-                // 滚动到底部
+                // 判断滚动到底部
                 scrollToBottom(event) {
+                    // 判断是否到达底部才执行到底部
+                    if (this.chatIsBottom) {
+                        const container = this.$refs.scrollContainer;
+                        container.scrollTop = container.scrollHeight;
+                        this.hideGotoMsg = true;
+                    } else {
+                        this.hideGotoMsg = false;
+                    }
+                },
+
+                //聊天室滚动底部
+                chatGotoBottom() {
                     const container = this.$refs.scrollContainer;
                     container.scrollTop = container.scrollHeight;
+                    this.chatIsBottom = true;
+                    this.hideGotoMsg = true;
                 },
+
                 // 发送消息
                 sendMessage(event) {
                     this.textarea = this.textarea.replace(/\n/g, '');
@@ -740,13 +757,14 @@
                         this.chatRoomMessage.push({
                             id: "3",
                             type: 'me',
-                            gift: true,// 是否是送礼物
-                            hi: true,// 是否首次进入
-                            lv: 4,
+                            gift: false,// 是否是送礼物
+                            hi: false,// 是否首次进入
+                            lv: 6,
                             name: 'xiaomi',
                             message: this.textarea,
                         });
                         this.textarea = '';
+                        this.chatGotoBottom();
                     }
                 },
 
