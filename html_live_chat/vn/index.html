@@ -966,7 +966,7 @@
                                     if (item.one_title && item.one_title) {
                                         room_vs = "," + item.one_title + ' vs ' + item.tow_title;
                                     }
-                                    matchContent += '<a href="?title=' + encodeURI(item.title) + room_vs + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"></a>';
+                                    matchContent += '<a href="?title=' + encodeURI(item.title) + room_vs + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"><p style="color: #FFFFFF">'+item.live_room[room].title+'</p></a>';
                                 }
                             }
                             matchContent += '</div>';
