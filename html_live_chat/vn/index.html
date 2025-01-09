@@ -159,6 +159,16 @@
             text-align: center;
             border-top: 1px solid #4a4a4a;
             padding-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #match-box .item .live-room .item-room {
+            margin: 10px;
+        }
+
+        #match-box .item .live-room .item-room p {
+            margin-top: 5px;
         }
 
         #match-box .item .live-room a {
@@ -399,9 +409,11 @@
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
             }
-            #adlogoinfo{
+
+            #adlogoinfo {
                 display: none;
             }
+
             #room-logo-box img {
                 height: 50px;
             }
@@ -966,7 +978,7 @@
                                     if (item.one_title && item.one_title) {
                                         room_vs = "," + item.one_title + ' vs ' + item.tow_title;
                                     }
-                                    matchContent += '<a href="?title=' + encodeURI(item.title) + room_vs + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"><p style="color: #FFFFFF">'+item.live_room[room].title+'</p></a>';
+                                    matchContent += '<div class="item-room"><a href="?title=' + encodeURI(item.title) + room_vs + '&t=' + item.live_room[room].title + '&v=' + item.live_room[room].uuid + '"><img src="' + item.live_room[room].video_img + '" alt="' + item.live_room[room].title + '"><p style="color: #FFFFFF">' + item.live_room[room].title + '</p></a></div>';
                                 }
                             }
                             matchContent += '</div>';
