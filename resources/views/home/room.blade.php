@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div id="video-show">
-                    <div ref="mui_player" id="mui-player">
+                    <div ref="mui_player" id="mui-player" @mousemove="mvVideo">
 
                     </div>
                 </div>
@@ -585,9 +585,9 @@
                         toggleControls: false,
                         poster: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
                         src: 'http://www.w3school.com.cn/i/movie.mp4',
-                        // live: true,
+                        live: true,
                         lang: "en",
-                        closeControlsTimer: 10000,
+                        closeControlsTimer: 1000,
                         autoplay: true,
                         volume: 1,
                         initFullFixed: false,
@@ -715,7 +715,11 @@
                         this.chatIsBottom = false;
                     }
                 },
-
+                mvVideo(){
+                    console.log(12);
+                    console.log(this.mp);
+                    this.mp.toggleControls(true).openTimer();
+                },
                 // 判断视频是否播放
                 videoIsPlay() {
                     // const mui_player = this.$refs.mui_player;
